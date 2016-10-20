@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 11:04:38 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/20 12:53:52 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/20 18:11:48 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char		*get_obj_type(t_env *e, char *str, int n)
 	char	*ret;
 	int		i;
 
-	obj = ft_strsplit(OBJ, ' ');
+	obj = ft_strsplit(OBJ_ALLOWED, ' ');
 	i = 0;
 	while (obj[i] && !(ft_strnstr(str, obj[i], n)))
 		i++;

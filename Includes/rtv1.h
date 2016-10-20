@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/20 16:58:06 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/20 18:56:03 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define OPT e->opt
 # define D (OPT & (1 << 0))
 
-# define OBJ "sphere plane cube cone cylinder"
+# define OBJ_ALLOWED "sphere plane cube cone cylinder"
 
 # define MLX e->mlx
 # define WIN e->win
@@ -46,6 +46,17 @@
 # define TH param->index
 # define RAY_POS param->ray_pos
 # define RAY_DIR param->ray_dir
+
+# define VW_WIDTH e->scene->view_plane_width
+# define VW_HEIGHT e->scene->view_plane_height
+# define VW_DIST e->scene->view_plane_dist
+# define VW_UP_LEFT e->scene->view_plane_up_left
+# define CAM_POS e->scene->cam_pos
+# define CAM_DIR e->scene->cam_dir
+# define CAM_UP e->scene->cam_up
+# define CAM_LEFT e->scene->cam_left
+# define OBJ e->scene->obj
+
 
 typedef	struct	s_hsv
 {
@@ -90,9 +101,15 @@ typedef struct	s_object
 typedef struct	s_scene
 {
 	char		*name;
-	t_vector	*cam_pos;
-	t_vector	*cam_dir;
+	t_vector	cam_pos;
+	t_vector	cam_dir;
+	t_vector	cam_up;
+	t_vector	cam_left;
 	t_list		*obj;
+	double		view_plane_width;
+	double		view_plane_height;
+	double		view_plane_dist;
+	t_vector	view_plane_up_left;
 }				t_scene;
 
 typedef struct	s_param
@@ -130,10 +147,13 @@ int				size_to_end_acc(char *str);
 void			img_put_pixel(t_env *e, int x, int y, unsigned int color);
 
 t_vector		*new_vector(double x, double y, double z);
+t_vector		fill_vector(double x, double y, double z);
 void			rot_vector(t_vector *v, double angle);
-void			add_vectors(t_vector *v1, t_vector *v2);
-void			sub_vectors(t_vector *v1, t_vector *v2);
-void			time_vector(t_vector *v, double i);
+t_vector		add_vectors(t_vector *v1, t_vector *v2);
+t_vector		sub_vectors(t_vector *v1, t_vector *v2);
+t_vector		time_vector(t_vector *v, double i);
+double			norm_vector(t_vector *v);
+t_vector		unit_vector(t_vector *v);
 
 void			*raytracer(void *arg);
 void			sphere(double *arg);
