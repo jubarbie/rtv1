@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 11:04:38 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/20 12:32:01 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/20 12:42:17 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static double	*get_obj_param(int *nb, char *str)
 	double	*param;
 	int		i;
 
-	printf("\n\n\n[%s]\n\n\n", str);	
 	tab = ft_strsplit(str, ' ');
 	i = 0;
 	while (tab[i])
@@ -39,6 +38,7 @@ static double	*get_obj_param(int *nb, char *str)
 static char		*get_obj_type(t_env *e, char *str, int n)
 {
 	char	**obj;
+	char	*ret;
 	int 	i;
 
 	obj = ft_strsplit(OBJ, ' ');
@@ -48,7 +48,14 @@ static char		*get_obj_type(t_env *e, char *str, int n)
 	if (!obj[i])
 		error_file(e);
 	else
-		return (ft_strdup(obj[i]));
+	{
+		ret = ft_strdup(obj[i]);
+		i = -1;
+		while (obj[++i])
+			free(obj[i]);
+		free(obj);
+		return (ret);
+	}
 	return (0);
 }
 
@@ -84,10 +91,11 @@ void 			build_object(t_env *e, char *str, int n)
 	obj.type = get_obj_type(e, tmp + 7, size_to_end_acc(tmp + 7));
 	obj.name = ft_strdup(name);
 	obj.pos = get_origin(tmp + 7, size_to_end_acc(tmp + 7));
-	obj.param = get_obj_param(&(obj.nb_param),
-			get_in_acc(e, tmp + 7, obj.type, size_to_end_acc(tmp + 7)));
+	tmp = get_in_acc(e, tmp + 7, obj.type, size_to_end_acc(tmp + 7));
+	obj.param = get_obj_param(&(obj.nb_param), tmp);
 	obj.color = get_obj_color(e, str, n);
 	elem = ft_lstnew(&obj, sizeof(obj));
 	ft_lstadd(&(e->scene->obj), elem);
 	free(name);
+	free(tmp);
 }
