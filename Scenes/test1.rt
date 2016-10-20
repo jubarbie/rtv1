@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/10/20 12:34:31 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/10/20 16:53:22 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ scene {
 			origin { 2 4 10.0 }
 			sphere {60  5 4.3    3}
 		}
-		color { rgb { 0xFFFFFF } }
+		color { rgb { 0xFFFFFF  }}
 	}
 	object {
 		name {  cube }

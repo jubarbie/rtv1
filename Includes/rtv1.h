@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/20 12:47:13 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/20 16:58:06 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "libft.h"
 
 # define PI 3.141592
-# define NB_TH 5
+# define NB_TH 13
 
 # define OPT_REF "d"
 # define OPT e->opt
@@ -34,13 +34,18 @@
 
 # define MLX e->mlx
 # define WIN e->win
-# define WIN_WIDTH e->win_width
-# define WIN_HEIGHT e->win_height
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 800
 # define BPP e->bpp
 # define SIZELINE e->sizeline
 # define ENDIAN e->endian
 # define IMG e->img
 # define IMG_ADDR e->img_addr
+
+# define ENV param->e
+# define TH param->index
+# define RAY_POS param->ray_pos
+# define RAY_DIR param->ray_dir
 
 typedef	struct	s_hsv
 {
@@ -90,13 +95,17 @@ typedef struct	s_scene
 	t_list		*obj;
 }				t_scene;
 
+typedef struct	s_param
+{
+	struct s_env	*e;
+	int				index;
+}				t_param;
+
 typedef struct	s_env
 {
 	char		opt;
 	void		*mlx;
 	void		*win;
-	int			win_width;
-	int			win_height;
 	int			bpp;
 	int			sizeline;
 	int			endian;
@@ -104,11 +113,12 @@ typedef struct	s_env
 	char		*img_addr;
 
 	t_scene		*scene;
+	t_param		*param[NB_TH];
 }				t_env;
 
 int				get_options(int ac, char **av, char *opt);
 
-t_env			*init_env(int size_x, int size_y);
+t_env			*init_env(char *file_name, char opt);
 void			free_env(t_env *e);
 
 void			parse_rt(t_env *e, char *file_name);
@@ -124,6 +134,9 @@ void			rot_vector(t_vector *v, double angle);
 void			add_vectors(t_vector *v1, t_vector *v2);
 void			sub_vectors(t_vector *v1, t_vector *v2);
 void			time_vector(t_vector *v, double i);
+
+void			*raytracer(void *arg);
+void			sphere(double *arg);
 
 void			error_usage(void);
 void			error_file(t_env *e);

@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:01:24 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/20 12:52:58 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/20 15:47:47 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 
 static int	create_img(t_env *e)
 {
+	int			i;
+	pthread_t	th[NB_TH];
+
+	i = -1;
+	while (++i < NB_TH)
+		if (pthread_create(&th[i], NULL, &raytracer, (void *)(e->param[i])) < 0)
+				quit_rt(e);
+	i = -1;
+	while (++i < NB_TH)
+		(void)pthread_join(th[i], NULL);
 	mlx_put_image_to_window(MLX, WIN, IMG, 0, 0);
 	return (0);
 }
@@ -34,17 +44,10 @@ void		img_put_pixel(t_env *e, int x, int y, unsigned int color)
 
 int			main(int ac, char **av)
 {
-	int		i;
 	t_env	*e;
+	char	opt;
 
-	e = init_env(900, 700);
-	i = get_options(ac, av, &OPT);
-	parse_rt(e, av[i + 1]);
-	if (D)
-	{
-		printf("Number of options: %d\n", i);
-		debug(e);
-	}
+	e = init_env(av[get_options(ac, av, &opt) + 1], opt);
 	mlx_loop_hook(MLX, create_img, e);
 	mlx_hook(WIN, 17, Button1MotionMask, quit_rt, e);
 	mlx_hook(WIN, KeyPress, KeyPressMask, ft_key_press, e);

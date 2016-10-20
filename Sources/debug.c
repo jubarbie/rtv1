@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 18:49:11 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/20 12:52:44 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/20 15:22:03 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	print_obj(t_env *e)
 
 static void	print_scene(t_env *e)
 {
-	printf("Debug: \n");
+	printf("\n\n----   DEBUG    ----\n");
 	printf("	Scene name: \"%s\"\n", e->scene->name);
 	printf("	Camera:\n");
 	printf("		origin(%lf, %lf, %lf)\n", e->scene->cam_pos->x,
@@ -49,5 +49,6 @@ static void	print_scene(t_env *e)
 
 void		debug(t_env *e)
 {
-	print_scene(e);
+	if (D)
+		print_scene(e);
 }

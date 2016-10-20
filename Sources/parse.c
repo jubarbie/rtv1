@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:21:36 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/20 12:59:26 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/20 15:41:46 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char		*get_in_acc(t_env *e, char *str, char *acc, int n)
 
 	if (!(tmp = ft_strnstr(str, acc, n)))
 		error_file(e);
-	len = ft_strlen(acc) + 2;
+	len = ft_strlen(acc);
 	tmp1 = strndup(tmp + len, size_to_end_acc(tmp + len));
 	tmp2 = ft_strtrim(tmp1);
 	free(tmp1);
