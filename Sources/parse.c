@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:21:36 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/20 12:34:00 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/20 12:59:26 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	build_scene(t_env *e, char *str)
 		quit_rt(e);
 	str += 7;
 	e->scene->name = get_in_acc(e, str, "name {", size_to_end_acc(str));
-	if (!(tmp = ft_strnstr(str , "camera {", size_to_end_acc(str))))
+	if (!(tmp = ft_strnstr(str, "camera {", size_to_end_acc(str))))
 		e->scene->cam_pos = new_vector(0, 0, 0);
 	else
 		e->scene->cam_pos = get_origin(tmp + 8, size_to_end_acc(tmp + 8));
@@ -57,12 +57,12 @@ int			size_to_end_acc(char *str)
 	return (10);
 }
 
-t_vector  	*get_origin(char *str, int n)
+t_vector	*get_origin(char *str, int n)
 {
 	char	*tmp;
 	char	*tmpy;
 	char	*tmpz;
-	
+
 	if (!(tmp = ft_strnstr(str, "origin {", n)))
 		return (new_vector(0, 0, 0));
 	else
@@ -77,7 +77,7 @@ t_vector  	*get_origin(char *str, int n)
 			tmpy++;
 		tmpz = tmpy;
 		while (*tmpz != '\n' && *tmpz != '\t' && *tmpz != ' ' && n-- > 0)
-			tmpz++;	
+			tmpz++;
 		return (new_vector(atof(tmp), atof(tmpy), atof(tmpz)));
 	}
 }
@@ -88,7 +88,7 @@ char		*get_in_acc(t_env *e, char *str, char *acc, int n)
 	char	*tmp1;
 	char	*tmp2;
 	int		len;
-	
+
 	if (!(tmp = ft_strnstr(str, acc, n)))
 		error_file(e);
 	len = ft_strlen(acc) + 2;
@@ -98,8 +98,7 @@ char		*get_in_acc(t_env *e, char *str, char *acc, int n)
 	return (tmp2);
 }
 
-
-static char	*get_file_content(t_env *e, char *file_name)
+void		parse_rt(t_env *e, char *file_name)
 {
 	int		fd;
 	char	*line;
@@ -122,14 +121,6 @@ static char	*get_file_content(t_env *e, char *file_name)
 	close(fd);
 	if (D)
 		ft_putstr(file);
-	return (file);
-}
-
-void		parse_rt(t_env *e, char *file_name)
-{
-	char	*str;
-
-	str = get_file_content(e, file_name);
-	build_scene(e, str);
-	free(str);
+	build_scene(e, file);
+	free(file);
 }

@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 11:04:38 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/20 12:42:17 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/20 12:53:52 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char		*get_obj_type(t_env *e, char *str, int n)
 {
 	char	**obj;
 	char	*ret;
-	int 	i;
+	int		i;
 
 	obj = ft_strsplit(OBJ, ' ');
 	i = 0;
@@ -75,10 +75,10 @@ static int		get_obj_color(t_env *e, char *str, int n)
 	color = ft_atoi(color_i);
 	free(color_i);
 	free(color_h);
-	return (color);	
+	return (color);
 }
 
-void 			build_object(t_env *e, char *str, int n)
+void			build_object(t_env *e, char *str, int n)
 {
 	t_object	obj;
 	t_list		*elem;

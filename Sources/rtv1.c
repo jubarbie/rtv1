@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:01:24 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/20 11:39:20 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/20 12:52:58 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	create_img(t_env *e)
 	return (0);
 }
 
-void	img_put_pixel(t_env *e, int x, int y, unsigned int color)
+void		img_put_pixel(t_env *e, int x, int y, unsigned int color)
 {
 	unsigned char r;
 	unsigned char g;
@@ -32,7 +32,7 @@ void	img_put_pixel(t_env *e, int x, int y, unsigned int color)
 	IMG_ADDR[y * SIZELINE + x * (BPP / 8) + 2] = b;
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	int		i;
 	t_env	*e;
