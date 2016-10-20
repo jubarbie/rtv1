@@ -34,37 +34,68 @@ static int	size_to_end_acc(char *str)
 	return (10);
 }
 
-static void	get_cam_pos(t_env *e, char *str)
+static void	get_origin(t_env *e, char *str, int n)
 {
-	int	i;
+	char	*tmp;
+	char	*tmpy;
+	char	*tmpz;
+	
+	if (!(tmp = ft_strnstr(str, "origin {", n)))
+		e->scene->cam_pos = new_vector(0, 0, 0);
+	else
+	{
+		tmp += 8;
+		while ((*tmp == '\n' || *tmp == '\t' || *tmp == ' ') && n-- > 0)
+			tmp++;
+		tmpy = tmp;
+		while (*tmpy != '\n' && *tmpy != '\t' && *tmpy != ' ' && n-- > 0)
+			tmpy++;
+		while ((*tmpy == '\n' || *tmpy == '\t' || *tmpy == ' ') && n-- > 0)
+			tmpy++;
+		tmpz = tmpy;
+		while (*tmpz != '\n' && *tmpz != '\t' && *tmpz != ' ' && n-- > 0)
+			tmpz++;	
+		e->scene->cam_pos = new_vector(atof(tmp), atof(tmpy), atof(tmpz));
+	}
+}
 
-	while (*str == '\n' || *str == '\t' || *str == ' ')
-		str++;
-	i = 0;
-	while (str[i] != '\n' && str[i] != '\t' && str[i] != ' ')
-		i++;
-	str[i] = '\0';
-	e->scene->cam_pos = new_vector(2, 2, 2);
+static void	get_name(t_env *e, char *str, int n)
+{
+	char *tmp;
+	
+	tmp = strndup(str, n);
+	e->scene->name = ft_strtrim(tmp);
+	free(tmp);
+}
+
+static void buid_object(t_env *e, char *str, int n)
+{
+	if (!(e->scene->obj))
+			
 }
 
 static void	build_scene(t_env *e, char *str)
 {
 	char	*tmp;
 
-	tmp = NULL;
 	if (!(e->scene = malloc(sizeof(t_scene))))
 		quit_rt(e);
+	e->scene->obj = NULL;
 	if (!(str = ft_strstr(str, "scene {")))
 		quit_rt(e);
-	tmp = strndup(str + 7, size_to_end_acc(str + 7));
-	if (!(tmp = ft_strstr(tmp, "name {")))
+	str += 7;
+	if (!(tmp = ft_strnstr(str, "name {", size_to_end_acc(str))))
 		quit_rt(e);
-	tmp = strndup(tmp + 6, size_to_end_acc(tmp + 6));
-	e->scene->name = ft_strtrim(tmp);
-	if (!(tmp = ft_strstr(tmp, "camera {")))
+	get_name(e, tmp + 6, size_to_end_acc(tmp + 6));
+	if (!(tmp = ft_strnstr(str , "camera {", size_to_end_acc(str))))
 		e->scene->cam_pos = new_vector(0, 0, 0);
 	else
-		get_cam_pos(e, tmp);
+		get_origin(e, tmp + 8, size_to_end_acc(tmp + 8));
+	while (tmp = ft_strnstr(str, "object {", size_to_end_acc(str)))
+	{
+		tmp += 8;
+		get_object(e, tmp, size_to_end_acc(tmp));
+	}
 }
 
 static char	*get_file_content(t_env *e, char *file_name)
@@ -95,5 +126,9 @@ static char	*get_file_content(t_env *e, char *file_name)
 
 void		parse_rt(t_env *e, char *file_name)
 {
-	build_scene(e, get_file_content(e, file_name));
+	char	*str;
+
+	str = get_file_content(e, file_name);
+	build_scene(e, str);
+	free(str);
 }

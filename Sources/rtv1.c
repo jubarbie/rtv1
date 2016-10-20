@@ -12,11 +12,11 @@
 
 #include "rtv1.h"
 
-static int	create_img(t_env *e)
+/*static int	create_img(t_env *e)
 {
 	mlx_put_image_to_window(MLX, WIN, IMG, 0, 0);
 	return (0);
-}
+}*/
 
 void	img_put_pixel(t_env *e, int x, int y, unsigned int color)
 {
@@ -45,10 +45,10 @@ int		main(int ac, char **av)
 		printf("Number of options: %d\n", i);
 		debug(e);
 	}
-	mlx_loop_hook(MLX, create_img, e);
+	/*mlx_loop_hook(MLX, create_img, e);
 	mlx_hook(WIN, 17, Button1MotionMask, quit_rt, e);
 	mlx_hook(WIN, KeyPress, KeyPressMask, ft_key_press, e);
 	mlx_hook(WIN, KeyRelease, KeyReleaseMask, ft_key_release, e);
-	mlx_loop(MLX);
+	mlx_loop(MLX);*/
 	return (0);
 }

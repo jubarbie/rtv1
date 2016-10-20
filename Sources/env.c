@@ -28,7 +28,7 @@ t_env		*init_env(int size_x, int size_y)
 	if (!(e = (t_env *)malloc(sizeof(t_env))))
 		exit(EXIT_FAILURE);
 	MLX = mlx_init();
-	WIN = mlx_new_window(MLX, size_x, size_y, "RT v.1");
+	//WIN = mlx_new_window(MLX, size_x, size_y, "RT v.1");
 	WIN_WIDTH = size_x;
 	WIN_HEIGHT = size_y;
 	IMG = mlx_new_image(MLX, WIN_WIDTH, WIN_HEIGHT);
