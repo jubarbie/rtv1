@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 15:06:39 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/19 17:57:39 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/20 11:42:09 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_env		*init_env(int size_x, int size_y)
 	if (!(e = (t_env *)malloc(sizeof(t_env))))
 		exit(EXIT_FAILURE);
 	MLX = mlx_init();
-	//WIN = mlx_new_window(MLX, size_x, size_y, "RT v.1");
+	WIN = mlx_new_window(MLX, size_x, size_y, "RT v.1");
 	WIN_WIDTH = size_x;
 	WIN_HEIGHT = size_y;
 	IMG = mlx_new_image(MLX, WIN_WIDTH, WIN_HEIGHT);

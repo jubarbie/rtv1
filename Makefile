@@ -6,7 +6,7 @@
 #    By: jubarbie <jubarbie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/30 16:51:35 by jubarbie          #+#    #+#              #
-#    Updated: 2016/10/19 18:54:46 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/10/20 11:21:07 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRC=	Sources/rtv1.c			\
 		Sources/env.c			\
 		Sources/vector.c		\
 		Sources/debug.c			\
-		Sources/parse.c
+		Sources/parse.c			\
+		Sources/parse_obj.c
 OBJ=$(SRC:.c=.o)
 NAME=rtv1
 

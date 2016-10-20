@@ -6,13 +6,36 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:21:36 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/19 20:02:48 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/20 12:34:00 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static int	size_to_end_acc(char *str)
+static void	build_scene(t_env *e, char *str)
+{
+	char	*tmp;
+
+	if (!(e->scene = malloc(sizeof(t_scene))))
+		quit_rt(e);
+	e->scene->obj = NULL;
+	if (!(str = ft_strstr(str, "scene {")))
+		quit_rt(e);
+	str += 7;
+	e->scene->name = get_in_acc(e, str, "name {", size_to_end_acc(str));
+	if (!(tmp = ft_strnstr(str , "camera {", size_to_end_acc(str))))
+		e->scene->cam_pos = new_vector(0, 0, 0);
+	else
+		e->scene->cam_pos = get_origin(tmp + 8, size_to_end_acc(tmp + 8));
+	tmp = str;
+	while ((tmp = ft_strnstr(tmp, "object {", size_to_end_acc(str))))
+	{
+		tmp += 8;
+		build_object(e, tmp, size_to_end_acc(tmp));
+	}
+}
+
+int			size_to_end_acc(char *str)
 {
 	int	i;
 	int j;
@@ -34,14 +57,14 @@ static int	size_to_end_acc(char *str)
 	return (10);
 }
 
-static void	get_origin(t_env *e, char *str, int n)
+t_vector  	*get_origin(char *str, int n)
 {
 	char	*tmp;
 	char	*tmpy;
 	char	*tmpz;
 	
 	if (!(tmp = ft_strnstr(str, "origin {", n)))
-		e->scene->cam_pos = new_vector(0, 0, 0);
+		return (new_vector(0, 0, 0));
 	else
 	{
 		tmp += 8;
@@ -55,48 +78,26 @@ static void	get_origin(t_env *e, char *str, int n)
 		tmpz = tmpy;
 		while (*tmpz != '\n' && *tmpz != '\t' && *tmpz != ' ' && n-- > 0)
 			tmpz++;	
-		e->scene->cam_pos = new_vector(atof(tmp), atof(tmpy), atof(tmpz));
+		return (new_vector(atof(tmp), atof(tmpy), atof(tmpz)));
 	}
 }
 
-static void	get_name(t_env *e, char *str, int n)
-{
-	char *tmp;
-	
-	tmp = strndup(str, n);
-	e->scene->name = ft_strtrim(tmp);
-	free(tmp);
-}
-
-static void buid_object(t_env *e, char *str, int n)
-{
-	if (!(e->scene->obj))
-			
-}
-
-static void	build_scene(t_env *e, char *str)
+char		*get_in_acc(t_env *e, char *str, char *acc, int n)
 {
 	char	*tmp;
-
-	if (!(e->scene = malloc(sizeof(t_scene))))
-		quit_rt(e);
-	e->scene->obj = NULL;
-	if (!(str = ft_strstr(str, "scene {")))
-		quit_rt(e);
-	str += 7;
-	if (!(tmp = ft_strnstr(str, "name {", size_to_end_acc(str))))
-		quit_rt(e);
-	get_name(e, tmp + 6, size_to_end_acc(tmp + 6));
-	if (!(tmp = ft_strnstr(str , "camera {", size_to_end_acc(str))))
-		e->scene->cam_pos = new_vector(0, 0, 0);
-	else
-		get_origin(e, tmp + 8, size_to_end_acc(tmp + 8));
-	while (tmp = ft_strnstr(str, "object {", size_to_end_acc(str)))
-	{
-		tmp += 8;
-		get_object(e, tmp, size_to_end_acc(tmp));
-	}
+	char	*tmp1;
+	char	*tmp2;
+	int		len;
+	
+	if (!(tmp = ft_strnstr(str, acc, n)))
+		error_file(e);
+	len = ft_strlen(acc) + 2;
+	tmp1 = strndup(tmp + len, size_to_end_acc(tmp + len));
+	tmp2 = ft_strtrim(tmp1);
+	free(tmp1);
+	return (tmp2);
 }
+
 
 static char	*get_file_content(t_env *e, char *file_name)
 {

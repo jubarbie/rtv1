@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 14:55:18 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/19 17:10:28 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/20 10:13:59 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ int		quit_rt(t_env *e)
 	free_env(e);
 	exit(EXIT_FAILURE);
 	return (0);
+}
+
+void	error_file(t_env *e)
+{
+	ft_putstr("Wrong file format\n");
+	quit_rt(e);
 }
 
 void	error_usage(void)

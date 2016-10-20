@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/10/19 17:53:52 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/10/20 12:34:31 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,4 +22,21 @@ scene {
 	render {
 		mlx_all_objects { 1080 800 }
 	}
+	object {
+		name {sphere}
+		inter {
+			origin { 2 4 10.0 }
+			sphere {60  5 4.3    3}
+		}
+		color { rgb { 0xFFFFFF } }
+	}
+	object {
+		name {  cube }
+		inter {
+			origin { 28.766 433 10.0 }
+			cube { 43}
+		}
+		color { rgb { 0xFF321C   } }
+	}
+
 }

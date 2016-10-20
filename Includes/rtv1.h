@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/19 19:08:14 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/20 12:21:00 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define OPT_REF "d"
 # define OPT e->opt
 # define D (OPT & (1 << 0))
+
+# define OBJ "sphere plane cube cone cylinder"
 
 # define MLX e->mlx
 # define WIN e->win
@@ -74,9 +76,10 @@ typedef struct	s_object
 {
 	char		*type;
 	char		*name;
-	t_vector	pos;
+	t_vector	*pos;
 	double		*param;
-	t_hsv		color;
+	int			nb_param;
+	int			color;
 }				t_object;
 
 typedef struct	s_scene
@@ -107,7 +110,12 @@ int				get_options(int ac, char **av, char *opt);
 
 t_env			*init_env(int size_x, int size_y);
 void			free_env(t_env *e);
+
 void			parse_rt(t_env *e, char *file_name);
+void			build_object(t_env *e, char *str, int n);
+char			*get_in_acc(t_env *e, char *str, char *acc, int n);
+t_vector		*get_origin(char *str, int n);
+int				size_to_end_acc(char *str);
 
 void			img_put_pixel(t_env *e, int x, int y, unsigned int color);
 
@@ -118,6 +126,7 @@ void			sub_vectors(t_vector *v1, t_vector *v2);
 void			time_vector(t_vector *v, double i);
 
 void			error_usage(void);
+void			error_file(t_env *e);
 void			error_opt(char opt);
 int				quit_rt(t_env *e);
 void			debug(t_env *e);
