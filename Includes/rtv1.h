@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/20 18:56:03 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/21 20:17:00 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@
 # define TH param->index
 # define RAY_POS param->ray_pos
 # define RAY_DIR param->ray_dir
+# define GAP_X param->gap_x
+# define GAP_Y param->gap_y
+# define X param->x
+# define Y param->y
+# define COLOR param->color
 
 # define VW_WIDTH e->scene->view_plane_width
 # define VW_HEIGHT e->scene->view_plane_height
@@ -54,7 +59,7 @@
 # define CAM_POS e->scene->cam_pos
 # define CAM_DIR e->scene->cam_dir
 # define CAM_UP e->scene->cam_up
-# define CAM_LEFT e->scene->cam_left
+# define CAM_RIGHT e->scene->cam_right
 # define OBJ e->scene->obj
 
 
@@ -92,7 +97,7 @@ typedef struct	s_object
 {
 	char		*type;
 	char		*name;
-	t_vector	*pos;
+	t_vector	pos;
 	double		*param;
 	int			nb_param;
 	int			color;
@@ -104,7 +109,7 @@ typedef struct	s_scene
 	t_vector	cam_pos;
 	t_vector	cam_dir;
 	t_vector	cam_up;
-	t_vector	cam_left;
+	t_vector	cam_right;
 	t_list		*obj;
 	double		view_plane_width;
 	double		view_plane_height;
@@ -116,6 +121,13 @@ typedef struct	s_param
 {
 	struct s_env	*e;
 	int				index;
+	int				x;
+	int				y;
+	double			gap_x;
+	double			gap_y;
+	t_vector		ray_pos;
+	t_vector		ray_dir;
+	int				color;
 }				t_param;
 
 typedef struct	s_env
@@ -141,22 +153,23 @@ void			free_env(t_env *e);
 void			parse_rt(t_env *e, char *file_name);
 void			build_object(t_env *e, char *str, int n);
 char			*get_in_acc(t_env *e, char *str, char *acc, int n);
-t_vector		*get_origin(char *str, int n);
+t_vector		get_origin(char *str, int n);
 int				size_to_end_acc(char *str);
 
 void			img_put_pixel(t_env *e, int x, int y, unsigned int color);
 
 t_vector		*new_vector(double x, double y, double z);
 t_vector		fill_vector(double x, double y, double z);
-void			rot_vector(t_vector *v, double angle);
-t_vector		add_vectors(t_vector *v1, t_vector *v2);
-t_vector		sub_vectors(t_vector *v1, t_vector *v2);
-t_vector		time_vector(t_vector *v, double i);
-double			norm_vector(t_vector *v);
-t_vector		unit_vector(t_vector *v);
+void			rot_vector(t_vector v, double angle);
+t_vector		add_vectors(t_vector v1, t_vector v2);
+t_vector		sub_vectors(t_vector v1, t_vector v2);
+t_vector		time_vector(t_vector v, double i);
+double			norm_vector(t_vector v);
+t_vector		unit_vector(t_vector v);
+t_vector		perp_vector(t_vector v1, t_vector v2);
 
 void			*raytracer(void *arg);
-void			sphere(double *arg);
+void			sphere(t_param *param, double *arg);
 
 void			error_usage(void);
 void			error_file(t_env *e);

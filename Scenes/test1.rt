@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/10/20 16:53:22 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/10/21 20:21:19 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 scene {
 	name { test1 }
 	camera { 
-		origin { 10.0 0.0 200 }	
+		origin { 110.0 10.0 200 }	
 	}
 	render {
 		mlx_all_objects { 1080 800 }

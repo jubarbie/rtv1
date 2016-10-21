@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 18:49:11 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/20 15:22:03 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/21 19:32:07 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void	print_obj(t_env *e)
 		i = -1;
 		while (++i < obj->nb_param)
 			printf("			%lf\n", obj->param[i]);
-		printf("		origin(%lf, %lf, %lf)\n", obj->pos->x,
-												obj->pos->y, obj->pos->z);
+		printf("		origin(%lf, %lf, %lf)\n", obj->pos.x,
+												obj->pos.y, obj->pos.z);
 		printf("		color: 0x%08.8X\n", obj->color);
 		printf("		----------\n");
 		elem = elem->next;
@@ -42,8 +42,8 @@ static void	print_scene(t_env *e)
 	printf("\n\n----   DEBUG    ----\n");
 	printf("	Scene name: \"%s\"\n", e->scene->name);
 	printf("	Camera:\n");
-	printf("		origin(%lf, %lf, %lf)\n", e->scene->cam_pos->x,
-			e->scene->cam_pos->y, e->scene->cam_pos->z);
+	printf("		origin(%lf, %lf, %lf)\n", e->scene->cam_pos.x,
+			e->scene->cam_pos.y, e->scene->cam_pos.z);
 	print_obj(e);
 }
 
