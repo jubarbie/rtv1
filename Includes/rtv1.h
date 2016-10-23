@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/21 20:24:05 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/23 16:29:57 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define TH param->index
 # define RAY_POS param->ray_pos
 # define RAY_DIR param->ray_dir
+# define RAY param->ray
 # define GAP_X param->gap_x
 # define GAP_Y param->gap_y
 # define X param->x
@@ -127,6 +128,7 @@ typedef struct	s_param
 	double			gap_y;
 	t_vector		ray_pos;
 	t_vector		ray_dir;
+	t_vector		ray;
 	int				color;
 }				t_param;
 
@@ -154,10 +156,11 @@ void			parse_rt(t_env *e, char *file_name);
 void			build_object(t_env *e, char *str, int n);
 char			*get_in_acc(t_env *e, char *str, char *acc, int n);
 t_vector		get_origin(char *str, int n);
-int				size_to_end_acc(char *str);
+int				size_to_end_acc(t_env *e, char *str);
 
 void			img_put_pixel(t_env *e, int x, int y, unsigned int color);
 
+void			print_vector(t_vector v, char *str);
 t_vector		*new_vector(double x, double y, double z);
 t_vector		fill_vector(double x, double y, double z);
 void			rot_vector(t_vector v, double angle);
@@ -174,6 +177,7 @@ void			sphere(t_param *param, double *arg);
 void			error_usage(void);
 void			error_file(t_env *e);
 void			error_opt(char opt);
+void			error_perso(t_env *e, char *str);
 int				quit_rt(t_env *e);
 void			debug(t_env *e);
 

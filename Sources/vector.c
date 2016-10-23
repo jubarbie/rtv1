@@ -6,11 +6,16 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 15:07:04 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/21 15:29:47 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/23 17:38:03 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+void		print_vector(t_vector v, char *str)
+{
+	printf("%s (%lf, %lf, %lf)\n", str, v.x, v.y, v.z);
+}
 
 void		rot_vector(t_vector v, double a)
 {

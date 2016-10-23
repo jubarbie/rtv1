@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:01:24 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/21 18:55:33 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/23 13:27:27 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	create_img(t_env *e)
 	i = -1;
 	while (++i < NB_TH)
 		if (pthread_create(&th[i], NULL, &raytracer, (void *)(e->param[i])) < 0)
-				quit_rt(e);
+				error_perso(e, "create thread failed");
 	i = -1;
 	while (++i < NB_TH)
 		(void)pthread_join(th[i], NULL);
@@ -46,8 +46,11 @@ int			main(int ac, char **av)
 {
 	t_env	*e;
 	char	opt;
+	int		i;
 
-	e = init_env(av[get_options(ac, av, &opt) + 1], opt);
+	if (ac - (i = get_options(ac, av, &opt)) <= 1)
+		error_usage();
+	e = init_env(av[i + 1], opt);
 	mlx_loop_hook(MLX, create_img, e);
 	mlx_hook(WIN, 17, Button1MotionMask, quit_rt, e);
 	mlx_hook(WIN, KeyPress, KeyPressMask, ft_key_press, e);

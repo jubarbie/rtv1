@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 14:55:18 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/21 19:40:17 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/23 13:22:44 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,29 @@
 int		quit_rt(t_env *e)
 {
 	free_env(e);
-	exit(EXIT_FAILURE);
+	exit(EXIT_SUCCESS);
 	return (0);
+}
+
+void	error_perso(t_env *e, char *str)
+{
+	ft_putstr("Error: ");
+	ft_putstr(str);
+	ft_putchar('\n');
+	free(e);
+	exit(EXIT_FAILURE);
 }
 
 void	error_file(t_env *e)
 {
 	ft_putstr("Wrong file format\n");
-	quit_rt(e);
+	free(e);
+	exit(EXIT_FAILURE);
 }
 
 void	error_usage(void)
 {
-	ft_putstr("usage: ./rtv1\n");
+	ft_putstr("usage: ./rtv1 [-d] file_name\n");
 	exit(EXIT_FAILURE);
 }
 

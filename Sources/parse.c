@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:21:36 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/21 15:36:14 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/23 17:32:39 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,25 @@ static void	build_scene(t_env *e, char *str)
 	char	*tmp;
 
 	if (!(e->scene = malloc(sizeof(t_scene))))
-		quit_rt(e);
+		error_perso(e, "malloc (t_scene *)scene failed");
 	e->scene->obj = NULL;
 	if (!(str = ft_strstr(str, "scene {")))
-		quit_rt(e);
+		error_perso(e, "no scene found in file");
 	str += 7;
-	e->scene->name = get_in_acc(e, str, "name {", size_to_end_acc(str));
-	if (!(tmp = ft_strnstr(str, "camera {", size_to_end_acc(str))))
+	e->scene->name = get_in_acc(e, str, "name {", size_to_end_acc(e, str));
+	if (!(tmp = ft_strnstr(str, "camera {", size_to_end_acc(e, str))))
 		e->scene->cam_pos = fill_vector(0, 0, 0);
 	else
-		e->scene->cam_pos = get_origin(tmp + 8, size_to_end_acc(tmp + 8));
+		e->scene->cam_pos = get_origin(tmp + 8, size_to_end_acc(e, tmp + 8));
 	tmp = str;
-	while ((tmp = ft_strnstr(tmp, "object {", size_to_end_acc(str))))
+	while ((tmp = ft_strnstr(tmp, "object {", size_to_end_acc(e, str))))
 	{
 		tmp += 8;
-		build_object(e, tmp, size_to_end_acc(tmp));
+		build_object(e, tmp, size_to_end_acc(e, tmp));
 	}
 }
 
-int			size_to_end_acc(char *str)
+int			size_to_end_acc(t_env *e, char *str)
 {
 	int	i;
 	int j;
@@ -53,7 +53,7 @@ int			size_to_end_acc(char *str)
 		i++;
 	}
 	if (str[i] == '\0')
-		exit(EXIT_FAILURE);
+		error_perso(e, "missing one \"}\" in file");
 	return (10);
 }
 
@@ -90,9 +90,9 @@ char		*get_in_acc(t_env *e, char *str, char *acc, int n)
 	int		len;
 
 	if (!(tmp = ft_strnstr(str, acc, n)))
-		error_file(e);
+		error_perso(e, "malloc failed in get_in_acc function");
 	len = ft_strlen(acc);
-	tmp1 = strndup(tmp + len, size_to_end_acc(tmp + len));
+	tmp1 = strndup(tmp + len, size_to_end_acc(e, tmp + len));
 	tmp2 = ft_strtrim(tmp1);
 	free(tmp1);
 	return (tmp2);
@@ -106,7 +106,7 @@ void		parse_rt(t_env *e, char *file_name)
 	char	*file;
 
 	if ((fd = open(file_name, O_RDONLY)) == -1)
-		quit_rt(e);
+		error_perso(e, "failed opening file");
 	file = ft_strnew(0);
 	while (get_next_line(fd, &line))
 	{
@@ -120,7 +120,10 @@ void		parse_rt(t_env *e, char *file_name)
 	}
 	close(fd);
 	if (D)
+	{
 		ft_putstr(file);
+		ft_putchar('\n');
+	}
 	build_scene(e, file);
 	free(file);
 }
