@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/23 16:29:57 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/24 14:12:20 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 # define PI 3.141592
 # define NB_TH 13
+# define DIST_MAX 400
 
 # define OPT_REF "d"
 # define OPT e->opt
@@ -52,6 +53,8 @@
 # define X param->x
 # define Y param->y
 # define COLOR param->color
+# define OBJ param->obj 
+# define DIST param->dist
 
 # define VW_WIDTH e->scene->view_plane_width
 # define VW_HEIGHT e->scene->view_plane_height
@@ -61,7 +64,6 @@
 # define CAM_DIR e->scene->cam_dir
 # define CAM_UP e->scene->cam_up
 # define CAM_RIGHT e->scene->cam_right
-# define OBJ e->scene->obj
 
 
 typedef	struct	s_hsv
@@ -130,6 +132,7 @@ typedef struct	s_param
 	t_vector		ray_dir;
 	t_vector		ray;
 	int				color;
+	double			dist;
 }				t_param;
 
 typedef struct	s_env
@@ -172,7 +175,8 @@ t_vector		unit_vector(t_vector v);
 t_vector		perp_vector(t_vector v1, t_vector v2);
 
 void			*raytracer(void *arg);
-void			sphere(t_param *param, double *arg);
+void			sphere(t_param *param, t_object *obj);
+void			plane(t_param *param, double *arg);
 
 void			error_usage(void);
 void			error_file(t_env *e);

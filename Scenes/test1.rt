@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/10/23 19:09:37 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/10/24 14:41:30 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 scene {
 	name { test1 }
 	camera { 
-		origin { -800 -800 -800 }	
+		origin { -20 -20 -20 }	
 	}
 	render {
 		mlx_all_objects { 1080 800 }
@@ -25,18 +25,35 @@ scene {
 	object {
 		name {sphere}
 		inter {
-			origin { 2 4 10.0 }
-			sphere {60  5 4.3    3}
+			origin { 0 0 0.0 }
+			sphere {  0.10}
 		}
-		color { rgb { 0xFFFFFF  }}
+		color { rgb { 0xFFFF00  }}
 	}
 	object {
-		name {  cube }
+		name {sphere}
 		inter {
-			origin { 28.766 433 10.0 }
-			cube { 43}
+			origin { 0 0.1 0.0 }
+			sphere {  0.120}
 		}
-		color { rgb { 0xFF321C   } }
+		color { rgb { 0x00FF00  }}
 	}
+	object {
+		name {sphere}
+		inter {
+			origin { 0 0 0.2 }
+			sphere {  0.10}
+		}
+		color { rgb { 0x0000FF  }}
+	}
+	object {
+		name {sphere}
+		inter {
+			origin { 0.1 0 0 }
+			sphere {  0.09}
+		}
+		color { rgb { 0x0F000F  }}
+	}
+
 
 }
