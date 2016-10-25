@@ -6,7 +6,7 @@
 #    By: jubarbie <jubarbie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/30 16:51:35 by jubarbie          #+#    #+#              #
-#    Updated: 2016/10/24 09:26:26 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/10/25 19:21:03 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,14 @@ SRC=	Sources/rtv1.c			\
 		Sources/key_event.c		\
 		Sources/env.c			\
 		Sources/vector.c		\
+		Sources/vector2.c		\
 		Sources/debug.c			\
 		Sources/parse.c			\
 		Sources/parse_obj.c		\
 		Sources/raytracer.c		\
 		Sources/sphere.c		\
-		Sources/plane.c
+		Sources/plane.c			\
+		Sources/moves.c
 OBJ=$(SRC:.c=.o)
 NAME=rtv1
 

@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 15:07:04 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/23 17:38:03 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/25 19:22:27 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,54 +15,6 @@
 void		print_vector(t_vector v, char *str)
 {
 	printf("%s (%lf, %lf, %lf)\n", str, v.x, v.y, v.z);
-}
-
-void		rot_vector(t_vector v, double a)
-{
-	double tmp;
-
-	tmp = v.x;
-	v.x = (v.x * cos(a)) + (v.y * sin(a));
-	v.y = (tmp * -sin(a)) + (v.y * cos(a));
-}
-
-t_vector	perp_vector(t_vector v1, t_vector v2)
-{
-	t_vector	ret;
-
-	ret.x = (v1.y * v2.z - v2.y * v1.z);
-	ret.y = (v1.x * v2.z - v2.x * v1.z);
-	ret.z = (v1.x * v2.y - v2.x * v1.y);
-	return (ret);
-}
-
-t_vector	time_vector(t_vector v, double i)
-{
-	t_vector	ret;
-	
-	ret.x = v.x * i;
-	ret.y = v.y * i;
-	ret.z = v.z * i;
-	return (ret);
-}
-
-t_vector	add_vectors(t_vector v1, t_vector v2)
-{
-	t_vector	ret;
-	ret.x = v1.x + v2.x;
-	ret.y = v1.y + v2.y;
-	ret.z = v1.z + v2.z;
-	return (ret);
-}
-
-t_vector	sub_vectors(t_vector v1, t_vector v2)
-{
-	t_vector 	ret;
-
-	ret.x = v1.x - v2.x;
-	ret.y = v1.y - v2.y;
-	ret.z = v1.z - v2.z;
-	return (ret);
 }
 
 double		norm_vector(t_vector v)

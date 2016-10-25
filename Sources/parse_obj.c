@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 11:04:38 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/23 13:22:35 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/25 19:19:12 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,23 @@ static char		*get_obj_type(t_env *e, char *str, int n)
 static int		get_obj_color(t_env *e, char *str, int n)
 {
 	char	*tmp;
-	char	*color_h;
-	char	*color_i;
+	char	*col_h;
+	char	*col_i;
 	int		color;
 
-	color_h = NULL;
+	col_h = NULL;
 	if (!(tmp = ft_strnstr(str, "color {", n)))
 		return (0);
 	if ((tmp = ft_strnstr(tmp + 7, "rgb {", size_to_end_acc(e, tmp + 7))))
-		color_h = get_in_acc(e, tmp, "rgb {", n);
-	color_i = ft_convert_base(color_h + 2, "0123456789ABCDEF", "0123456789");
-	color = ft_atoi(color_i);
-	free(color_i);
-	free(color_h);
-	return (color);
+	{
+		col_h = get_in_acc(e, tmp, "rgb {", n);
+		col_i = ft_convert_base(col_h + 2, "0123456789ABCDEF", "0123456789");
+		color = ft_atoi(col_i);
+		free(col_i);
+		free(col_h);
+		return (color);
+	}
+	return (0);
 }
 
 void			build_object(t_env *e, char *str, int n)
@@ -85,6 +88,7 @@ void			build_object(t_env *e, char *str, int n)
 	t_list		*elem;
 	char		*name;
 	char		*tmp;
+	char		*type_acc;
 
 	name = get_in_acc(e, str, "name {", size_to_end_acc(e, str));
 	if (!(tmp = ft_strnstr(str, "inter {", n)))
@@ -92,11 +96,13 @@ void			build_object(t_env *e, char *str, int n)
 	obj.type = get_obj_type(e, tmp + 7, size_to_end_acc(e, tmp + 7));
 	obj.name = ft_strdup(name);
 	obj.pos = get_origin(tmp + 7, size_to_end_acc(e, tmp + 7));
-	tmp = get_in_acc(e, tmp + 7, obj.type, size_to_end_acc(e, tmp + 7));
+	type_acc = ft_strjoin(obj.type, " {");
+	tmp = get_in_acc(e, tmp + 7, type_acc, size_to_end_acc(e, tmp + 7));
 	obj.param = get_obj_param(e, &(obj.nb_param), tmp);
 	obj.color = get_obj_color(e, str, n);
 	elem = ft_lstnew(&obj, sizeof(obj));
 	ft_lstadd(&(e->scene->obj), elem);
+	free(type_acc);
 	free(name);
 	free(tmp);
 }

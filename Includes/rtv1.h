@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/24 14:12:20 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/25 19:23:43 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,19 @@
 
 # define PI 3.141592
 # define NB_TH 13
-# define DIST_MAX 400
+# define DIST_MAX 400.0
 
 # define OPT_REF "d"
 # define OPT e->opt
 # define D (OPT & (1 << 0))
+
+# define MOVES e->moves
+# define M_FORWARD (1 << 0)
+# define M_BACKWARD (1 << 1)
+# define M_LEFT (1 << 2)
+# define M_RIGHT (1 << 3)
+# define M_UP (1 << 4)
+# define M_DOWN (1 << 5)
 
 # define OBJ_ALLOWED "sphere plane cube cone cylinder"
 
@@ -48,12 +56,10 @@
 # define RAY_POS param->ray_pos
 # define RAY_DIR param->ray_dir
 # define RAY param->ray
-# define GAP_X param->gap_x
-# define GAP_Y param->gap_y
 # define X param->x
 # define Y param->y
 # define COLOR param->color
-# define OBJ param->obj 
+# define OBJ param->obj
 # define DIST param->dist
 
 # define VW_WIDTH e->scene->view_plane_width
@@ -64,7 +70,8 @@
 # define CAM_DIR e->scene->cam_dir
 # define CAM_UP e->scene->cam_up
 # define CAM_RIGHT e->scene->cam_right
-
+# define GAP_X e->scene->gap_x
+# define GAP_Y e->scene->gap_y
 
 typedef	struct	s_hsv
 {
@@ -118,6 +125,8 @@ typedef struct	s_scene
 	double		view_plane_height;
 	double		view_plane_dist;
 	t_vector	view_plane_up_left;
+	double		gap_x;
+	double		gap_y;
 }				t_scene;
 
 typedef struct	s_param
@@ -126,13 +135,12 @@ typedef struct	s_param
 	int				index;
 	int				x;
 	int				y;
-	double			gap_x;
-	double			gap_y;
 	t_vector		ray_pos;
 	t_vector		ray_dir;
 	t_vector		ray;
 	int				color;
 	double			dist;
+	t_object		*obj;
 }				t_param;
 
 typedef struct	s_env
@@ -145,7 +153,7 @@ typedef struct	s_env
 	int			endian;
 	void		*img;
 	char		*img_addr;
-
+	char		moves;
 	t_scene		*scene;
 	t_param		*param[NB_TH];
 }				t_env;
@@ -161,7 +169,9 @@ char			*get_in_acc(t_env *e, char *str, char *acc, int n);
 t_vector		get_origin(char *str, int n);
 int				size_to_end_acc(t_env *e, char *str);
 
+int				create_img(t_env *e);
 void			img_put_pixel(t_env *e, int x, int y, unsigned int color);
+int				moves(t_env *e);
 
 void			print_vector(t_vector v, char *str);
 t_vector		*new_vector(double x, double y, double z);

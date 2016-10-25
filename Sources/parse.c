@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:21:36 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/23 17:32:39 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/25 17:15:45 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			size_to_end_acc(t_env *e, char *str)
 	}
 	if (str[i] == '\0')
 		error_perso(e, "missing one \"}\" in file");
-	return (10);
+	return (-1);
 }
 
 t_vector	get_origin(char *str, int n)
@@ -120,10 +120,7 @@ void		parse_rt(t_env *e, char *file_name)
 	}
 	close(fd);
 	if (D)
-	{
-		ft_putstr(file);
-		ft_putchar('\n');
-	}
+		printf("%s\n", file);
 	build_scene(e, file);
 	free(file);
 }
