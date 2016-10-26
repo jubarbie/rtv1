@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/25 19:23:43 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:56:21 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@
 # define NB_TH 13
 # define DIST_MAX 400.0
 
-# define OPT_REF "d"
+# define OPT_REF "dl"
 # define OPT e->opt
 # define D (OPT & (1 << 0))
+# define L (OPT & (1 << 1))
 
 # define MOVES e->moves
 # define M_FORWARD (1 << 0)
@@ -39,7 +40,7 @@
 # define M_UP (1 << 4)
 # define M_DOWN (1 << 5)
 
-# define OBJ_ALLOWED "sphere plane cube cone cylinder"
+# define OBJ_ALLOWED "light sphere plane cube cone cylinder"
 
 # define MLX e->mlx
 # define WIN e->win
@@ -56,11 +57,15 @@
 # define RAY_POS param->ray_pos
 # define RAY_DIR param->ray_dir
 # define RAY param->ray
+# define PHO_POS param->pho_pos
+# define PHO_DIR param->pho_dir
+# define PHO param->pho
 # define X param->x
 # define Y param->y
 # define COLOR param->color
 # define OBJ param->obj
 # define DIST param->dist
+# define DRAW param->draw
 
 # define VW_WIDTH e->scene->view_plane_width
 # define VW_HEIGHT e->scene->view_plane_height
@@ -121,6 +126,7 @@ typedef struct	s_scene
 	t_vector	cam_up;
 	t_vector	cam_right;
 	t_list		*obj;
+	t_list		*light;
 	double		view_plane_width;
 	double		view_plane_height;
 	double		view_plane_dist;
@@ -141,6 +147,7 @@ typedef struct	s_param
 	int				color;
 	double			dist;
 	t_object		*obj;
+	char			draw;
 }				t_param;
 
 typedef struct	s_env
@@ -182,6 +189,7 @@ t_vector		sub_vectors(t_vector v1, t_vector v2);
 t_vector		time_vector(t_vector v, double i);
 double			norm_vector(t_vector v);
 t_vector		unit_vector(t_vector v);
+double			angle_vectors(t_vector v1, t_vector v2);
 t_vector		perp_vector(t_vector v1, t_vector v2);
 
 void			*raytracer(void *arg);

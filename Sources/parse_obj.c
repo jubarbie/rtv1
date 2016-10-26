@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 11:04:38 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/25 19:19:12 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/26 11:35:45 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,10 @@ void			build_object(t_env *e, char *str, int n)
 	obj.param = get_obj_param(e, &(obj.nb_param), tmp);
 	obj.color = get_obj_color(e, str, n);
 	elem = ft_lstnew(&obj, sizeof(obj));
-	ft_lstadd(&(e->scene->obj), elem);
+	if (!ft_strcmp("light", obj.type))
+		ft_lstadd(&(e->scene->light), elem);
+	else
+		ft_lstadd(&(e->scene->obj), elem);
 	free(type_acc);
 	free(name);
 	free(tmp);

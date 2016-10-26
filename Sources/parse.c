@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:21:36 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/25 17:15:45 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/26 11:39:17 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	build_scene(t_env *e, char *str)
 	if (!(e->scene = malloc(sizeof(t_scene))))
 		error_perso(e, "malloc (t_scene *)scene failed");
 	e->scene->obj = NULL;
+	e->scene->light = NULL;
 	if (!(str = ft_strstr(str, "scene {")))
 		error_perso(e, "no scene found in file");
 	str += 7;

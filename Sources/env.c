@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 15:06:39 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/25 17:50:36 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/26 11:39:21 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void			free_env(t_env *e)
 			e->param[i] ? free(e->param[i]) : 0;
 		e->scene->name ? free(e->scene->name) : 0;
 		ft_lstdel(&e->scene->obj, &free_obj);
+		ft_lstdel(&e->scene->light, &free_obj);
 		e->scene ? free(e->scene) : 0;
 		mlx_destroy_image(MLX, IMG);
 		MLX = NULL;

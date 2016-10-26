@@ -6,11 +6,21 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 19:19:33 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/25 19:23:45 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/26 12:22:21 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+double		angle_vectors(t_vector v1, t_vector v2)
+{
+	double	ret;
+	
+	v1 = unit_vector(v1);
+	v2 = unit_vector(v2);
+	ret = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+	return (ret);
+}
 
 t_vector	perp_vector(t_vector v1, t_vector v2)
 {

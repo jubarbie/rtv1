@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 15:06:00 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/25 18:51:16 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:25:05 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ int			ft_key_press(int keycode, t_env *e)
 		printf("%d\n", keycode);
 	if (keycode == 53)
 		quit_rt(e);
+	else if (keycode == 37)
+	{
+		(L) ? (OPT ^= (1 << 1)) : (OPT |= (1 << 1));
+		create_img(e);
+	}
 	else
 		move(keycode, e);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 14:55:18 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/23 13:22:44 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:35:33 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int		quit_rt(t_env *e)
 {
+	ft_putstr("Quiting rtv1\n");
 	free_env(e);
 	exit(EXIT_SUCCESS);
 	return (0);
