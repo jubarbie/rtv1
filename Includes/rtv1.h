@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/28 14:11:34 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/28 17:15:46 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,11 @@
 
 # define ENV param->e
 # define TH param->index
-# define RAY_POS param->ray_pos
-# define RAY_DIR param->ray_dir
-# define RAY param->ray
-# define PHO_POS param->pho_pos
-# define PHO_DIR param->pho_dir
-# define PHO param->pho
 # define X param->x
 # define Y param->y
+# define VW_RAY param->vw_ray
+# define PHO_RAY param->light_ray
 # define COLOR param->color
-# define OBJ param->obj
-# define DIST param->dist
-# define DRAW param->draw
 
 # define VW_WIDTH e->scene->view_plane_width
 # define VW_HEIGHT e->scene->view_plane_height
@@ -118,6 +111,15 @@ typedef struct	s_object
 	int			color;
 }				t_object;
 
+typedef struct	s_ray
+{
+	t_vector	pos;
+	t_vector	dir;
+	t_vector	inter;
+	double		dist;
+	t_object	*obj;
+}				t_ray;
+
 typedef struct	s_scene
 {
 	char		*name;
@@ -141,13 +143,9 @@ typedef struct	s_param
 	int				index;
 	int				x;
 	int				y;
-	t_vector		ray_pos;
-	t_vector		ray_dir;
-	t_vector		ray;
+	t_ray			vw_ray;
+	t_ray			light_ray;
 	int				color;
-	double			dist;
-	t_object		*obj;
-	char			draw;
 }				t_param;
 
 typedef struct	s_env
@@ -193,7 +191,7 @@ double			angle_vectors(t_vector v1, t_vector v2);
 t_vector		perp_vector(t_vector v1, t_vector v2);
 
 void			*raytracer(void *arg);
-void			sphere(t_param *param, t_object *obj);
+int				sphere(t_param *param, t_object *obj, t_ray *ray);
 void			plane(t_param *param, t_object *obj);
 
 void			error_usage(void);
