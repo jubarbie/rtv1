@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/10/26 15:59:10 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/10/28 14:15:32 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 scene {
 	name { test1 }
 	camera { 
-		origin { -1 -1 -1 }	
+		origin { -1 -1 -1 }			
 	}
 	render {
 		mlx_all_objects { 1080 800 }
@@ -70,6 +70,16 @@ scene {
 		}
 		color { rgb { 0x000000FF  }}
 	}
+#	object {
+		name { plane }
+		inter {
+			origin { 0 0 0.0 }			
+			plane {  0 1  0 0.8 }
+
+		}
+		color { rgb { 0x0000FF00  }}
+	}
+
 
 
 }

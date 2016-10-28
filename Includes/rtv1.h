@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/26 15:56:21 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/28 14:11:34 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ t_vector		perp_vector(t_vector v1, t_vector v2);
 
 void			*raytracer(void *arg);
 void			sphere(t_param *param, t_object *obj);
-void			plane(t_param *param, double *arg);
+void			plane(t_param *param, t_object *obj);
 
 void			error_usage(void);
 void			error_file(t_env *e);

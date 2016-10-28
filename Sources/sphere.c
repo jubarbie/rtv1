@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:58:17 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/26 15:55:46 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/28 14:15:50 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void	get_color(t_param *param, t_object *obj, t_vector q, double det)
 		//rgb_to_hsv(obj->color, &hsv.h, &hsv.s, &hsv.v);
 		RAY = add_vectors(RAY_POS, time_vector(RAY_DIR, t1));
 		//COLOR = hsv_to_rgb(hsv.h, hsv.s, det * 2 / obj->param[0]);
-		DRAW = 1;
 	}
 }
 
@@ -49,6 +48,4 @@ void		sphere(t_param *param, t_object *obj)
 	r = q.y * q.y - 4.0 * q.x * q.z;
 	if (r >= 0)
 		get_color(param, obj, q, r);
-	else
-		DRAW = 0;
 }

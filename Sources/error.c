@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 14:55:18 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/26 15:35:33 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/28 14:12:14 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ void	error_file(t_env *e)
 
 void	error_usage(void)
 {
-	ft_putstr("usage: ./rtv1 [-d] file_name\n");
+	ft_putstr("usage: ./rtv1 [-");
+	ft_putstr(OPT_REF);
+	ft_putstr("] file_name\n");
 	exit(EXIT_FAILURE);
 }
 

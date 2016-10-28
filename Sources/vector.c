@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 15:07:04 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/25 19:22:27 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/28 10:46:53 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		print_vector(t_vector v, char *str)
 
 double		norm_vector(t_vector v)
 {
-	return (sqrtf(v.x * v.x + v.y * v.y + v.z * v.z));
+	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
 
 t_vector	unit_vector(t_vector v)

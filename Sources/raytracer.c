@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:41:19 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/26 16:08:47 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/28 14:23:16 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 static void	init_param(t_param *param, t_env *e)
 {
 	Y = TH * (WIN_HEIGHT / NB_TH) - 1;
-	CAM_DIR = unit_vector(fill_vector(-CAM_POS.x, -CAM_POS.y, -CAM_POS.z));
 	CAM_UP = unit_vector(fill_vector(0, 1, 0));
+	CAM_DIR = unit_vector(fill_vector(-CAM_POS.x, -CAM_POS.y, -CAM_POS.z));
 	CAM_RIGHT = unit_vector(perp_vector(CAM_DIR, CAM_UP));
+	CAM_UP = unit_vector(perp_vector(CAM_DIR, CAM_RIGHT));
 	RAY_POS = fill_vector(CAM_POS.x, CAM_POS.y, CAM_POS.z);
 	VW_UP_LEFT = sub_vectors(add_vectors(add_vectors(CAM_POS,
 		time_vector(CAM_DIR, VW_DIST)), time_vector(CAM_UP, VW_HEIGHT / 2.0)),
@@ -45,8 +46,7 @@ static void	apply_light(t_env *e, t_param *param)
 	while (lst_light)
 	{
 		light = (t_object *)lst_light->content;
-		angle = angle_vectors(sub_vectors(RAY, e->scene->cam_pos),
-				sub_vectors(RAY, light->pos));
+		angle = angle_vectors(sub_vectors(light->pos, RAY), sub_vectors(e->scene->cam_pos, RAY));
 		sphere(param, light);
 		/*lst_obj = ENV->scene->obj;
 		  while (lst_obj)
@@ -87,6 +87,9 @@ void		*raytracer(void *arg)
 				obj = (t_object *)lst_obj->content;
 				if (!ft_strcmp(obj->type, "sphere"))
 					sphere(param, obj);
+				if (!ft_strcmp(obj->type, "plane"))
+					plane(param, obj);
+
 				lst_obj = lst_obj->next;
 			}
 			apply_light(ENV, param);

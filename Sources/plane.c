@@ -6,31 +6,28 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/23 19:55:56 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/25 19:07:38 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/28 14:23:22 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	plane(t_param *param, double *arg)
+void	plane(t_param *param, t_object *obj)
 {
-	double a = 0.0;
-	double b = 1.0;
-	double c = 0.0;
-	double d = 0.0;
-	t_hsv	col;
-	double t;
+	t_vector	n;
+	double		t;
 
-	*arg = 0;	
-	t = (a * (RAY_POS.x - 0)) + (b * (RAY_POS.y - 0)) + (c * (RAY_POS.z - 0)) + d;
-	t /= a * RAY_DIR.x + b * RAY_DIR.y + c * RAY_DIR.z;
+	n = fill_vector(obj->param[0], obj->param[1], obj->param[2]);
+	t = (n.x * (RAY_POS.x - 0)) + (n.y * (RAY_POS.y - 0)) + (n.z * (RAY_POS.z - 0)) + obj->param[3];
+	t /= n.x * RAY_DIR.x + n.y * RAY_DIR.y + n.z * RAY_DIR.z;
 	t *= -1;
-	printf("t: %lf\n", t);	
-	if (t < 0)
+	//printf("t: %lf\n", t);	
+	if (t == 0)
 	{
-		COLOR = 0x0000FF00;
-		rgb_to_hsv(COLOR, &col.h, &col.s, &col.v);
-		COLOR = hsv_to_rgb(col.h, col.s, col.v - fabs(t) / 10000);
+		OBJ = obj;
+		DIST = t;
+		COLOR = obj->color;
+		RAY = add_vectors(RAY_POS, time_vector(RAY_DIR, t));
 	}
 
 }

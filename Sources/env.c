@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 15:06:39 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/26 11:39:21 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/28 10:50:09 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ static void		init_scene(t_env *e, char *file_name)
 	VW_DIST = 1.0;
 	GAP_X = VW_WIDTH / (double)WIN_WIDTH;
 	GAP_Y = VW_HEIGHT / (double)WIN_HEIGHT;
+	CAM_UP = fill_vector(0, 1 , 0);
+	CAM_DIR = unit_vector(fill_vector(-CAM_POS.x, -CAM_POS.y, -CAM_POS.z));
+	CAM_RIGHT = unit_vector(perp_vector(CAM_DIR, CAM_UP));
+	//CAM_UP = unit_vector(perp_vector(CAM_RIGHT, CAM_DIR));
 }
 
 static t_param	*init_param(t_env *e, int index)
