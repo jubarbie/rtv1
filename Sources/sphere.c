@@ -6,13 +6,13 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:58:17 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/28 17:15:37 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/29 19:28:34 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int	sphere(t_param *param, t_object *obj, t_ray *ray)
+void	sphere(t_object *obj, t_ray *ray)
 {
 	t_vector	o;
 	t_vector	q;
@@ -32,15 +32,13 @@ int	sphere(t_param *param, t_object *obj, t_ray *ray)
 	{
 		t1 = (-q.y + sqrt(r)) / 2.0 * q.x;
 		t2 = (-q.y - sqrt(r)) / 2.0 * q.x;
-		t1 = fmin(fabs(t1), fabs(t2));
+		t1 = fmin(t1, t2);
 		if (t1 < ray->dist)
 		{
 			ray->obj = obj;
 			ray->dist = t1;
-			COLOR = obj->color;
+			//COLOR = obj->color;
 			ray->inter = add_vectors(ray->pos, time_vector(ray->dir, t1));
 		}
-		return (1);
 	}
-	return (0);
 }
