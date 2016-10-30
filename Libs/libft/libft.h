@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/19 09:31:33 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/09/20 18:59:09 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/30 15:25:07 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ char			*ft_convert_base(char *nbr, char *base_from, char *base_to);
 char			*ft_strrev(char *str);
 int				ft_power_two(unsigned int power);
 int				ft_abs(int nb);
+int				ft_min(int n1, int n2);
+int				ft_max(int n1, int n2);
 int				get_next_line(int fd, char **line);
 
 #endif

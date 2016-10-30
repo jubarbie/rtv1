@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/29 19:28:31 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/30 17:52:13 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define PI 3.141592
 # define NB_TH 13
-# define DIST_MAX 400.0
+# define DIST_MAX 100000.0
 
 # define OPT_REF "dl"
 # define OPT e->opt
@@ -41,6 +41,7 @@
 # define M_DOWN (1 << 5)
 
 # define OBJ_ALLOWED "light sphere plane cube cone cylinder"
+# define NB_OBJ_FCT 6
 
 # define MLX e->mlx
 # define WIN e->win
@@ -160,6 +161,7 @@ typedef struct	s_env
 	char		*img_addr;
 	char		moves;
 	t_scene		*scene;
+	void		(*obj_fct[NB_OBJ_FCT])(t_object *, t_ray *);
 	t_param		*param[NB_TH];
 }				t_env;
 
@@ -192,7 +194,8 @@ t_vector		perp_vector(t_vector v1, t_vector v2);
 
 void			*raytracer(void *arg);
 void			sphere(t_object *obj, t_ray *ray);
-void			plane(t_param *param, t_object *obj);
+void			plane(t_object *obj, t_ray *ray);
+void			cylinder(t_object *obj, t_ray *ray);
 
 void			error_usage(void);
 void			error_file(t_env *e);
@@ -203,6 +206,7 @@ void			debug(t_env *e);
 
 unsigned int	hsv_to_rgb(unsigned int h, double s, double v);
 void			rgb_to_hsv(unsigned int rgb, int *h, double *s, double *v);
+int				add_color(int c1, int c2);
 
 int				ft_key_press(int keycode, t_env *e);
 int				ft_key_release(int keycode, t_env *e);

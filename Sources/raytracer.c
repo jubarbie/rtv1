@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:41:19 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/29 19:28:27 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/30 17:52:07 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,48 +49,38 @@ static void	apply_light(t_env *e, t_param *param)
 	t_object	*obj;
 	double		angle;
 	t_hsv		hsv;
+	double		v;
 
+	v = 0.0;
 	lst_light = e->scene->light;
 	while (lst_light)
 	{
 		light = (t_object *)lst_light->content;
 		lst_obj = e->scene->obj;
 		init_light_ray(param, light);
-		sphere(light, &VW_RAY);
-		if (VW_RAY.obj)
-		{
-			angle = angle_vectors(sub_vectors(PHO_RAY.pos, VW_RAY.inter),
-							sub_vectors(VW_RAY.inter, VW_RAY.obj->pos));
+		angle = angle_vectors(sub_vectors(VW_RAY.obj->pos, VW_RAY.inter), PHO_RAY.dir);
 		while (lst_obj)
 		{
 			obj = (t_object *)lst_obj->content;
-			if (obj != VW_RAY.obj )
-			{
+			if (obj != VW_RAY.obj && !ft_strcmp(obj->type, "sphere"))
 				sphere(obj, &PHO_RAY);
-				if (!PHO_RAY.obj)
-				{
-					if (angle <= 0)
-					{
-						//printf("%lf\n", angle);
-						rgb_to_hsv(VW_RAY.obj->color, &hsv.h, &hsv.s, &hsv.v);
-						COLOR = hsv_to_rgb(hsv.h, hsv.s, -angle);
-					}
-					else
-						COLOR = 0;
-				}
-				else if (PHO_RAY.obj && PHO_RAY.obj != VW_RAY.obj && PHO_RAY.obj != light)
-				{
-					rgb_to_hsv(COLOR, &hsv.h, &hsv.s, &hsv.v);
-					COLOR = hsv_to_rgb(hsv.h, hsv.s, -angle - 0.1);
-				}
-				else 
-					COLOR = 0;
-			}
+			if (obj != VW_RAY.obj && !ft_strcmp(obj->type, "plane"))
+				plane(obj, &PHO_RAY);
+			if (obj != VW_RAY.obj && !ft_strcmp(obj->type, "cylinder"))
+				cylinder(obj, &PHO_RAY);
 			lst_obj = lst_obj->next;
-		}	
+		}
+		if (angle < 0)
+		{
+			rgb_to_hsv(VW_RAY.obj->color, &hsv.h, &hsv.s, &hsv.v);
+			v += -angle * 0.6;
+			if (PHO_RAY.obj && PHO_RAY.obj != VW_RAY.obj
+			&& PHO_RAY.dist > norm_vector(sub_vectors(PHO_RAY.pos, VW_RAY.inter)))
+				v -= 0.05;
+		}
+		lst_light = lst_light->next;
 	}
-	lst_light = lst_light->next;
-	}
+	COLOR = hsv_to_rgb(hsv.h, hsv.s, 0.2 + v);
 }
 
 void		*raytracer(void *arg)
@@ -115,12 +105,14 @@ void		*raytracer(void *arg)
 				obj = (t_object *)lst_obj->content;
 				if (!ft_strcmp(obj->type, "sphere"))
 					sphere(obj, &VW_RAY);
-				//if (!ft_strcmp(obj->type, "plane"))
-				//	plane(param, obj);
+				if (!ft_strcmp(obj->type, "plane"))
+					plane(obj, &VW_RAY);
+				if (!ft_strcmp(obj->type, "cylinder"))
+					cylinder(obj, &VW_RAY);
 				lst_obj = lst_obj->next;
 			}
 			COLOR = VW_RAY.obj ? VW_RAY.obj->color : 0;
-			(L) ? apply_light(ENV, param) : 0;
+			(VW_RAY.obj && L) ? apply_light(ENV, param) : 0;
 			img_put_pixel(ENV, X, Y, COLOR);
 		}
 	}
