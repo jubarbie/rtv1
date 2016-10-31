@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:41:19 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/31 12:15:06 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/31 13:24:05 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	init_param(t_param *param, t_env *e)
 {
 	Y = TH * (WIN_HEIGHT / NB_TH) - 1;
-	CAM_UP = unit_vector(fill_vector(0, 1, 0));
+	CAM_UP = unit_vector(perp_vector(CAM_RIGHT, CAM_DIR));
 	CAM_DIR = unit_vector(fill_vector(-CAM_POS.x, -CAM_POS.y, -CAM_POS.z));
 	CAM_RIGHT = unit_vector(perp_vector(CAM_DIR, CAM_UP));
 	CAM_UP = unit_vector(perp_vector(CAM_DIR, CAM_RIGHT));
@@ -50,8 +50,10 @@ static void	apply_light(t_env *e, t_param *param)
 	double		angle;
 	t_hsv		hsv;
 	double		v;
+	double		shadow;
 
 	v = 0.0;
+	shadow = 0.0;
 	lst_light = e->scene->light;
 	while (lst_light)
 	{
@@ -76,11 +78,11 @@ static void	apply_light(t_env *e, t_param *param)
 			v += -angle * 0.6;
 			if (PHO_RAY.obj && PHO_RAY.obj != VW_RAY.obj
 			&& PHO_RAY.dist > norm_vector(sub_vectors(PHO_RAY.pos, VW_RAY.inter)))
-				v -= 0.08;
+				shadow += 0.05;
 		}
 		lst_light = lst_light->next;
 	}
-	COLOR = hsv_to_rgb(hsv.h, hsv.s, 0.2 + v);
+	COLOR = hsv_to_rgb(hsv.h, hsv.s, 0.2 + v - shadow);
 }
 
 void		*raytracer(void *arg)

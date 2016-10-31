@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/10/31 12:17:07 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/10/31 13:14:00 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ scene {
 		}
 		color { rgb { 0x004BCE17 }}
 	}
-	object {
+#	object {
 		name { cylindre }
 		inter {
 			origin { 0. 0 0 }

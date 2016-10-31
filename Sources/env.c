@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 15:06:39 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/31 11:34:32 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/31 13:22:43 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void		init_scene(t_env *e, char *file_name)
 	CAM_UP = fill_vector(0, 1 , 0);
 	CAM_DIR = unit_vector(fill_vector(-CAM_POS.x, -CAM_POS.y, -CAM_POS.z));
 	CAM_RIGHT = unit_vector(perp_vector(CAM_DIR, CAM_UP));
-	//CAM_UP = unit_vector(perp_vector(CAM_RIGHT, CAM_DIR));
+	CAM_UP = unit_vector(perp_vector(CAM_RIGHT, CAM_DIR));
 }
 
 static t_param	*init_param(t_env *e, int index)
