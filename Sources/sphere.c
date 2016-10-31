@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:58:17 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/30 17:52:11 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/31 12:17:53 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	sphere(t_object *obj, t_ray *ray)
 		t1 = fmin(t1, t2);
 		if (t1 < ray->dist)
 		{
-			//printf("%lf\n", t1);
 			ray->obj = obj;
 			ray->dist = t1;
 			ray->inter = add_vectors(ray->pos, time_vector(ray->dir, t1));

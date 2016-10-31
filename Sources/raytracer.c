@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:41:19 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/30 17:52:07 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/31 12:15:06 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void	init_vw_ray(t_env *e, t_param *param)
 {
 	VW_RAY.obj = NULL;
 	VW_RAY.dist = DIST_MAX;
-	VW_RAY.dir = unit_vector(add_vectors(VW_UP_LEFT, sub_vectors(time_vector(
-					CAM_RIGHT, GAP_X * X), time_vector(CAM_UP, GAP_Y * Y))));
+	VW_RAY.dir = unit_vector(sub_vectors(add_vectors(VW_UP_LEFT, sub_vectors(time_vector(
+					CAM_RIGHT, GAP_X * X), time_vector(CAM_UP, GAP_Y * Y))), CAM_POS));
 }
 
 static void	init_light_ray(t_param *param, t_object *light)
@@ -70,13 +70,13 @@ static void	apply_light(t_env *e, t_param *param)
 				cylinder(obj, &PHO_RAY);
 			lst_obj = lst_obj->next;
 		}
-		if (angle < 0)
+		rgb_to_hsv(VW_RAY.obj->color, &hsv.h, &hsv.s, &hsv.v);
+		if (angle <= 0)
 		{
-			rgb_to_hsv(VW_RAY.obj->color, &hsv.h, &hsv.s, &hsv.v);
 			v += -angle * 0.6;
 			if (PHO_RAY.obj && PHO_RAY.obj != VW_RAY.obj
 			&& PHO_RAY.dist > norm_vector(sub_vectors(PHO_RAY.pos, VW_RAY.inter)))
-				v -= 0.05;
+				v -= 0.08;
 		}
 		lst_light = lst_light->next;
 	}
