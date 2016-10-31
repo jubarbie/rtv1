@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/10/31 13:14:00 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/10/31 16:00:04 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,15 @@ scene {
 			light {  0.0}
 		}
 		color { rgb { 0x003F0000  }}
+	}
+	object {
+		name { plane }
+		inter {
+			origin { 0 0 0.0 }			
+			plane {  0.2 -0.2 0 -8 }
+
+		}
+		color { rgb { 0x0000FF00  }}
 	}
 	object {
 		name { sphere }
@@ -87,18 +96,5 @@ scene {
 			sphere {  0.12}
 		}
 		color { rgb { 0x000000FF  }}
-	}
-#	object {
-		name { plane }
-		inter {
-			origin { 0 0 0.0 }			
-			plane {  0.2 0.2  0 -0.8 }
-
-		}
-		color { rgb { 0x0000FF00  }}
-	}
-	
-
-
-
+	}	
 }

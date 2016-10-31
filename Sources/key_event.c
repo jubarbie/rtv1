@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 15:06:00 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/26 15:25:05 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/10/31 15:58:14 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ static void	move(int keycode, t_env *e)
 		MOVES |= M_LEFT;
 	else if (keycode == 124)
 		MOVES |= M_RIGHT;
+	else if (keycode == 13)
+		MOVES |= M_FORWARD;
+	else if (keycode == 1)
+		MOVES |= M_BACKWARD;
 }
 
 int			ft_key_release(int keycode, t_env *e)
@@ -34,6 +38,10 @@ int			ft_key_release(int keycode, t_env *e)
 		MOVES ^= M_LEFT;
 	else if (keycode == 124)
 		MOVES ^= M_RIGHT;
+	else if (keycode == 13)
+		MOVES ^= M_FORWARD;
+	else if (keycode == 1)
+		MOVES ^= M_BACKWARD;
 	return (0);
 }
 
