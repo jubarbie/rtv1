@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:41:19 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/31 16:23:18 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/07 17:44:13 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ static void	init_light_ray(t_param *param, t_object *light)
 	PHO_RAY.dist = DIST_MAX;
 	PHO_RAY.dir = unit_vector(sub_vectors(VW_RAY.inter, PHO_RAY.pos));
 	PHO_RAY.obj = NULL;
+	if (VW_RAY.obj && !ft_strcmp(VW_RAY.obj->type, "plane"))
+			param->norm = fill_vector(VW_RAY.obj->param[0], VW_RAY.obj->param[1]
+				, VW_RAY.obj->param[2]);
+	else if (VW_RAY.obj)
+		param->norm = sub_vectors(VW_RAY.obj->pos, VW_RAY.inter);
 }
 
 static void	apply_light(t_env *e, t_param *param)

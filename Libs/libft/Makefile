@@ -6,7 +6,7 @@
 #    By: jubarbie <jubarbie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/30 16:51:35 by jubarbie          #+#    #+#              #
-#    Updated: 2016/10/30 15:25:48 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/11/07 13:48:36 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,16 +78,19 @@ SRC=	ft_atoi.c \
 		ft_abs.c \
 		ft_min.c \
 		ft_max.c \
-		get_next_line.c
-OBJ=$(SRC:.c=.o)
+		get_next_line.c \
+		ft_atof.c
 NAME=libft.a
+OBJ=$(SRC:.c=.o)
+
+.PHONY: clean
 
 $(NAME): $(OBJ)
 	@ar rc $@ $^
 	@ranlib $@
-	
+	@echo "\033[32m[OK]\033[0m libft.a created"
+
 all: $(NAME)
-	@echo "\033[32m[OK]\033[0m libft compiled"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $<

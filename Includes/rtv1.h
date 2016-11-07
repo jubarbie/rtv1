@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/31 13:24:52 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/07 17:31:24 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "libft.h"
 
 # define PI 3.141592
-# define NB_TH 13
+# define NB_TH 50
 # define DIST_MAX 100000.0
 
 # define OPT_REF "dl"
@@ -147,6 +147,7 @@ typedef struct	s_param
 	t_ray			vw_ray;
 	t_ray			light_ray;
 	int				color;
+	t_vector		norm;
 }				t_param;
 
 typedef struct	s_env

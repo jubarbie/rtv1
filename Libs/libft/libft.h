@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/19 09:31:33 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/30 15:25:07 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/07 10:56:43 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ int				ft_abs(int nb);
 int				ft_min(int n1, int n2);
 int				ft_max(int n1, int n2);
 int				get_next_line(int fd, char **line);
+double			ft_atof(const char *str);
 
 #endif

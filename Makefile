@@ -6,32 +6,34 @@
 #    By: jubarbie <jubarbie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/30 16:51:35 by jubarbie          #+#    #+#              #
-#    Updated: 2016/10/30 11:58:23 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/11/07 14:48:27 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=gcc
 CFLAGS= -ILibs/libft -ILibs/libmlx -IIncludes -Wall -Wextra -Werror
-SRC=	Sources/rtv1.c			\
-		Sources/color.c			\
-		Sources/options.c		\
-		Sources/error.c			\
-		Sources/key_event.c		\
-		Sources/env.c			\
-		Sources/vector.c		\
-		Sources/vector2.c		\
-		Sources/debug.c			\
-		Sources/parse.c			\
-		Sources/parse_obj.c		\
-		Sources/raytracer.c		\
-		Sources/sphere.c		\
-		Sources/plane.c			\
-		Sources/cylinder.c		\
-		Sources/moves.c
-OBJ=$(SRC:.c=.o)
+SRC=	rtv1.c			\
+		color.c			\
+		options.c		\
+		error.c			\
+		key_event.c		\
+		env.c			\
+		vector.c		\
+		vector2.c		\
+		debug.c			\
+		parse.c			\
+		parse_obj.c		\
+		raytracer.c		\
+		sphere.c		\
+		plane.c			\
+		cylinder.c		\
+		moves.c
+OBJDIR=Objects
+VPATH=Sources
+OBJS=$(patsubst %,$(OBJDIR)/%,$(SRC:.c=.o))
 NAME=rtv1
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJS)
 	@make -C Libs/libft
 	@make -C Libs/libmlx
 	@$(CC) -LLibs/libft/ -lft -LLibs/libmlx/ -lmlx -framework OpenGL -framework AppKit -framework Opencl -o $@ $^
@@ -39,12 +41,13 @@ $(NAME): $(OBJ)
 
 all: $(NAME)
 	
-%.o: %.c
-	@$(CC) -o $@ -c $< $(CFLAGS)
+$(OBJDIR)/%.o: %.c
+	@mkdir -p $(OBJDIR)
+	@$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
 	@make clean -C Libs/libft
-	@rm -rf $(OBJ)
+	@rm -rf $(OBJDIR)
 	@echo "\033[32m[OK]\033[0m object files deleted"
 
 fclean: clean

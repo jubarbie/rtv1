@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:58:17 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/31 13:24:54 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/03 17:30:16 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	sphere(t_object *obj, t_ray *ray)
 	q.z = (pow(ray->pos.x - o.x, 2.0) + pow(ray->pos.y - o.y, 2.0) +
 			pow(ray->pos.z - o.z, 2.0)) - r * r;
 	r = q.y * q.y - 4.0 * q.x * q.z;
-	if (r >= 0)
+	if (r >= 0.0)
 	{
 		t1 = (-q.y + sqrt(r)) / 2.0 * q.x;
 		t2 = (-q.y - sqrt(r)) / 2.0 * q.x;

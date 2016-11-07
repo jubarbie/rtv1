@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 11:04:38 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/30 15:00:12 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/07 11:30:18 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static double	*get_obj_param(t_env *e, int *nb, char *str)
 	i = 0;
 	while (tab[i])
 	{
-		param[i] = atof(tab[i]);
+		param[i] = ft_atof(tab[i]);
 		free(tab[i]);
 		i++;
 	}

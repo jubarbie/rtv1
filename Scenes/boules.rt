@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/11/03 09:05:57 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/11/07 16:26:21 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,28 +17,27 @@
 scene {
 	name { test1 }
 	camera { 
-		origin { 2 0 0 }			
+		origin { 1 1 1 }			
 	}
 	render {
 		mlx_all_objects { 1080 800 }
 	}
 	object {
-		name { light1 }
+		name { light2 }
 		inter {
-			origin { -1 -1 -1 }
-			light {  0.0}
+			origin {-1 -1 -1 }
+			light {  0.01}
 		}
-		color { rgb { 0x003F0000  }}
+		color { rgb { 0x00FFFFFF } }
 	}
-	object {
-		name { plane }
-		inter {
-			origin { 0 0 0.0 }			
-			plane {  0.2 -0.2 0 -8 }
-
-		}
-		color { rgb { 0x0000FF00  }}
-	}
+#	object {
+#		name { light1 }
+#		inter {
+#			origin { -1 -1 -1 }
+#			light {  0.0}
+#		}
+#		color { rgb { 0x003F0000  }}
+#	}
 	object {
 		name { sphere }
 		inter {
@@ -47,28 +46,10 @@ scene {
 		}
 		color { rgb { 0x004BCE17 }}
 	}
-#	object {
-		name { cylindre }
-		inter {
-			origin { 0. 0 0 }
-			cylinder {0.1}
-		}
-		color { rgb { 0x000000FF  }}
-	}
-
-	object {
-		name { light1 }
-		inter {
-			origin {1 1 1 }
-			light {  0.01}
-		}
-		color { rgb { 0x00FFFFFF  }}
-	}
-
 	object {
 		name {sphere}
 		inter {
-			origin { 0.8 0 0 }
+			origin { 0.8 }
 			sphere {  0.020}
 		}
 		color { rgb { 0x00FDFF00  }}
@@ -77,7 +58,7 @@ scene {
 		name { sphere }
 		inter {
 			origin { 0.2 0 0 } 
-			sphere {  0.070}
+			sphere {  .070}
 		}
 		color { rgb { 0x00B8A03A  }}
 	}

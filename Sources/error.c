@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 14:55:18 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/28 14:12:14 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/07 11:30:16 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		quit_rt(t_env *e)
 {
-	ft_putstr("Quiting rtv1\n");
+	ft_putstr("\033[32mQuiting rtv1\033[0m\n");
 	free_env(e);
 	exit(EXIT_SUCCESS);
 	return (0);
@@ -22,16 +22,16 @@ int		quit_rt(t_env *e)
 
 void	error_perso(t_env *e, char *str)
 {
-	ft_putstr("Error: ");
+	ft_putstr("\033[31mError: ");
 	ft_putstr(str);
-	ft_putchar('\n');
+	ft_putstr("\033[0m\n");
 	free(e);
 	exit(EXIT_FAILURE);
 }
 
 void	error_file(t_env *e)
 {
-	ft_putstr("Wrong file format\n");
+	ft_putstr("\033[31mWrong file format\033[0m\n");
 	free(e);
 	exit(EXIT_FAILURE);
 }

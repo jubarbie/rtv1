@@ -6,20 +6,39 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:21:36 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/26 11:39:17 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/07 11:32:45 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
+static void	check_acc(t_env *e, char *str)
+{
+	int		i;
+	int		nb;
+
+	i = -1;
+	nb = 0;
+	while (str[++i] && nb >= 0)
+	{
+		if (str[i] == '{')
+			nb++;
+		else if (str[i] == '}')
+			nb--;
+	}
+	if (nb != 0)
+		error_perso(e, "missing one \"}\" in file");
+}
+
 static void	build_scene(t_env *e, char *str)
 {
 	char	*tmp;
-
+	
 	if (!(e->scene = malloc(sizeof(t_scene))))
 		error_perso(e, "malloc (t_scene *)scene failed");
 	e->scene->obj = NULL;
 	e->scene->light = NULL;
+	check_acc(e, str);
 	if (!(str = ft_strstr(str, "scene {")))
 		error_perso(e, "no scene found in file");
 	str += 7;
@@ -79,7 +98,7 @@ t_vector	get_origin(char *str, int n)
 		tmpz = tmpy;
 		while (*tmpz != '\n' && *tmpz != '\t' && *tmpz != ' ' && n-- > 0)
 			tmpz++;
-		return (fill_vector(atof(tmp), atof(tmpy), atof(tmpz)));
+		return (fill_vector(ft_atof(tmp), ft_atof(tmpy), ft_atof(tmpz)));
 	}
 }
 
