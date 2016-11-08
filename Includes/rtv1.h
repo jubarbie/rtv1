@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/08 12:03:54 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/08 16:01:41 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@
 # include <time.h>
 # include "mlx.h"
 # include "libft.h"
+# include "libv3d.h"
 
 # define PI 3.141592
 # define NB_TH 50
 # define DIST_MAX 100000.0
+# define SPEED 1
 
 # define OPT_REF "dl"
 # define OPT e->opt
@@ -95,47 +97,40 @@ typedef struct	s_texture
 	int			sizeline;
 }				t_tex;
 
-typedef struct	s_vector
-{
-	double	x;
-	double	y;
-	double	z;
-}				t_vector;
-
 typedef struct	s_object
 {
-	char		*type;
+	int			type;
 	char		*name;
-	t_vector	pos;
-	double		*param;
+	t_v3d		pos;
+	float		*param;
 	int			nb_param;
 	int			color;
 }				t_object;
 
 typedef struct	s_ray
 {
-	t_vector	pos;
-	t_vector	dir;
-	t_vector	inter;
-	double		dist;
+	t_v3d		pos;
+	t_v3d		dir;
+	t_v3d		inter;
+	float		dist;
 	t_object	*obj;
 }				t_ray;
 
 typedef struct	s_scene
 {
 	char		*name;
-	t_vector	cam_pos;
-	t_vector	cam_dir;
-	t_vector	cam_up;
-	t_vector	cam_right;
-	t_list		*obj;
-	t_list		*light;
-	double		view_plane_width;
-	double		view_plane_height;
-	double		view_plane_dist;
-	t_vector	view_plane_up_left;
-	double		gap_x;
-	double		gap_y;
+	t_v3d	cam_pos;
+	t_v3d	cam_dir;
+	t_v3d	cam_up;
+	t_v3d	cam_right;
+	t_list	*obj;
+	t_list	*light;
+	float	view_plane_width;
+	float	view_plane_height;
+	float	view_plane_dist;
+	t_v3d	view_plane_up_left;
+	float	gap_x;
+	float	gap_y;
 }				t_scene;
 
 typedef struct	s_param
@@ -147,7 +142,7 @@ typedef struct	s_param
 	t_ray			vw_ray;
 	t_ray			light_ray;
 	int				color;
-	t_vector		norm;
+	t_v3d			norm;
 }				t_param;
 
 typedef struct	s_env
@@ -162,6 +157,7 @@ typedef struct	s_env
 	char		*img_addr;
 	char		moves;
 	t_scene		*scene;
+	char		**obj_allowed;
 	void		(*obj_fct[NB_OBJ_FCT])(t_object *, t_ray *);
 	t_param		*param[NB_TH];
 }				t_env;
@@ -174,24 +170,13 @@ void			free_env(t_env *e);
 void			parse_rt(t_env *e, char *file_name);
 void			build_object(t_env *e, char *str, int n);
 char			*get_in_acc(t_env *e, char *str, char *acc, int n);
-t_vector		get_origin(char *str, int n);
+t_v3d			get_origin(char *str, int n);
 int				size_to_end_acc(t_env *e, char *str);
+void			check_acc(t_env *e, char *str);
 
 int				create_img(t_env *e);
 void			img_put_pixel(t_env *e, int x, int y, unsigned int color);
 int				moves(t_env *e);
-
-void			print_vector(t_vector v, char *str);
-t_vector		*new_vector(double x, double y, double z);
-t_vector		fill_vector(double x, double y, double z);
-void			rot_vector(t_vector v, double angle);
-t_vector		add_vectors(t_vector v1, t_vector v2);
-t_vector		sub_vectors(t_vector v1, t_vector v2);
-t_vector		time_vector(t_vector v, double i);
-double			norm_vector(t_vector v);
-t_vector		unit_vector(t_vector v);
-double			angle_vectors(t_vector v1, t_vector v2);
-t_vector		perp_vector(t_vector v1, t_vector v2);
 
 void			*raytracer(void *arg);
 void			sphere(t_object *obj, t_ray *ray);

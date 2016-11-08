@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:58:17 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/03 17:29:09 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/08 13:05:06 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	cylinder(t_object *obj, t_ray *ray)
 {
-	t_vector	n;
-	t_vector	q;
+	t_v3d	n;
+	t_v3d	q;
 	double		t0;
 	double		t1;
 	double		t;
@@ -25,7 +25,7 @@ void	cylinder(t_object *obj, t_ray *ray)
 	double		r;
 
 	r = obj->param[0];
-	n = fill_vector(obj->param[0], obj->param[1], obj->param[2]);
+	n = v3d(obj->param[0], obj->param[1], obj->param[2]);
 	q.x = ray->dir.x * ray->dir.x + ray->dir.z * ray->dir.z;
 	q.y = 2 * (ray->dir.x * ray->pos.x + ray->dir.z * ray->pos.z);
 	q.z = ray->pos.x * ray->pos.x + ray->pos.z * ray->pos.z - r * r;
@@ -52,7 +52,7 @@ void	cylinder(t_object *obj, t_ray *ray)
 				{
 					ray->obj = obj;
 					ray->dist = t;
-					ray->inter = add_vectors(ray->pos, time_vector(ray->dir, t));
+					ray->inter = add_v3d(ray->pos, smul_v3d(ray->dir, t));
 				}
 			}
 		}
@@ -62,7 +62,7 @@ void	cylinder(t_object *obj, t_ray *ray)
 			{
 				ray->obj = obj;
 				ray->dist = t0;
-				ray->inter = add_vectors(ray->pos, time_vector(ray->dir, t0));
+				ray->inter = add_v3d(ray->pos, smul_v3d(ray->dir, t0));
 			}
 		}
 		else if (y0 > 1)
@@ -74,7 +74,7 @@ void	cylinder(t_object *obj, t_ray *ray)
 				{
 					ray->obj = obj;
 					ray->dist = t;
-					ray->inter = add_vectors(ray->pos, time_vector(ray->dir, t));
+					ray->inter = add_v3d(ray->pos, smul_v3d(ray->dir, t));
 				}
 			}
 		}
@@ -82,7 +82,7 @@ void	cylinder(t_object *obj, t_ray *ray)
 		{
 			ray->obj = obj;
 			ray->dist = t0;
-			ray->inter = add_vectors(ray->pos, time_vector(ray->dir, t0));
+			ray->inter = add_v3d(ray->pos, smul_v3d(ray->dir, t0));
 		}*/
 	}
 }

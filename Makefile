@@ -6,7 +6,7 @@
 #    By: jubarbie <jubarbie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/30 16:51:35 by jubarbie          #+#    #+#              #
-#    Updated: 2016/11/08 12:44:58 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/11/08 15:33:50 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,10 @@ SRC=	rtv1.c			\
 		error.c			\
 		key_event.c		\
 		env.c			\
-		vector.c		\
-		vector2.c		\
 		debug.c			\
 		parse.c			\
 		parse_obj.c		\
+		parse_scene.c	\
 		raytracer.c		\
 		sphere.c		\
 		plane.c			\

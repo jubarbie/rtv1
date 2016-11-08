@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/23 19:55:56 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/03 10:45:40 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/08 13:03:59 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	plane(t_object *obj, t_ray *ray)
 {
-	t_vector	n;
-	t_vector	q;
+	t_v3d	n;
+	t_v3d	q;
 	double		t0;
 	double		t1;
 	double		t;
@@ -23,7 +23,7 @@ void	plane(t_object *obj, t_ray *ray)
 	double		y0;
 	double		y1;
 
-	n = fill_vector(obj->param[0], obj->param[1], obj->param[2]);
+	n = v3d(obj->param[0], obj->param[1], obj->param[2]);
 	q.x = ray->dir.x * ray->dir.x + ray->dir.z * ray->dir.z;
 	q.y = 2 * ray->dir.x * ray->pos.x + 2 * ray->dir.z * ray->pos.z;
 	q.z = ray->pos.x * ray->pos.x + ray->pos.z * ray->pos.z - 1;
@@ -39,7 +39,7 @@ void	plane(t_object *obj, t_ray *ray)
 		{
 			ray->obj = obj;
 			ray->dist = t0;
-			ray->inter = add_vectors(ray->pos, time_vector(ray->dir, t0));
+			ray->inter = add_v3d(ray->pos, smul_v3d(ray->dir, t0));
 		}
 	}
 

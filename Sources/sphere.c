@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:58:17 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/03 17:30:16 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/08 12:57:38 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	sphere(t_object *obj, t_ray *ray)
 {
-	t_vector	o;
-	t_vector	q;
-	double		r;
-	double		t1;
-	double		t2;
+	t_v3d	o;
+	t_v3d	q;
+	float	r;
+	float	t1;
+	float	t2;
 
-	o = fill_vector(obj->pos.x, obj->pos.y, obj->pos.z);
+	o = v3d(obj->pos.x, obj->pos.y, obj->pos.z);
 	r = obj->param[0];
 	q.x = ray->dir.x * ray->dir.x + ray->dir.y * ray->dir.y + ray->dir.z * ray->dir.z;
 	q.y = 2.0 * (ray->dir.x * (ray->pos.x - o.x) + ray->dir.y * (ray->pos.y - o.y) +
@@ -37,7 +37,7 @@ void	sphere(t_object *obj, t_ray *ray)
 		{
 			ray->obj = obj;
 			ray->dist = t1;
-			ray->inter = add_vectors(ray->pos, time_vector(ray->dir, t1));
+			ray->inter = add_v3d(ray->pos, smul_v3d(ray->dir, t1));
 		}
 	}
 }

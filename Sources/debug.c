@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 18:49:11 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/10/26 15:25:11 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/08 15:48:35 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	print_obj(t_env *e)
 	{
 		obj = (t_object *)(elem->content);
 		printf("		name: \"%s\"\n", obj->name);
-		printf("		type: \"%s\"\n", obj->type);
+		printf("		type: \"%d\"\n", obj->type);
 		printf("		param: \n");
 		i = -1;
 		while (++i < obj->nb_param)
@@ -51,7 +51,7 @@ static void	print_light(t_env *e)
 	{
 		obj = (t_object *)(elem->content);
 		printf("		name: \"%s\"\n", obj->name);
-		printf("		type: \"%s\"\n", obj->type);
+		printf("		type: \"%d\"\n", obj->type);
 		printf("		param:\n");
 		i = -1;
 		while (++i < obj->nb_param)

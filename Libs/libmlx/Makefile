@@ -10,11 +10,13 @@ CFLAGS+=-O2
 all: $(NOM)
 
 $(NOM):	$(OBJ)
-	ar -r $(NOM) $(OBJ)
-	ranlib $(NOM)
+	@ar -r $(NOM) $(OBJ)
+	@ranlib $(NOM)
+	@echo "\033[32m[OK]\033[0m libmlx.a created"
 
 clean:
-	rm -f $(NOM) $(OBJ) *~
-	rm -f mlx_app
+	@rm -f $(NOM) $(OBJ) *~
+	@rm -f mlx_app
+	@echo "\033[32m[OK]\033[0m libmlx: libmlx.a deleted"
 
 re: clean all
