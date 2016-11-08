@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:58:17 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/08 13:05:06 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/08 17:24:49 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ void	cylinder(t_object *obj, t_ray *ray)
 {
 	t_v3d	n;
 	t_v3d	q;
-	double		t0;
-	double		t1;
-	double		t;
-	double		det;
-	double		y0;
-	double		y1;
-	double		r;
+	float	t0;
+	float	t1;
+	float	t;
+	float	det;
+	float	y0;
+	float	y1;
+	float	r;
 
 	r = obj->param[0];
-	n = v3d(obj->param[0], obj->param[1], obj->param[2]);
+	n = unit_v3d(obj->pos);
 	q.x = ray->dir.x * ray->dir.x + ray->dir.z * ray->dir.z;
 	q.y = 2 * (ray->dir.x * ray->pos.x + ray->dir.z * ray->pos.z);
 	q.z = ray->pos.x * ray->pos.x + ray->pos.z * ray->pos.z - r * r;
@@ -40,14 +40,13 @@ void	cylinder(t_object *obj, t_ray *ray)
 			t0 = t1;
 			t1 = t;
 		}
-		//t = fmin(t0, t1);
 		y0 = ray->pos.y + t0 * ray->dir.y;
 		y1 = ray->pos.y + t1 * ray->dir.y;
 		if (y0 < -1)
 		{
 			if (y1 >= -1)
 			{
-				t = t0 + (t1 - t0) * (y0 + 1) / (y0 - y1);
+				t = t0 + (t1 - t0) * (y0 + 1.0) / (y0 - y1);
 				if (t > 0)
 				{
 					ray->obj = obj;
@@ -69,7 +68,7 @@ void	cylinder(t_object *obj, t_ray *ray)
 		{
 			if (y1 <= 1)
 			{
-				t = t0 + (t1 - t0) * (y0 - 1) / (y0 - y1);
+				t = t0 + (t1 - t0) * (y0 - 1.0) / (y0 - y1);
 				if (t > 0)
 				{
 					ray->obj = obj;
@@ -77,12 +76,6 @@ void	cylinder(t_object *obj, t_ray *ray)
 					ray->inter = add_v3d(ray->pos, smul_v3d(ray->dir, t));
 				}
 			}
-		}
-		/*if (t0 < ray->dist && y0 > -1 && y0 < 1 && t0 > 0)
-		{
-			ray->obj = obj;
-			ray->dist = t0;
-			ray->inter = add_v3d(ray->pos, smul_v3d(ray->dir, t0));
-		}*/
+		}	
 	}
 }
