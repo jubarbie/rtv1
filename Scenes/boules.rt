@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/11/09 11:16:09 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/11/09 17:28:17 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,16 @@ scene {
 		}
 		color { rgb { 0x00FFFFFF } }
 	}
+
+	object {
+		name { light2 }
+		inter {
+			origin {4 2 2}
+			light {  0.01}
+		}
+		color { rgb { 0x00FFFFFF } }
+	}
+
 
 	object {
 		name { sphere1 }
