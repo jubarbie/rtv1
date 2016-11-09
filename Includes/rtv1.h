@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/09 09:48:23 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/09 17:01:04 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,5 +197,7 @@ int				add_color(int c1, int c2);
 
 int				ft_key_press(int keycode, t_env *e);
 int				ft_key_release(int keycode, t_env *e);
+
+void			init_cl(t_env *e);
 
 #endif

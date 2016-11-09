@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raytracer.c                                        :+:      :+:    :+:   */
+/*   raytracer_cl.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:41:19 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/09 11:52:43 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/09 16:40:57 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	apply_light(t_env *e, t_param *param)
 	COLOR = hsv_to_rgb(hsv.h, hsv.s, 0.2 + v);
 }
 
-void		*raytracer(void *arg)
+void		*raytracer_cl(void *arg)
 {
 	t_param		*param;
 	t_list		*lst_obj;
