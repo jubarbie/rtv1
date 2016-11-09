@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:58:17 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/08 17:26:01 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/09 07:43:19 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	sphere(t_object *obj, t_ray *ray)
 			ray->obj = obj;
 			ray->dist = t1;
 			ray->inter = add_v3d(ray->pos, smul_v3d(ray->dir, t1));
+			ray->norm = unit_v3d(sub_v3d(ray->inter, obj->pos));
 		}
 	}
 }

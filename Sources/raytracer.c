@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:41:19 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/08 16:13:21 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/09 09:45:05 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	init_light_ray(t_param *param, t_object *light)
 {
 	PHO_RAY.pos = light->pos;
 	PHO_RAY.dist = DIST_MAX;
-	PHO_RAY.dir = unit_v3d(sub_v3d(PHO_RAY.pos, VW_RAY.inter));
+	PHO_RAY.dir = unit_v3d(sub_v3d(VW_RAY.inter, PHO_RAY.pos));
 	PHO_RAY.obj = NULL;
 	if (VW_RAY.obj && VW_RAY.obj->type == 2)
 			param->norm = v3d(VW_RAY.obj->param[0], VW_RAY.obj->param[1]
@@ -65,7 +65,7 @@ static void	apply_light(t_env *e, t_param *param)
 		light = (t_object *)lst_light->content;
 		lst_obj = e->scene->obj;
 		init_light_ray(param, light);
-		angle = cos_v3d(sub_v3d(VW_RAY.obj->pos, VW_RAY.inter), PHO_RAY.dir);
+		angle = cos_v3d(PHO_RAY.dir, VW_RAY.norm);
 		while (lst_obj)
 		{
 			obj = (t_object *)lst_obj->content;
@@ -78,12 +78,12 @@ static void	apply_light(t_env *e, t_param *param)
 		{
 			v += -angle * 0.6;
 			if (PHO_RAY.obj && PHO_RAY.obj != VW_RAY.obj
-			&& PHO_RAY.dist > length_v3d(sub_v3d(PHO_RAY.pos, VW_RAY.inter)))
-				shadow += 0.05;
+			&& PHO_RAY.dist < length_v3d(sub_v3d(VW_RAY.inter, PHO_RAY.pos)))
+				v = 0;
 		}
 		lst_light = lst_light->next;
 	}
-	COLOR = hsv_to_rgb(hsv.h, hsv.s, 0.2 + v - shadow);
+	COLOR = hsv_to_rgb(hsv.h, hsv.s, 0.2 + v);
 }
 
 void		*raytracer(void *arg)

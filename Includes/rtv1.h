@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/08 17:26:03 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/09 09:48:23 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ typedef struct	s_ray
 	t_v3d		pos;
 	t_v3d		dir;
 	t_v3d		inter;
+	t_v3d		norm;
 	float		dist;
 	t_object	*obj;
 }				t_ray;
