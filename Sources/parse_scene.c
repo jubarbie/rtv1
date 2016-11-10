@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:21:36 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/08 16:13:23 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/10 10:36:45 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	make_fct_tab(t_env *e)
 	e->obj_fct[1] = &sphere;
 	e->obj_fct[2] = &plane;
 	e->obj_fct[3] = &sphere;
-	e->obj_fct[4] = &sphere;
+	e->obj_fct[4] = &cone;
 	e->obj_fct[5] = &cylinder;
 }
 
@@ -58,6 +58,16 @@ static void	build_scene(t_env *e, char *str)
 	}
 }
 
+static int	avoid_spaces(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] && (line[i] == ' ' || line[i] == '\t' || line[i] == '\n'))
+		i++;
+	return (i);
+}
+
 void		parse_rt(t_env *e, char *file_name)
 {
 	int		fd;
@@ -71,20 +81,16 @@ void		parse_rt(t_env *e, char *file_name)
 	file = ft_strnew(0);
 	while (get_next_line(fd, &line))
 	{
-		i = 0;
-		while (line[i] && (line[i] == ' ' || line[i] == '\t' || line[i] == '\n'))
-			i++;
+		i = avoid_spaces(line);
 		if (line[i] && line[i] != '#')
 		{
 			tmp = file;
-			file = ft_strjoin(tmp, line);
+			file = ft_strjoin(tmp, &line[i]);
 			free(tmp);
 		}
 		free(line);
 	}
 	close(fd);
-	if (D)
-		printf("%s\n", file);
 	make_fct_tab(e);
 	build_scene(e, file);
 	free_fct_tab(e);

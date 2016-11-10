@@ -6,7 +6,7 @@
 #    By: jubarbie <jubarbie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/30 16:51:35 by jubarbie          #+#    #+#              #
-#    Updated: 2016/11/09 17:00:03 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/11/10 10:35:52 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ CC=gcc
 CFLAGS= -ILibs/libft -ILibs/libmlx -ILibs/libv3d -IIncludes -Wall -Wextra -Werror
 SRC=	rtv1.c			\
 		color.c			\
+		hsv_rgb.c		\
 		options.c		\
 		error.c			\
 		key_event.c		\
@@ -23,9 +24,11 @@ SRC=	rtv1.c			\
 		parse_obj.c		\
 		parse_scene.c	\
 		raytracer.c		\
+		light.c			\
 		sphere.c		\
 		plane.c			\
 		cylinder.c		\
+		cone.c			\
 		moves.c
 OBJDIR=Objects
 VPATH=Sources

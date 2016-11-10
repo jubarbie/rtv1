@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/09 17:01:04 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/10 10:40:16 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ typedef struct	s_ray
 
 typedef struct	s_scene
 {
-	char		*name;
+	char	*name;
 	t_v3d	cam_pos;
 	t_v3d	cam_dir;
 	t_v3d	cam_up;
@@ -180,9 +180,11 @@ void			img_put_pixel(t_env *e, int x, int y, unsigned int color);
 int				moves(t_env *e);
 
 void			*raytracer(void *arg);
+void			apply_light(t_env *e, t_param *param);
 void			sphere(t_object *obj, t_ray *ray);
 void			plane(t_object *obj, t_ray *ray);
 void			cylinder(t_object *obj, t_ray *ray);
+void			cone(t_object *obj, t_ray *ray);
 
 void			error_usage(void);
 void			error_file(t_env *e);

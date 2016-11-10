@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:21:36 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/08 15:29:19 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/10 09:39:09 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int			size_to_end_acc(t_env *e, char *str)
 	return (-1);
 }
 
-t_v3d	get_origin(char *str, int n)
+t_v3d		get_origin(char *str, int n)
 {
 	char	*tmp;
 	char	*tmpy;

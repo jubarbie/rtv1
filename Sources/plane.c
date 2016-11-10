@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/23 19:55:56 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/09 17:27:42 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/10 09:33:07 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	plane(t_object *obj, t_ray *ray)
 	float	det;
 
 	n = unit_v3d(v3d(obj->param[0], obj->param[1], obj->param[2]));
-	det	 = dot_v3d(n, ray->dir);
+	det = dot_v3d(n, ray->dir);
 	if (det >= 0)
 	{
 		q = sub_v3d(n, ray->pos);
