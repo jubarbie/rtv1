@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 09:11:28 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/10 09:14:27 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/10 12:08:56 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	find_inter(t_object *obj, t_ray *ray, t_v3d q, float r)
 	t0 = fmin(t0, t1);
 	if (t0 < ray->dist)
 	{
+		ray->det = r;
 		ray->obj = obj;
 		ray->dist = t0;
 		ray->inter = add_v3d(ray->pos, smul_v3d(ray->dir, t0));

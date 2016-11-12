@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/10 10:40:16 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/12 15:16:50 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@
 # define WIN e->win
 # define WIN_WIDTH 1000
 # define WIN_HEIGHT 800
+# define IMG_WIDTH 990
+# define IMG_HEIGHT 790
 # define BPP e->bpp
 # define SIZELINE e->sizeline
 # define ENDIAN e->endian
@@ -114,6 +116,7 @@ typedef struct	s_ray
 	t_v3d		inter;
 	t_v3d		norm;
 	float		dist;
+	float		det;
 	t_object	*obj;
 }				t_ray;
 

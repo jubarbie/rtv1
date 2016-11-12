@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/23 19:55:56 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/10 09:33:07 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/10 12:09:19 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	plane(t_object *obj, t_ray *ray)
 		t = dot_v3d(q, n) / det;
 		if (t >= 0 && t < ray->dist)
 		{
+			ray->det = det;
 			ray->obj = obj;
 			ray->dist = t;
 			ray->inter = add_v3d(ray->pos, smul_v3d(ray->dir, t));

@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:01:24 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/09 17:00:41 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/12 15:16:39 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int			create_img(t_env *e)
 	i = -1;
 	while (++i < NB_TH)
 		(void)pthread_join(th[i], NULL);
-	mlx_put_image_to_window(MLX, WIN, IMG, 0, 0);
+	mlx_put_image_to_window(MLX, WIN, IMG, 5, 5);
 	return (0);
 }
 

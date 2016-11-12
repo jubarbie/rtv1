@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:41:19 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/10 09:40:24 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/12 15:15:42 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	init_param(t_param *param, t_env *e)
 {
-	Y = TH * (WIN_HEIGHT / NB_TH) - 1;
 	CAM_UP = unit_v3d(cross_v3d(CAM_RIGHT, CAM_DIR));
 	CAM_DIR = unit_v3d(v3d(-CAM_POS.x, -CAM_POS.y, -CAM_POS.z));
 	CAM_RIGHT = unit_v3d(cross_v3d(CAM_DIR, CAM_UP));
@@ -59,10 +58,11 @@ void		*raytracer(void *arg)
 	param = (t_param *)arg;
 	init_param(param, ENV);
 	e = ENV;
-	while (++Y < (TH + 1) * WIN_HEIGHT / NB_TH)
+	Y = TH * (IMG_HEIGHT / NB_TH) - 1;
+	while (++Y < (TH + 1) * IMG_HEIGHT / NB_TH)
 	{
 		X = -1;
-		while (++X < WIN_WIDTH)
+		while (++X < IMG_WIDTH)
 			perform_raytracing(e, param);
 	}
 	pthread_exit(0);
