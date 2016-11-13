@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plane.c                                            :+:      :+:    :+:   */
+/*   mouse_event.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/23 19:55:56 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/13 20:19:05 by jubarbie         ###   ########.fr       */
+/*   Created: 2016/11/13 15:46:55 by jubarbie          #+#    #+#             */
+/*   Updated: 2016/11/13 18:44:58 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	plane(t_object *obj, t_ray *ray)
+int	ft_mouse_click(int button, int x, int y, t_env *e)
 {
-	t_v3d	n;
-	t_v3d	q;
-	float	t;
-	float	det;
-
-	n = unit_v3d(v3d(obj->param[0], obj->param[1], obj->param[2]));
-	det = dot_v3d(ray->dir, n);
-	if (det < 0)
+	if (button == 1 && x >= 0 && x < 34)
 	{
-		q = sub_v3d(obj->pos, ray->pos);
-		t = dot_v3d(q, n) / det;
-		if (t >= 0 && t < ray->dist)
+		if (y >= 4 && y <= 36)
 		{
-			ray->det = det;
-			ray->obj = obj;
-			ray->dist = t;
-			ray->inter = add_v3d(ray->pos, smul_v3d(ray->dir, t));
-			ray->norm = n;
+			(L) ? (OPT ^= (1 << 1)) : (OPT |= (1 << 1));
+			create_img(e);
 		}
 	}
+	return (0);
 }

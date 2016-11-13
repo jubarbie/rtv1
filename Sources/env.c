@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 15:06:39 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/12 15:20:53 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/13 20:33:21 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void		init_scene(t_env *e, char *file_name)
 	GAP_X = VW_WIDTH / (float)IMG_WIDTH;
 	GAP_Y = VW_HEIGHT / (float)IMG_HEIGHT;
 	CAM_UP = v3d(0, 1, 0);
-	CAM_DIR = unit_v3d(v3d(-CAM_POS.x, -CAM_POS.y, -CAM_POS.z));
-	CAM_RIGHT = unit_v3d(cross_v3d(CAM_DIR, CAM_UP));
-	CAM_UP = unit_v3d(cross_v3d(CAM_RIGHT, CAM_DIR));
+	CAM_DIR = v3d(0, 0, 1);
+	CAM_RIGHT = v3d(1, 0, 0);
+	//CAM_UP = unit_v3d(cross_v3d(CAM_RIGHT, CAM_DIR));
 }
 
 static t_param	*init_param(t_env *e, int index)
@@ -84,8 +84,10 @@ t_env			*init_env(char *file_name, char opt)
 		e->param[i] = init_param(e, i);
 	MLX = mlx_init();
 	WIN = mlx_new_window(MLX, WIN_WIDTH, WIN_HEIGHT, "RT v.1");
+	init_menu(e);
 	IMG = mlx_new_image(MLX, IMG_WIDTH, IMG_HEIGHT);
-	IMG_ADDR = mlx_get_data_addr(IMG, &BPP, &SIZELINE, &ENDIAN);
+	IMG_ADDR = mlx_get_data_addr(IMG, &e->img.bpp, &e->img.sizeline, &ENDIAN);
+	create_wait_image(e);
 	debug(e);
 	return (e);
 }

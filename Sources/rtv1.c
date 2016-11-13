@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:01:24 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/12 15:16:39 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/13 19:45:45 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int			create_img(t_env *e)
 	int			i;
 	pthread_t	th[NB_TH];
 
+	mlx_put_image_to_window(MLX, WIN, WAIT_IMG, 40, 0);
 	i = -1;
 	while (++i < NB_TH)
 		if (pthread_create(&th[i], NULL, &raytracer, (void *)(e->param[i])) < 0)
@@ -24,22 +25,25 @@ int			create_img(t_env *e)
 	i = -1;
 	while (++i < NB_TH)
 		(void)pthread_join(th[i], NULL);
-	mlx_put_image_to_window(MLX, WIN, IMG, 5, 5);
+	mlx_put_image_to_window(MLX, WIN, IMG, 40, 0);
 	return (0);
 }
 
-void		img_put_pixel(t_env *e, int x, int y, unsigned int color)
+void		img_put_pixel(t_img *img, int x, int y, unsigned int color)
 {
 	unsigned char r;
 	unsigned char g;
 	unsigned char b;
+	unsigned char t;
 
+	t = ((color & 0xFF000000) >> 24);
 	b = ((color & 0x00FF0000) >> 16);
 	g = ((color & 0x00FF00) >> 8);
 	r = (color & 0x00FF);
-	IMG_ADDR[y * SIZELINE + x * (BPP / 8)] = r;
-	IMG_ADDR[y * SIZELINE + x * (BPP / 8) + 1] = g;
-	IMG_ADDR[y * SIZELINE + x * (BPP / 8) + 2] = b;
+	img->addr[y * img->sizeline + x * (img->bpp / 8)] = r;
+	img->addr[y * img->sizeline + x * (img->bpp / 8) + 1] = g;
+	img->addr[y * img->sizeline + x * (img->bpp / 8) + 2] = b;
+	img->addr[y * img->sizeline + x * (img->bpp / 8) + 3] = t;
 }
 
 int			main(int ac, char **av)
@@ -56,6 +60,7 @@ int			main(int ac, char **av)
 	mlx_hook(WIN, 17, Button1MotionMask, quit_rt, e);
 	mlx_hook(WIN, KeyPress, KeyPressMask, ft_key_press, e);
 	mlx_hook(WIN, KeyRelease, KeyReleaseMask, ft_key_release, e);
+	mlx_hook(WIN, ButtonPress, ButtonPressMask, ft_mouse_click, e);
 	mlx_loop(MLX);
 	return (0);
 }

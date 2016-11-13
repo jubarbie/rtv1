@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:41:19 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/12 15:15:42 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/13 20:33:22 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	init_param(t_param *param, t_env *e)
 {
-	CAM_UP = unit_v3d(cross_v3d(CAM_RIGHT, CAM_DIR));
-	CAM_DIR = unit_v3d(v3d(-CAM_POS.x, -CAM_POS.y, -CAM_POS.z));
-	CAM_RIGHT = unit_v3d(cross_v3d(CAM_DIR, CAM_UP));
-	CAM_UP = unit_v3d(cross_v3d(CAM_DIR, CAM_RIGHT));
+	//CAM_UP = unit_v3d(cross_v3d(CAM_RIGHT, CAM_DIR));
+	//CAM_DIR = unit_v3d(v3d(0, 0, 1));
+	//CAM_RIGHT = unit_v3d(cross_v3d(CAM_DIR, CAM_UP));
+	//CAM_UP = unit_v3d(cross_v3d(CAM_DIR, CAM_RIGHT));
 	VW_RAY.pos = v3d(CAM_POS.x, CAM_POS.y, CAM_POS.z);
 	VW_UP_LEFT = sub_v3d(add_v3d(add_v3d(CAM_POS,
 		smul_v3d(CAM_DIR, VW_DIST)), smul_v3d(CAM_UP, VW_HEIGHT / 2.0)),
@@ -47,7 +47,7 @@ static void	perform_raytracing(t_env *e, t_param *param)
 	}
 	COLOR = VW_RAY.obj ? VW_RAY.obj->color : 0;
 	(VW_RAY.obj && L) ? apply_light(ENV, param) : 0;
-	img_put_pixel(ENV, X, Y, COLOR);
+	img_put_pixel(&e->img, X, Y, COLOR);
 }
 
 void		*raytracer(void *arg)

@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/12 15:16:50 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/13 20:33:26 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define PI 3.141592
 # define NB_TH 50
 # define DIST_MAX 100000.0
-# define SPEED 1
+# define SPEED 0.1
 
 # define OPT_REF "dl"
 # define OPT e->opt
@@ -49,13 +49,16 @@
 # define WIN e->win
 # define WIN_WIDTH 1000
 # define WIN_HEIGHT 800
-# define IMG_WIDTH 990
-# define IMG_HEIGHT 790
-# define BPP e->bpp
-# define SIZELINE e->sizeline
+# define IMG_WIDTH 960
+# define IMG_HEIGHT 800
+# define IMG e->img.img
+# define IMG_ADDR e->img.addr
+# define WAIT_IMG e->wait.img
+# define WAIT_ADDR e->wait.addr
 # define ENDIAN e->endian
-# define IMG e->img
-# define IMG_ADDR e->img_addr
+# define NB_BTN 1
+# define MENU e->menu
+# define BTN_SIZE 30
 
 # define ENV param->e
 # define TH param->index
@@ -89,6 +92,25 @@ typedef	struct	s_pix
 	int				y;
 	unsigned int	color;
 }				t_pix;
+
+typedef struct	s_img
+{
+	void	*img;
+	char	*addr;
+	int		width;
+	int		height;
+	int		sizeline;
+	int		bpp;
+}				t_img;
+
+typedef struct	s_button
+{
+	int		pos_x;
+	int		pos_y;
+	int		width;
+	int		height;
+	t_img	img;
+}				t_button;
 
 typedef struct	s_texture
 {
@@ -154,11 +176,10 @@ typedef struct	s_env
 	char		opt;
 	void		*mlx;
 	void		*win;
-	int			bpp;
-	int			sizeline;
+	t_img		img;
+	t_img		wait;
 	int			endian;
-	void		*img;
-	char		*img_addr;
+	t_button	menu[NB_BTN];
 	char		moves;
 	t_scene		*scene;
 	char		**obj_allowed;
@@ -171,6 +192,9 @@ int				get_options(int ac, char **av, char *opt);
 t_env			*init_env(char *file_name, char opt);
 void			free_env(t_env *e);
 
+void			create_wait_image(t_env *e);
+void			init_menu(t_env *e);
+
 void			parse_rt(t_env *e, char *file_name);
 void			build_object(t_env *e, char *str, int n);
 char			*get_in_acc(t_env *e, char *str, char *acc, int n);
@@ -179,7 +203,7 @@ int				size_to_end_acc(t_env *e, char *str);
 void			check_acc(t_env *e, char *str);
 
 int				create_img(t_env *e);
-void			img_put_pixel(t_env *e, int x, int y, unsigned int color);
+void			img_put_pixel(t_img *img, int x, int y, unsigned int color);
 int				moves(t_env *e);
 
 void			*raytracer(void *arg);
@@ -202,6 +226,7 @@ int				add_color(int c1, int c2);
 
 int				ft_key_press(int keycode, t_env *e);
 int				ft_key_release(int keycode, t_env *e);
+int				ft_mouse_click(int button, int x, int y, t_env *e);
 
 void			init_cl(t_env *e);
 

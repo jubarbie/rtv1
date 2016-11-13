@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 08:30:59 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/10 12:14:26 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/13 20:33:24 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,16 @@ static void	init_light_ray(t_param *param, t_object *light)
 
 static void	get_v(t_param *param, t_hsv *hsv)
 {
-	float	angle;
+	float	angle_light;
+	float	angle_view;
 	float	dist;
 
-	angle = cos_v3d(PHO_RAY.dir, VW_RAY.norm);
-	if (angle <= 0)
+	angle_light = cos_v3d(PHO_RAY.dir, VW_RAY.norm);
+	angle_view = cos_v3d(VW_RAY.dir, VW_RAY.norm);
+	if (angle_light <= 0)
 	{
-		hsv->v += -angle * 0.6;
+		hsv->v -= angle_light * 0.6;
+			//hsv->s = 1 / fabs(angle_light - angle_view);
 		if (PHO_RAY.obj && PHO_RAY.obj != VW_RAY.obj
 			&& PHO_RAY.dist < length_v3d(sub_v3d(VW_RAY.inter, PHO_RAY.pos)))
 		{

@@ -6,18 +6,20 @@
 #    By: jubarbie <jubarbie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/30 16:51:35 by jubarbie          #+#    #+#              #
-#    Updated: 2016/11/10 10:35:52 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/11/13 15:53:50 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=gcc
 CFLAGS= -ILibs/libft -ILibs/libmlx -ILibs/libv3d -IIncludes -Wall -Wextra -Werror
 SRC=	rtv1.c			\
+		menu.c			\
 		color.c			\
 		hsv_rgb.c		\
 		options.c		\
 		error.c			\
 		key_event.c		\
+		mouse_event.c	\
 		env.c			\
 		debug.c			\
 		parse.c			\
