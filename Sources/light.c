@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 08:30:59 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/13 20:33:24 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/11/30 18:30:47 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static void	get_v(t_param *param, t_hsv *hsv)
 	if (angle_light <= 0)
 	{
 		hsv->v -= angle_light * 0.6;
-			//hsv->s = 1 / fabs(angle_light - angle_view);
+		//hsv->s += pow((angle_light - angle_view), 2.0);
 		if (PHO_RAY.obj && PHO_RAY.obj != VW_RAY.obj
-			&& PHO_RAY.dist < length_v3d(sub_v3d(VW_RAY.inter, PHO_RAY.pos)))
+			&& PHO_RAY.dist < length_v3d(sub_v3d(VW_RAY.inter, PHO_RAY.pos)) && PHO_RAY.dist > 0)
 		{
 			dist = length_v3d(sub_v3d(PHO_RAY.inter, VW_RAY.inter));
 			hsv->v = 0;
