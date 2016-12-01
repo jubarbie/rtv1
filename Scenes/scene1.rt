@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/11/30 18:30:51 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/12/01 18:41:06 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ scene {
 	object {
 		name { light2 }
 		inter {
-			origin {2 2 -4}
+			origin {2 3 -14}
 			light {  0.01}
 		}
 		color { rgb { 0x00FFFFFF } }
@@ -87,23 +87,21 @@ scene {
 		color { rgb { 0x00FFFFFF }}
 	}
 
-object {
-		name { cylinder }
-		inter {
-			origin { 3 0 -3 }
-			cylinder { 0.5 0.5 1.2}
-		}
-		color { rgb { 0x0000FF00 }}
-	}
+#object {
+#		name { cylinder }
+#		inter {
+#			origin { 0 0 -1 }
+#			cylinder { 0.4 0 1 0}
+#		}
+#		color { rgb { 0x0000FF00 }}
+#	}
 
 object {
 		name { sphere1 }
 		inter {
-			origin { 3 0.5 -3 }
+			origin { 3 0 -3 }
 			sphere {  0.5}
 		}
 		color { rgb { 0x0000FF00 }}
 	}
-
-
 }
