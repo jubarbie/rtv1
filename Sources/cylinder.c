@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sphere.c                                           :+:      :+:    :+:   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:58:17 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/01 18:41:03 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/02 17:59:24 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void		cylinder(t_object *obj, t_ray *ray)
 	t_v3d	n;
 	t_v3d	o;
 	t_v3d	dp;
+	t_v3d	tmp;
 	float	a;
 	float	b;
 	float	c;
-
 	float	det;
 	float	s1;
 	float	s2;
@@ -31,22 +31,21 @@ void		cylinder(t_object *obj, t_ray *ray)
 	o = obj->pos;
 
 	dp = sub_v3d(ray->pos, obj->pos);
-	a = dot_v3d((sub_v3d(ray->dir, smul_v3d(n, dot_v3d(ray->dir, n)))), 
-			sub_v3d(ray->dir, smul_v3d(n, dot_v3d(ray->dir, n))));
+	tmp = sub_v3d(ray->dir, smul_v3d(n, dot_v3d(ray->dir, n)));
+	a = dot_v3d(tmp, tmp);
 	b = 2 * (dot_v3d((sub_v3d(ray->dir, smul_v3d(n, dot_v3d(ray->dir, n)))), 
 				sub_v3d(dp, smul_v3d(n, dot_v3d(dp, n)))));
-	c = dot_v3d((sub_v3d(dp, smul_v3d(n, dot_v3d(dp, n)))), 
-			(sub_v3d(dp, smul_v3d(n, dot_v3d(dp, n))))) - pow(r, 2.0);
+	tmp = sub_v3d(dp, smul_v3d(n, dot_v3d(dp, n)));
+	c = dot_v3d(tmp, tmp) - pow(r, 2.0);
 
 	det = b * b - 4.0 * a * c;
-	if (det >= 0)
+	if (det >= 0.0000001)
 	{
 		s1 = (-b + sqrt(det)) / 2.0 * a;
 		s2 = (-b - sqrt(det)) / 2.0 * a;
 		if (s2 < s1 && s2 > 0)
 			s1 = s2;
-		//s = fmin(fabs(s2), fabs(s1));
-		if (s1 > 0 && s1 < ray->dist)
+		if (s1 > 0.00001 && s1 < ray->dist)
 		{
 			ray->det = det;
 			ray->obj = obj;

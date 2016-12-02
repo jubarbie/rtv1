@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/12/01 18:41:06 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/12/02 17:58:15 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,25 +22,149 @@ scene {
 	render {
 		mlx_all_objects { 1080 800 }
 	}
+	
+	object {
+		name { light1 }
+		inter {
+			origin {5 3.4 -1}
+			light {  0.01}
+		}
+		color { rgb { 0x00FFFFFF } }
+	}
 
 
 	object {
 		name { light2 }
 		inter {
-			origin {2 3 -14}
+			origin {1 3.4 -1}
 			light {  0.01}
 		}
 		color { rgb { 0x00FFFFFF } }
 	}
 
 	object {
+		name { light3 }
+		inter {
+			origin {5 3.4 -3}
+			light {  0.01}
+		}
+		color { rgb { 0x00FFFFFF } }
+	}
+
+
+	object {
+		name { light4 }
+		inter {
+			origin {1 3.4 -3}
+			light {  0.01}
+		}
+		color { rgb { 0x00FFFFFF } }
+	}
+
+	object {
+		name { light5 }
+		inter {
+			origin {5 3.4 -5}
+			light {  0.01}
+		}
+		color { rgb { 0x00FFFFFF } }
+	}
+
+
+	object {
+		name { light6 }
+		inter {
+			origin {1 3.4 -5}
+			light {  0.01}
+		}
+		color { rgb { 0x00FFFFFF } }
+	}
+
+#
+#     CYLINDER
+#
+
+#	object {
+#		name { cylinder }
+#		inter {
+#			origin { 0 0 -2 }
+#			cylinder { 1 0 1 0}
+#		}
+#		color { rgb { 0x0000FF00 }}
+#	}
+
+
+#
+#     SPHERES
+#
+	object {
 		name { sphere1 }
 		inter {
-			origin { 3 1.20 -3 }
+			origin { 3 0.5 -3 }
 			sphere {  0.5}
 		}
-		color { rgb { 0x0000FF00 }}
+		color { rgb { 0x008A6552 }}
 	}
+	
+	object {
+		name { sphere1 }
+		inter {
+			origin { 0 1.75 -3 }
+			sphere { 1.5}
+		}
+		color { rgb { 0x00FFFFFF }}
+	}
+
+
+	object {
+		name { sphere2 }
+		inter {
+			origin { 1 0.2 -1 }
+			sphere {  0.2}
+		}
+		color { rgb { 0x00CA2E55 }}
+	}
+
+	object {
+		name { sphere3 }
+		inter {
+			origin { 1.3 0.1 -3 }
+			sphere {  0.1}
+		}
+		color { rgb { 0x00FFE0B5 }}
+	}
+
+	object {
+		name { sphere4 }
+		inter {
+			origin { 5 0.3 -5 }
+			sphere {  0.3}
+		}
+		color { rgb { 0x00EF7B45 }}
+	}
+	
+	object {
+		name { sphere5 }
+		inter {
+			origin { 2.6 0.15 -4.2 }
+			sphere {  0.15}
+		}
+		color { rgb { 0x00FFF07C }}
+	}
+
+	object {
+		name { sphere6 }
+		inter {
+			origin { 3.4 0.3 -2 }
+			sphere {  0.3}
+		}
+		color { rgb { 0x00F4F0BB }}
+	}
+
+
+#
+#		PLANS
+#
 
 	object {
 		name { plane }
@@ -48,7 +172,7 @@ scene {
 			origin { 0 0 0 }
 			plane { 0 1 0}
 		}
-		color { rgb { 0x00685044 }}
+		color { rgb { 0x00042A2B }}
 	}
 
 	object {
@@ -57,7 +181,7 @@ scene {
 			origin { 0 3.5 0 }
 			plane { 0 -1 0}
 		}
-		color { rgb { 0x00FFFFFFF }}
+		color { rgb { 0x00A0A4B8 }}
 	}
 
 	object {
@@ -66,7 +190,7 @@ scene {
 			origin { 0 0 0 }
 			plane { 1 0 0}
 		}
-		color { rgb { 0x00AEC5EB }}
+		color { rgb { 0x00A0A4B8 }}
 	}
 
 	object {
@@ -75,7 +199,7 @@ scene {
 			origin { 6 0 0 }
 			plane { -1 0 0}
 		}
-		color { rgb { 0x00AEC5EB }}
+		color { rgb { 0x00A0A4B8 }}
 	}
 
 	object {
@@ -84,24 +208,6 @@ scene {
 			origin { 0 0 0 }
 			plane { 0 0 -1}
 		}
-		color { rgb { 0x00FFFFFF }}
-	}
-
-#object {
-#		name { cylinder }
-#		inter {
-#			origin { 0 0 -1 }
-#			cylinder { 0.4 0 1 0}
-#		}
-#		color { rgb { 0x0000FF00 }}
-#	}
-
-object {
-		name { sphere1 }
-		inter {
-			origin { 3 0 -3 }
-			sphere {  0.5}
-		}
-		color { rgb { 0x0000FF00 }}
+		color { rgb { 0x00A0A4B8 }}
 	}
 }
