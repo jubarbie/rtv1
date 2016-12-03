@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:58:17 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/02 17:59:24 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/03 16:51:14 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void		cylinder(t_object *obj, t_ray *ray)
 {
 	float	r;
 	t_v3d	n;
-	t_v3d	o;
 	t_v3d	dp;
 	t_v3d	tmp;
 	float	a;
@@ -28,30 +27,29 @@ void		cylinder(t_object *obj, t_ray *ray)
 
 	r = obj->param[0];
 	n = unit_v3d(v3d(obj->param[1], obj->param[2], obj->param[3]));
-	o = obj->pos;
 
 	dp = sub_v3d(ray->pos, obj->pos);
 	tmp = sub_v3d(ray->dir, smul_v3d(n, dot_v3d(ray->dir, n)));
 	a = dot_v3d(tmp, tmp);
-	b = 2 * (dot_v3d((sub_v3d(ray->dir, smul_v3d(n, dot_v3d(ray->dir, n)))), 
+	b = 2.0 * (dot_v3d((sub_v3d(ray->dir, smul_v3d(n, dot_v3d(ray->dir, n)))), 
 				sub_v3d(dp, smul_v3d(n, dot_v3d(dp, n)))));
 	tmp = sub_v3d(dp, smul_v3d(n, dot_v3d(dp, n)));
-	c = dot_v3d(tmp, tmp) - pow(r, 2.0);
+	c = dot_v3d(tmp, tmp) - r * r;
 
 	det = b * b - 4.0 * a * c;
-	if (det >= 0.0000001)
+	if (det > 0.0000001)
 	{
-		s1 = (-b + sqrt(det)) / 2.0 * a;
-		s2 = (-b - sqrt(det)) / 2.0 * a;
-		if (s2 < s1 && s2 > 0)
+		s1 = (-b + (float)sqrt((double)det)) / 2.0 * a;
+		s2 = (-b - (float)sqrt((double)det)) / 2.0 * a;
+		if (s2 < s1 && s2 > 0.0000001)
 			s1 = s2;
-		if (s1 > 0.00001 && s1 < ray->dist)
-		{
+		if (s1 > 0.0000001 && s1 < ray->dist)
+		{	
 			ray->det = det;
 			ray->obj = obj;
 			ray->dist = s1;
 			ray->inter = add_v3d(ray->pos, smul_v3d(ray->dir, s1));
-			ray->norm = add_v3d(v3d(obj->pos.x, ray->inter.y, obj->pos.z), smul_v3d(unit_v3d(sub_v3d(ray->inter, v3d(obj->pos.x, ray->inter.y, obj->pos.z))), r));
+			ray->norm = sub_v3d(ray->inter, v3d(obj->pos.x, ray->inter.y, obj->pos.z));
 		}
 	}
 }

@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/12/02 17:58:15 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/12/03 16:50:26 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,19 +84,33 @@ scene {
 #     CYLINDER
 #
 
+	object {
+		name { cylinder }
+		inter {
+			origin { 0 0 -2 }
+			cylinder { 0.5 0 1 0}
+		}
+		color { rgb { 0x0000FF00 }}
+	}
+
+#
+#     CONE
+#
+
 #	object {
-#		name { cylinder }
+#		name { cone1 }
 #		inter {
-#			origin { 0 0 -2 }
-#			cylinder { 1 0 1 0}
+#			origin { 0 3.5 -1 }
+#			cone {  0.2 0 1 0}
 #		}
-#		color { rgb { 0x0000FF00 }}
+#		color { rgb { 0x00E09891 }}
 #	}
 
 
 #
 #     SPHERES
 #
+
 	object {
 		name { sphere1 }
 		inter {
@@ -106,14 +120,14 @@ scene {
 		color { rgb { 0x008A6552 }}
 	}
 	
-	object {
-		name { sphere1 }
-		inter {
-			origin { 0 1.75 -3 }
-			sphere { 1.5}
-		}
-		color { rgb { 0x00FFFFFF }}
-	}
+#	object {
+#		name { sphere1 }
+#		inter {
+#			origin { 0 1.75 -3 }
+#			sphere { 1.5}
+#		}
+#		color { rgb { 0x00FFFFFF }}
+#	}
 
 
 	object {

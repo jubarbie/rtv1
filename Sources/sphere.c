@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 09:11:28 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/14 09:46:47 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/03 14:15:28 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ static void	find_inter(t_object *obj, t_ray *ray, t_v3d q, float r)
 
 	t0 = (-q.y + sqrt(r)) / 2.0 * q.x;
 	t1 = (-q.y - sqrt(r)) / 2.0 * q.x;
-	t0 = fmin(t0, t1);
-	if (t0 < ray->dist)
+	if (t1 < t0 && t1 > 0.0000001)
+		t0 = t1;
+	if (t0 > 0.000001 && t0 < ray->dist)
 	{
 		ray->det = r;
 		ray->obj = obj;

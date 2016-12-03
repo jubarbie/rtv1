@@ -5,44 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 09:11:28 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/10 10:46:15 by jubarbie         ###   ########.fr       */
+/*   Created: 2016/10/20 16:58:17 by jubarbie          #+#    #+#             */
+/*   Updated: 2016/12/03 16:41:28 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static void	find_inter(t_object *obj, t_ray *ray, t_v3d q, float r)
-{
-	float	t0;
-	float	t1;
-
-	t0 = (-q.y + sqrt(r)) / 2.0 * q.x;
-	t1 = (-q.y - sqrt(r)) / 2.0 * q.x;
-	t0 = fmin(t0, t1);
-	if (t0 < ray->dist)
-	{
-		ray->obj = obj;
-		ray->dist = t0;
-		ray->inter = add_v3d(ray->pos, smul_v3d(ray->dir, t0));
-		ray->norm = unit_v3d(sub_v3d(ray->inter, obj->pos));
-	}
-}
-
 void		cone(t_object *obj, t_ray *ray)
 {
-	t_v3d	o;
-	t_v3d	q;
-	float	r;
+	float	angle;
+	t_v3d	n;
+	t_v3d	dp;
+	t_v3d	tmp;
+	float	a;
+	float	b;
+	float	c;
+	float	det;
+	float	s1;
+	float	s2;
+	float	sina;
+	float	cosa;
 
-	o = v3d(obj->pos.x, obj->pos.y, obj->pos.z);
-	q.x = ray->dir.y * ray->dir.y + ray->dir.z * ray->dir.z -
-			ray->dir.x * ray->dir.x;
-	q.y = 2.0 * (ray->dir.y * (ray->pos.y - o.y) +
-			ray->dir.z * (ray->pos.z - o.z) - ray->dir.x * (ray->pos.x - o.x));
-	q.z = (pow(ray->pos.y - o.y, 2.0) + pow(ray->pos.z - o.z, 2.0) -
-			pow(ray->pos.x - o.x, 2.0));
-	r = q.y * q.y - 4.0 * q.x * q.z;
-	if (r >= 0.0)
-		find_inter(obj, ray, q, r);
+	angle = obj->param[0];
+	n = unit_v3d(v3d(obj->param[1], obj->param[2], obj->param[3]));
+
+	dp = sub_v3d(ray->pos, obj->pos);
+	sina = (float)sin(angle);
+	cosa = (float)cos(angle);
+	cosa *= cosa;
+	sina *= sina;
+	tmp = sub_v3d(ray->dir, smul_v3d(n, dot_v3d(ray->dir, n)));
+	a = cosa * dot_v3d(tmp, tmp) - sina * dot_v3d(ray->dir, n) * dot_v3d(ray->dir, n);
+
+	det = 2 * cosa * dot_v3d(sub_v3d(ray->dir, smul_v3d(n, dot_v3d(n, ray->dir))), sub_v3d(dp, smul_v3d(n, dot_v3d(dp, n))));
+	b = det - 2 * sina * dot_v3d(ray->dir, n) * dot_v3d(dp, n);
+	tmp = sub_v3d(dp, smul_v3d(n, dot_v3d(dp, n)));
+	c = cosa * dot_v3d(tmp, tmp) - sina * dot_v3d(dp, n) * dot_v3d(dp, n);
+
+	det = b * b - 4.0 * a * c;
+	if (det > 0.0000001)
+	{
+		s1 = (-b + (float)sqrt(det)) / 2.0 * a;
+		s2 = (-b - (float)sqrt(det)) / 2.0 * a;
+		if (s2 < s1 && s2 > 0.0000001)
+			s1 = s2;
+		if (s1 > 0.0000001 && s1 < ray->dist)
+		{
+			ray->det = det;
+			ray->obj = obj;
+			ray->dist = s1;
+			ray->inter = add_v3d(ray->pos, smul_v3d(ray->dir, s1));
+			ray->norm = sub_v3d(ray->inter, v3d(obj->pos.x, ray->inter.y, obj->pos.z));
+		}
+	}
 }

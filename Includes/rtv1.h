@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/30 18:30:49 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/03 16:52:48 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,12 @@ typedef struct	s_texture
 	int			sizeline;
 }				t_tex;
 
+typedef struct	m_mat
+{
+	char 		*name;
+	float		diffuse;
+}				t_mat;
+
 typedef struct	s_object
 {
 	int			type;
@@ -129,6 +135,7 @@ typedef struct	s_object
 	float		*param;
 	int			nb_param;
 	int			color;
+	t_mat		mat;
 }				t_object;
 
 typedef struct	s_ray

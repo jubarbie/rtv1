@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 08:30:59 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/02 18:14:23 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/03 16:52:42 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ static void	get_v(t_param *param, t_hsv *hsv)
 	//angle_view = cos_v3d(VW_RAY.dir, VW_RAY.norm);
 	if (angle_light <= 0)
 	{
-		hsv->v -= angle_light * 0.2;
+		hsv->v -= angle_light * 0.18;
+		hsv->v = fmax(0.12, hsv->v);
 		//hsv->s += pow((angle_light - angle_view), 2.0);
 		if (PHO_RAY.obj && PHO_RAY.obj != VW_RAY.obj
 			&& PHO_RAY.dist < length_v3d(sub_v3d(VW_RAY.inter, PHO_RAY.pos)) && PHO_RAY.dist > 0)
 		{
 			dist = length_v3d(sub_v3d(PHO_RAY.inter, VW_RAY.inter));
-			hsv->v -= 0.1;
+			hsv->v = fmax(0.12, hsv->v - 0.1);
 			//hsv->v -= PHO_RAY.det * dist * 0.5;
 		}
 	}
@@ -49,9 +50,11 @@ void		apply_light(t_env *e, t_param *param)
 	t_list		*lst_obj;
 	t_object	*obj;
 	t_hsv		hsv;
+	double		vm;
 
 	rgb_to_hsv(VW_RAY.obj->color, &hsv.h, &hsv.s, &hsv.v);
-	hsv.v = 0;
+	vm = hsv.v;
+	hsv.v = 0.12;
 	lst_light = e->scene->light;
 	while (lst_light)
 	{
@@ -68,5 +71,5 @@ void		apply_light(t_env *e, t_param *param)
 		get_v(param, &hsv);
 		lst_light = lst_light->next;
 	}
-	COLOR = hsv_to_rgb(hsv.h, hsv.s, 0.02 + hsv.v);
+	COLOR = hsv_to_rgb(hsv.h, hsv.s, 0.02 + (hsv.v * vm));
 }
