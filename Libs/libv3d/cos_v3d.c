@@ -6,15 +6,15 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 12:32:27 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/03 14:58:02 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/03 16:58:40 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libv3d.h"
 
-float	cos_v3d(t_v3d v1, t_v3d v2)
+double	cos_v3d(t_v3d v1, t_v3d v2)
 {
-	float ret;
+	double ret;
 
 	v1 = unit_v3d(v1);
 	v2 = unit_v3d(v2);

@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/03 16:52:48 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/03 17:13:22 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ typedef struct	s_texture
 typedef struct	m_mat
 {
 	char 		*name;
-	float		diffuse;
+	double		diffuse;
 }				t_mat;
 
 typedef struct	s_object
@@ -132,7 +132,7 @@ typedef struct	s_object
 	int			type;
 	char		*name;
 	t_v3d		pos;
-	float		*param;
+	double		*param;
 	int			nb_param;
 	int			color;
 	t_mat		mat;
@@ -144,8 +144,8 @@ typedef struct	s_ray
 	t_v3d		dir;
 	t_v3d		inter;
 	t_v3d		norm;
-	float		dist;
-	float		det;
+	double		dist;
+	double		det;
 	t_object	*obj;
 }				t_ray;
 
@@ -158,12 +158,12 @@ typedef struct	s_scene
 	t_v3d	cam_right;
 	t_list	*obj;
 	t_list	*light;
-	float	view_plane_width;
-	float	view_plane_height;
-	float	view_plane_dist;
+	double	view_plane_width;
+	double	view_plane_height;
+	double	view_plane_dist;
 	t_v3d	view_plane_up_left;
-	float	gap_x;
-	float	gap_y;
+	double	gap_x;
+	double	gap_y;
 }				t_scene;
 
 typedef struct	s_param

@@ -6,23 +6,23 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 11:04:38 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/03 14:58:12 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/03 17:04:12 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static float	*get_obj_param(t_env *e, int *nb, char *str)
+static double	*get_obj_param(t_env *e, int *nb, char *str)
 {
 	char	**tab;
-	float	*param;
+	double	*param;
 	int		i;
 
 	tab = ft_strsplit(str, ' ');
 	i = 0;
 	while (tab[i])
 		i++;
-	if (!(param = malloc(sizeof(float) * i - 1)))
+	if (!(param = malloc(sizeof(double) * i - 1)))
 		error_perso(e, "malloc (t_param *param) failed in get_obj_param()");
 	i = 0;
 	while (tab[i])

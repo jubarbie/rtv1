@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:58:17 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/03 16:51:14 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/03 18:23:35 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void		cylinder(t_object *obj, t_ray *ray)
 {
-	float	r;
+	double	r;
 	t_v3d	n;
 	t_v3d	dp;
 	t_v3d	tmp;
-	float	a;
-	float	b;
-	float	c;
-	float	det;
-	float	s1;
-	float	s2;
+	double	a;
+	double	b;
+	double	c;
+	double	det;
+	double	s1;
+	double	s2;
 
 	r = obj->param[0];
 	n = unit_v3d(v3d(obj->param[1], obj->param[2], obj->param[3]));
@@ -34,16 +34,16 @@ void		cylinder(t_object *obj, t_ray *ray)
 	b = 2.0 * (dot_v3d((sub_v3d(ray->dir, smul_v3d(n, dot_v3d(ray->dir, n)))), 
 				sub_v3d(dp, smul_v3d(n, dot_v3d(dp, n)))));
 	tmp = sub_v3d(dp, smul_v3d(n, dot_v3d(dp, n)));
-	c = dot_v3d(tmp, tmp) - r * r;
+	c = dot_v3d(tmp, tmp) - pow(r, 2.0);
 
-	det = b * b - 4.0 * a * c;
-	if (det > 0.0000001)
+	det = b * b  - 4.0 * a * c;
+	if (det > 0)
 	{
-		s1 = (-b + (float)sqrt((double)det)) / 2.0 * a;
-		s2 = (-b - (float)sqrt((double)det)) / 2.0 * a;
-		if (s2 < s1 && s2 > 0.0000001)
+		s1 = (-b + sqrt(det)) / 2.0 * a;
+		s2 = (-b - sqrt(det)) / 2.0 * a;
+		if (s2 < s1 && s2 > 0)
 			s1 = s2;
-		if (s1 > 0.0000001 && s1 < ray->dist)
+		if (s1 >= .00000001 && s1 < ray->dist)
 		{	
 			ray->det = det;
 			ray->obj = obj;

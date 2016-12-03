@@ -6,13 +6,13 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 12:06:08 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/08 12:07:25 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/03 17:00:40 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libv3d.h"
 
-t_v3d	v3d(float x, float y, float z)
+t_v3d	v3d(double x, double y, double z)
 {
 	t_v3d	v;
 

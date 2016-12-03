@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 12:27:21 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/08 16:14:49 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/03 17:00:22 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_v3d	unit_v3d(t_v3d v)
 {
-	float	length;
+	double	length;
 
 	if ((length = length_v3d(v)) != 0.0)
 		return (smul_v3d(v, 1 / length));

@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:58:17 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/03 16:41:28 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/03 17:11:08 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,25 @@
 
 void		cone(t_object *obj, t_ray *ray)
 {
-	float	angle;
+	double	angle;
 	t_v3d	n;
 	t_v3d	dp;
 	t_v3d	tmp;
-	float	a;
-	float	b;
-	float	c;
-	float	det;
-	float	s1;
-	float	s2;
-	float	sina;
-	float	cosa;
+	double	a;
+	double	b;
+	double	c;
+	double	det;
+	double	s1;
+	double	s2;
+	double	sina;
+	double	cosa;
 
 	angle = obj->param[0];
 	n = unit_v3d(v3d(obj->param[1], obj->param[2], obj->param[3]));
 
 	dp = sub_v3d(ray->pos, obj->pos);
-	sina = (float)sin(angle);
-	cosa = (float)cos(angle);
-	cosa *= cosa;
-	sina *= sina;
+	sina = pow(sin(angle), 2.0);
+	cosa = pow(cos(angle), 2.0);
 	tmp = sub_v3d(ray->dir, smul_v3d(n, dot_v3d(ray->dir, n)));
 	a = cosa * dot_v3d(tmp, tmp) - sina * dot_v3d(ray->dir, n) * dot_v3d(ray->dir, n);
 
@@ -43,11 +41,11 @@ void		cone(t_object *obj, t_ray *ray)
 	tmp = sub_v3d(dp, smul_v3d(n, dot_v3d(dp, n)));
 	c = cosa * dot_v3d(tmp, tmp) - sina * dot_v3d(dp, n) * dot_v3d(dp, n);
 
-	det = b * b - 4.0 * a * c;
+	det = pow(b, 2.0) - 4.0 * a * c;
 	if (det > 0.0000001)
 	{
-		s1 = (-b + (float)sqrt(det)) / 2.0 * a;
-		s2 = (-b - (float)sqrt(det)) / 2.0 * a;
+		s1 = (-b + sqrt(det)) / 2.0 * a;
+		s2 = (-b - sqrt(det)) / 2.0 * a;
 		if (s2 < s1 && s2 > 0.0000001)
 			s1 = s2;
 		if (s1 > 0.0000001 && s1 < ray->dist)

@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/11/14 09:44:25 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/12/03 18:20:48 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 scene {
 	name { test1 }
 	camera { 
-		origin { 10 10 10 }			
+		origin { 0 2 -10 }			
 	}
 	render {
 		mlx_all_objects { 1080 800 }
@@ -25,7 +25,7 @@ scene {
 	object {
 		name { light1 }
 		inter {
-			origin { 10 10 10 }
+			origin { 3 3 -10 }
 			light {  0.0}
 		}
 		color { rgb { 0x003F0000  }}
@@ -33,16 +33,25 @@ scene {
 	object {
 		name { cylindre }
 		inter {
-			origin { 0 1 0 }
-			cylinder {1}
+			origin { 0 0 0 }
+			cylinder {2 0 1 0}
 		}
 		color { rgb { 0x000000FF  }}
 	}
 	object {
-		name { boule }
+		name { plan }
 		inter {
 			origin { 0 0 0 }
-			sphere {0.1}
+			plane { 1 0 -1}
+		}
+		color { rgb { 0x00FFFFFF  }}
+	}
+
+	object {
+		name { plan }
+		inter {
+			origin { 0 0 0 }
+			plane { -1 0 -1}
 		}
 		color { rgb { 0x00FFFFFF  }}
 	}
