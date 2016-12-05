@@ -17,7 +17,7 @@
 scene {
 	name { test1} 
 	camera { 
-		origin { 3 1.75 -10 }			
+		origin { 3 1.75 -14 }			
 	}
 	render {
 		mlx_all_objects { 1080 800 }
@@ -87,8 +87,8 @@ scene {
 	object {
 		name { cylinder }
 		inter {
-			origin { 0 -1 0 }
-			cylinder { 1 0 3 0}
+			origin { 0 1 0 }
+			cylinder { 0.2 0.4 1 0}
 		}
 		color { rgb { 0x0000FF00 }}
 	}
@@ -133,11 +133,69 @@ scene {
 	object {
 		name { sphere2 }
 		inter {
-			origin { 0.2 0 -4 }
+			origin { 0 0 -4 }
 			sphere {  0.2}
 		}
 		color { rgb { 0x00CA2E55 }}
 	}
+	object {
+		name { sphere2 }
+		inter {
+			origin { 0 0.5 -4 }
+			sphere {  0.2}
+		}
+		color { rgb { 0x00CA2E55 }}
+	}
+	object {
+		name { sphere2 }
+		inter {
+			origin { 0 1 -4 }
+			sphere {  0.2}
+		}
+		color { rgb { 0x00CA2E55 }}
+	}
+	object {
+		name { sphere2 }
+		inter {
+			origin { 0 1.5 -4 }
+			sphere {  0.2}
+		}
+		color { rgb { 0x00CA2E55 }}
+	}
+	object {
+		name { sphere2 }
+		inter {
+			origin { 0 2 -4 }
+			sphere {  0.2}
+		}
+		color { rgb { 0x00CA2E55 }}
+	}
+	object {
+		name { sphere2 }
+		inter {
+			origin { 0 2.5 -4 }
+			sphere {  0.2}
+		}
+		color { rgb { 0x00CA2E55 }}
+	}
+	object {
+		name { sphere2 }
+		inter {
+			origin { 0 3 -4 }
+			sphere {  0.2}
+		}
+		color { rgb { 0x00CA2E55 }}
+	}
+	object {
+		name { sphere2 }
+		inter {
+			origin { 0 3.5 -4 }
+			sphere {  0.2}
+		}
+		color { rgb { 0x00CA2E55 }}
+	}
+
+
 
 	object {
 		name { sphere3 }

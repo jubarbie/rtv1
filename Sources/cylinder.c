@@ -30,7 +30,7 @@ void		cylinder(t_object *obj, t_ray *ray)
 	double	tp1;
 
 	r = obj->param[0];
-	p1 = obj->pos;
+	p1 = v3d(obj->pos.x, obj->pos.y, obj->pos.z);
 	p2 = v3d(obj->param[1], obj->param[2], obj->param[3]);
 	n = unit_v3d(sub_v3d(p2, p1));
 
@@ -43,25 +43,25 @@ void		cylinder(t_object *obj, t_ray *ray)
 	c = dot_v3d(tmp, tmp) - pow(r, 2.0);
 
 	det = b * b  - 4.0 * a * c;
-	if (det > 0)
+	if (det > 0.0000001)
 	{
 		t0 = (-b + sqrt(det)) / 2.0 * a;
 		t1 = (-b - sqrt(det)) / 2.0 * a;
 		tp0 = -1;
 		tp1 = -1;
-		if (t0 > 0)
+		if (t0 > 0.0000001)
 		{
 			tmp = add_v3d(ray->pos, smul_v3d(ray->dir, t0));
 			if (dot_v3d(n, sub_v3d(tmp, p1)) > 0 && dot_v3d(n, sub_v3d(tmp, p2)) < 0)
 				tp0 = t0;
 		}
-		if (t1 > 0)
+		if (t1 > 0.0000001)
 		{
 			tmp = add_v3d(ray->pos, smul_v3d(ray->dir, t1));
 			if (dot_v3d(n, sub_v3d(tmp, p1)) > 0 && dot_v3d(n, sub_v3d(tmp, p2)) < 0)
 					tp1 = t1;
 		}
-		if (tp1 < tp0 && tp1 > 0)
+		if ((tp1 < tp0 && tp1 > 0) || (tp1 > tp0 && tp0 < 0))
 			tp0 = tp1;
 		if (tp0 > 0 && tp0 < ray->dist)
 		{	

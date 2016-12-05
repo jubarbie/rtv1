@@ -42,13 +42,13 @@ void		cone(t_object *obj, t_ray *ray)
 	c = cosa * dot_v3d(tmp, tmp) - sina * dot_v3d(dp, n) * dot_v3d(dp, n);
 
 	det = pow(b, 2.0) - 4.0 * a * c;
-	if (det > 0.0000001)
+	if (det > 0)
 	{
 		s1 = (-b + sqrt(det)) / 2.0 * a;
 		s2 = (-b - sqrt(det)) / 2.0 * a;
-		if (s2 < s1 && s2 > 0.0000001)
+		if ((s2 < s1 && s2 > 0) || (s2 > s1 && s1 < 0))
 			s1 = s2;
-		if (s1 > 0.0000001 && s1 < ray->dist)
+		if (s1 > 0 && s1 < ray->dist)
 		{
 			ray->det = det;
 			ray->obj = obj;

@@ -15,9 +15,9 @@
 static void		init_scene(t_env *e, char *file_name)
 {
 	parse_rt(e, file_name);
-	VW_WIDTH = 0.990000000;
-	VW_HEIGHT = 0.790000000;
-	VW_DIST = 1.000000000;
+	VW_WIDTH = 0.96;
+	VW_HEIGHT = 0.6;
+	VW_DIST = 1.0;
 	GAP_X = VW_WIDTH / (double)IMG_WIDTH;
 	GAP_Y = VW_HEIGHT / (double)IMG_HEIGHT;
 	CAM_UP = v3d(0, 1, 0);
