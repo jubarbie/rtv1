@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/19 09:31:33 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/07 10:56:43 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/06 08:50:02 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <string.h>
+# include <math.h>
 
 # define BUFF_SIZE 200
 
@@ -96,5 +97,7 @@ int				ft_min(int n1, int n2);
 int				ft_max(int n1, int n2);
 int				get_next_line(int fd, char **line);
 double			ft_atof(const char *str);
+double			ft_solve_quadratic(double a, double b, double c,
+														double *t0, double *t1);
 
 #endif

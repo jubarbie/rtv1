@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:21:36 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/03 16:52:46 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/06 08:08:59 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,18 @@ static void	free_fct_tab(t_env *e)
 static void	make_fct_tab(t_env *e)
 {
 	e->obj_allowed = ft_strsplit(OBJ_ALLOWED, ' ');
-	e->obj_fct[0] = &sphere;
-	e->obj_fct[1] = &sphere;
-	e->obj_fct[2] = &plane;
-	e->obj_fct[3] = &sphere;
-	e->obj_fct[4] = &cone;
-	e->obj_fct[5] = &cylinder;
+	e->obj_fct_obj[0] = &sphere;
+	e->obj_fct_norm[0] = &sphere_norm;
+	e->obj_fct_obj[1] = &sphere;
+	e->obj_fct_norm[1] = &sphere_norm;
+	e->obj_fct_obj[2] = &plane;
+	e->obj_fct_norm[2] = &plane_norm;
+	e->obj_fct_obj[3] = &sphere;
+	e->obj_fct_norm[3] = &sphere_norm;
+	e->obj_fct_obj[4] = &cone;
+	e->obj_fct_norm[4] = &cone_norm;
+	e->obj_fct_obj[5] = &cylinder;
+	e->obj_fct_norm[5] = &cylinder_norm;
 }
 
 static void	build_scene(t_env *e, char *str)

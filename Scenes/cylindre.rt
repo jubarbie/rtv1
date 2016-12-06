@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/12/03 18:20:48 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/12/06 12:30:06 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,26 +34,26 @@ scene {
 		name { cylindre }
 		inter {
 			origin { 0 0 0 }
-			cylinder {2 0 1 0}
+			cylinder {2 1 1 0}
 		}
 		color { rgb { 0x000000FF  }}
 	}
-	object {
-		name { plan }
-		inter {
-			origin { 0 0 0 }
-			plane { 1 0 -1}
-		}
-		color { rgb { 0x00FFFFFF  }}
-	}
+#	object {
+#		name { plan }
+#		inter {
+#			origin { 0 0 0 }
+#			plane { 1 0 -1}
+#		}
+#		color { rgb { 0x00FFFFFF  }}
+#	}
 
-	object {
-		name { plan }
-		inter {
-			origin { 0 0 0 }
-			plane { -1 0 -1}
-		}
-		color { rgb { 0x00FFFFFF  }}
-	}
+#	object {
+#		name { plan }
+#		inter {
+#			origin { 0 0 0 }
+#			plane { -1 0 -1}
+#		}
+#		color { rgb { 0x00FFFFFF  }}
+#	}
 
 }

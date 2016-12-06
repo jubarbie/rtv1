@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/12/03 19:53:03 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/12/06 13:03:29 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 scene {
 	name { test1} 
 	camera { 
-		origin { 3 1.75 -14 }			
+		origin { 3 1.75 -15 }			
 	}
 	render {
 		mlx_all_objects { 1080 800 }
@@ -87,8 +87,8 @@ scene {
 	object {
 		name { cylinder }
 		inter {
-			origin { 0 1 0 }
-			cylinder { 0.2 0.4 1 0}
+			origin { 1 1 0 }
+			cylinder { 0.4 1.4 1 0}
 		}
 		color { rgb { 0x0000FF00 }}
 	}

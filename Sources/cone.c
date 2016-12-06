@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:58:17 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/03 17:11:08 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/06 13:05:46 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@ void		cone(t_object *obj, t_ray *ray)
 	t_v3d	n;
 	t_v3d	dp;
 	t_v3d	tmp;
-	double	a;
-	double	b;
-	double	c;
+	t_v3d	abc;
 	double	det;
-	double	s1;
-	double	s2;
+	double	t0;
+	double	t1;
 	double	sina;
 	double	cosa;
 
@@ -34,27 +32,17 @@ void		cone(t_object *obj, t_ray *ray)
 	sina = pow(sin(angle), 2.0);
 	cosa = pow(cos(angle), 2.0);
 	tmp = sub_v3d(ray->dir, smul_v3d(n, dot_v3d(ray->dir, n)));
-	a = cosa * dot_v3d(tmp, tmp) - sina * dot_v3d(ray->dir, n) * dot_v3d(ray->dir, n);
+	abc.x = cosa * dot_v3d(tmp, tmp) - sina * dot_v3d(ray->dir, n) * dot_v3d(ray->dir, n);
 
 	det = 2 * cosa * dot_v3d(sub_v3d(ray->dir, smul_v3d(n, dot_v3d(n, ray->dir))), sub_v3d(dp, smul_v3d(n, dot_v3d(dp, n))));
-	b = det - 2 * sina * dot_v3d(ray->dir, n) * dot_v3d(dp, n);
+	abc.y = det - 2 * sina * dot_v3d(ray->dir, n) * dot_v3d(dp, n);
 	tmp = sub_v3d(dp, smul_v3d(n, dot_v3d(dp, n)));
-	c = cosa * dot_v3d(tmp, tmp) - sina * dot_v3d(dp, n) * dot_v3d(dp, n);
+	abc.z = cosa * dot_v3d(tmp, tmp) - sina * dot_v3d(dp, n) * dot_v3d(dp, n);
+	if ((det = ft_solve_quadratic(abc.x, abc.y, abc.z, &t0, &t1)) >= 0)
+		find_dist(obj, ray, t0, t1);
+}
 
-	det = pow(b, 2.0) - 4.0 * a * c;
-	if (det > 0)
-	{
-		s1 = (-b + sqrt(det)) / 2.0 * a;
-		s2 = (-b - sqrt(det)) / 2.0 * a;
-		if ((s2 < s1 && s2 > 0) || (s2 > s1 && s1 < 0))
-			s1 = s2;
-		if (s1 > 0 && s1 < ray->dist)
-		{
-			ray->det = det;
-			ray->obj = obj;
-			ray->dist = s1;
-			ray->inter = add_v3d(ray->pos, smul_v3d(ray->dir, s1));
-			ray->norm = sub_v3d(ray->inter, v3d(obj->pos.x, ray->inter.y, obj->pos.z));
-		}
-	}
+void	cone_norm(t_ray *ray)
+{
+	ray->norm = sub_v3d(ray->inter, v3d(ray->obj->pos.x, ray->inter.y, ray->obj->pos.z));
 }

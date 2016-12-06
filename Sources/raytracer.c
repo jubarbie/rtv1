@@ -6,11 +6,22 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:41:19 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/03 18:09:57 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/06 12:13:31 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+void		find_dist(t_object *obj, t_ray *ray, double t0, double t1)
+{
+	if ((t1 < t0 && t1 > 0) || (t1 > t0 && t0 < 0))
+		t0 = t1;
+	if (t0 > 0 && t0 < ray->dist)
+	{
+		ray->obj = obj;
+		ray->dist = t0;
+	}
+}
 
 static void	init_param(t_param *param, t_env *e)
 {
@@ -42,9 +53,10 @@ static void	perform_raytracing(t_env *e, t_param *param)
 	while (lst_obj)
 	{
 		obj = (t_object *)lst_obj->content;
-		(*(e->obj_fct[obj->type]))(obj, &VW_RAY);
+		(*(e->obj_fct_obj[obj->type]))(obj, &VW_RAY);
 		lst_obj = lst_obj->next;
 	}
+	VW_RAY.inter = add_v3d(VW_RAY.pos, smul_v3d(VW_RAY.dir, VW_RAY.dist));
 	COLOR = VW_RAY.obj ? VW_RAY.obj->color : 0;
 	(VW_RAY.obj && L) ? apply_light(ENV, param) : 0;
 	img_put_pixel(&e->img, X, Y, COLOR);

@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/03 17:13:22 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/06 13:05:44 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@
 # define WIN e->win
 # define WIN_WIDTH 1000
 # define WIN_HEIGHT 600
-# define IMG_WIDTH 960
-# define IMG_HEIGHT 600
+# define IMG_WIDTH (WIN_WIDTH - 40)
+# define IMG_HEIGHT WIN_HEIGHT
 # define IMG e->img.img
 # define IMG_ADDR e->img.addr
 # define WAIT_IMG e->wait.img
@@ -190,7 +190,8 @@ typedef struct	s_env
 	char		moves;
 	t_scene		*scene;
 	char		**obj_allowed;
-	void		(*obj_fct[NB_OBJ_FCT])(t_object *, t_ray *);
+	void		(*obj_fct_obj[NB_OBJ_FCT])(t_object *, t_ray *);
+	void		(*obj_fct_norm[NB_OBJ_FCT])(t_ray *);
 	t_param		*param[NB_TH];
 }				t_env;
 
@@ -215,10 +216,15 @@ int				moves(t_env *e);
 
 void			*raytracer(void *arg);
 void			apply_light(t_env *e, t_param *param);
+void			find_dist(t_object *obj, t_ray *ray, double t0, double t1);
 void			sphere(t_object *obj, t_ray *ray);
+void			sphere_norm(t_ray *ray);
 void			plane(t_object *obj, t_ray *ray);
+void			plane_norm(t_ray *ray);
 void			cylinder(t_object *obj, t_ray *ray);
+void			cylinder_norm(t_ray *ray);
 void			cone(t_object *obj, t_ray *ray);
+void			cone_norm(t_ray *ray);
 
 void			error_usage(void);
 void			error_file(t_env *e);
