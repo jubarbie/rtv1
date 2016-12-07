@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 11:04:38 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/06 08:08:57 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/07 16:20:44 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int		get_obj_type(t_env *e, char *str, int n)
 	while (e->obj_allowed[i] && !(ft_strnstr(str, e->obj_allowed[i], n)))
 		i++;
 	if (!e->obj_allowed[i])
-		error_perso(e, "oject type is not supported");
+		error_perso(e, "object type is not supported");
 	else
 		return (i);
 	return (-1);
@@ -80,6 +80,8 @@ void			build_object(t_env *e, char *str, int n)
 	char		*tmp;
 	char		*type_acc;
 
+	if (!(tmp = ft_strnstr(str, "name {", n)))
+		error_perso(e, "No name found in object");
 	name = get_in_acc(e, str, "name {", size_to_end_acc(e, str));
 	if (!(tmp = ft_strnstr(str, "inter {", n)))
 		error_file(e);
@@ -90,6 +92,7 @@ void			build_object(t_env *e, char *str, int n)
 	tmp = get_in_acc(e, tmp + 7, type_acc, size_to_end_acc(e, tmp + 7));
 	obj.param = get_obj_param(e, &(obj.nb_param), tmp);
 	obj.color = get_obj_color(e, str, n);
+	add_mat(e, &obj, str, n);
 	elem = ft_lstnew(&obj, sizeof(obj));
 	if (obj.type == 0)
 		ft_lstadd(&(e->scene->light), elem);

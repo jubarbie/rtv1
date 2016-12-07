@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 15:06:39 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/06 13:05:41 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/07 16:02:32 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static void		init_scene(t_env *e, char *file_name)
 {
 	parse_rt(e, file_name);
-	VW_WIDTH = IMG_WIDTH / 100.0;
-	VW_HEIGHT = IMG_HEIGHT / 100.0;
-	VW_DIST = 10.0;
+	VW_WIDTH = IMG_WIDTH / 1000.0;
+	VW_HEIGHT = IMG_HEIGHT / 1000.0;
+	VW_DIST = 1.0;
 	GAP_X = VW_WIDTH / (double)IMG_WIDTH;
 	GAP_Y = VW_HEIGHT / (double)IMG_HEIGHT;
 	CAM_UP = v3d(0, 1.0, 0);

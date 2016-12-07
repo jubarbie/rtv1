@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/12/06 13:03:29 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/12/07 19:41:20 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 scene {
 	name { test1} 
 	camera { 
-		origin { 3 1.75 -15 }			
+		origin { 3 1.75 -13 }			
 	}
 	render {
 		mlx_all_objects { 1080 800 }
@@ -84,14 +84,18 @@ scene {
 #     CYLINDER
 #
 
-	object {
-		name { cylinder }
-		inter {
-			origin { 1 1 0 }
-			cylinder { 0.4 1.4 1 0}
-		}
-		color { rgb { 0x0000FF00 }}
-	}
+#	object {
+#		name { cylinder }
+#		inter {
+#			origin { 1 1 0 }
+#			cylinder { 0.4 1.4 1 0}
+#		}
+#		color { rgb { 0x0000FF00 }}
+#		mat {	
+#			diffuse { 0.18 }
+#			shine { 0.3}
+#		}
+#	}
 
 #
 #     CONE
@@ -118,6 +122,10 @@ scene {
 			sphere {  0.5}
 		}
 		color { rgb { 0x008A6552 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.3}
+		}
 	}
 	
 #	object {
@@ -134,9 +142,13 @@ scene {
 		name { sphere2 }
 		inter {
 			origin { 0 0 -4 }
-			sphere {  0.2}
+			sphere {0.2}	
 		}
 		color { rgb { 0x00CA2E55 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.3}
+		}
 	}
 	object {
 		name { sphere2 }
@@ -145,6 +157,10 @@ scene {
 			sphere {  0.2}
 		}
 		color { rgb { 0x00CA2E55 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.3}
+		}
 	}
 	object {
 		name { sphere2 }
@@ -153,6 +169,10 @@ scene {
 			sphere {  0.2}
 		}
 		color { rgb { 0x00CA2E55 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.3}
+		}
 	}
 	object {
 		name { sphere2 }
@@ -161,6 +181,10 @@ scene {
 			sphere {  0.2}
 		}
 		color { rgb { 0x00CA2E55 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.3}
+		}
 	}
 	object {
 		name { sphere2 }
@@ -169,6 +193,10 @@ scene {
 			sphere {  0.2}
 		}
 		color { rgb { 0x00CA2E55 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.3}
+		}
 	}
 	object {
 		name { sphere2 }
@@ -177,6 +205,11 @@ scene {
 			sphere {  0.2}
 		}
 		color { rgb { 0x00CA2E55 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.3}
+		}
+
 	}
 	object {
 		name { sphere2 }
@@ -185,6 +218,10 @@ scene {
 			sphere {  0.2}
 		}
 		color { rgb { 0x00CA2E55 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.3}
+		}
 	}
 	object {
 		name { sphere2 }
@@ -193,6 +230,10 @@ scene {
 			sphere {  0.2}
 		}
 		color { rgb { 0x00CA2E55 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.3}
+		}
 	}
 
 
@@ -204,6 +245,10 @@ scene {
 			sphere {  0.1}
 		}
 		color { rgb { 0x00FFE0B5 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.3}
+		}
 	}
 
 	object {
@@ -213,6 +258,10 @@ scene {
 			sphere {  0.3}
 		}
 		color { rgb { 0x00EF7B45 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.3}
+		}
 	}
 	
 	object {
@@ -222,6 +271,10 @@ scene {
 			sphere {  0.15}
 		}
 		color { rgb { 0x00FFF07C }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.3}
+		}
 	}
 
 	object {
@@ -231,6 +284,10 @@ scene {
 			sphere {  0.3}
 		}
 		color { rgb { 0x00F4F0BB }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.3}
+		}
 	}
 
 
@@ -245,6 +302,10 @@ scene {
 			plane { 0 1 0}
 		}
 		color { rgb { 0x00042A2B }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.3}
+		}
 	}
 
 	object {
@@ -254,6 +315,10 @@ scene {
 			plane { 0 -1 0}
 		}
 		color { rgb { 0x00A0A4B8 }}
+		mat {	
+			diffuse { 0.23 }
+			shine { 0.3}
+		}
 	}
 
 	object {
@@ -263,6 +328,10 @@ scene {
 			plane { 1 0 0}
 		}
 		color { rgb { 0x00A0A4B8 }}
+		mat {	
+			diffuse { 0.25 }
+			shine { 0.3}
+		}
 	}
 
 	object {
@@ -272,6 +341,10 @@ scene {
 			plane { -1 0 0}
 		}
 		color { rgb { 0x00A0A4B8 }}
+		mat {	
+			diffuse { 0.25 }
+			shine { 0.3}
+		}	
 	}
 
 	object {
@@ -281,5 +354,9 @@ scene {
 			plane { 0 0 -1}
 		}
 		color { rgb { 0x00A0A4B8 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.3}
+		}
 	}
 }

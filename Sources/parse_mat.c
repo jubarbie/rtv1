@@ -6,96 +6,26 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 11:04:38 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/03 13:34:04 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/07 16:29:28 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static float	*get_obj_param(t_env *e, int *nb, char *str)
-{
-	char	**tab;
-	float	*param;
-	int		i;
-
-	tab = ft_strsplit(str, ' ');
-	i = 0;
-	while (tab[i])
-		i++;
-	if (!(param = malloc(sizeof(float) * i - 1)))
-		error_perso(e, "malloc (t_param *param) failed in get_obj_param()");
-	i = 0;
-	while (tab[i])
-	{
-		param[i] = ft_atof(tab[i]);
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-	*nb = i;
-	return (param);
-}
-
-static int		get_obj_type(t_env *e, char *str, int n)
-{
-	int		i;
-
-	i = 0;
-	while (e->obj_allowed[i] && !(ft_strnstr(str, e->obj_allowed[i], n)))
-		i++;
-	if (!e->obj_allowed[i])
-		error_perso(e, "oject type is not supported");
-	else
-		return (i);
-	return (-1);
-}
-
-static int		get_obj_color(t_env *e, char *str, int n)
+void			add_mat(t_env *e, t_object *obj, char *str, int n)
 {
 	char	*tmp;
-	char	*col_h;
-	char	*col_i;
-	int		color;
+	char	*mat;
 
-	col_h = NULL;
-	if (!(tmp = ft_strnstr(str, "color {", n)))
-		return (0);
-	if ((tmp = ft_strnstr(tmp + 7, "rgb {", size_to_end_acc(e, tmp + 7))))
+	obj->mat.shine = 0;
+	obj->mat.diffuse = 0.5;
+	if ((tmp = ft_strnstr(str, "mat {", n)))
 	{
-		col_h = get_in_acc(e, tmp, "rgb {", n);
-		col_i = ft_convert_base(col_h + 2, "0123456789ABCDEF", "0123456789");
-		color = ft_atoi(col_i);
-		free(col_i);
-		free(col_h);
-		return (color);
+		mat = get_in_acc(e, tmp, "mat {", n);
+		if ((tmp = ft_strnstr(mat, "diffuse {", n)))
+			obj->mat.diffuse = ft_atof(get_in_acc(e, tmp, "diffuse {", n));
+		if ((tmp = ft_strnstr(mat, "shine {", n)))
+			obj->mat.shine = ft_atof(get_in_acc(e, tmp, "shine {", n));
+		free(mat);
 	}
-	return (0);
-}
-
-void			build_object(t_env *e, char *str, int n)
-{
-	t_object	obj;
-	t_list		*elem;
-	char		*name;
-	char		*tmp;
-	char		*type_acc;
-
-	name = get_in_acc(e, str, "name {", size_to_end_acc(e, str));
-	if (!(tmp = ft_strnstr(str, "inter {", n)))
-		error_file(e);
-	obj.type = get_obj_type(e, tmp + 7, size_to_end_acc(e, tmp + 7));
-	obj.name = ft_strdup(name);
-	obj.pos = get_origin(tmp + 7, size_to_end_acc(e, tmp + 7));
-	type_acc = ft_strjoin(e->obj_allowed[obj.type], " {");
-	tmp = get_in_acc(e, tmp + 7, type_acc, size_to_end_acc(e, tmp + 7));
-	obj.param = get_obj_param(e, &(obj.nb_param), tmp);
-	obj.color = get_obj_color(e, str, n);
-	elem = ft_lstnew(&obj, sizeof(obj));
-	if (obj.type == 0)
-		ft_lstadd(&(e->scene->light), elem);
-	else
-		ft_lstadd(&(e->scene->obj), elem);
-	free(type_acc);
-	free(name);
-	free(tmp);
 }

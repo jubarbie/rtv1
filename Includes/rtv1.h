@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/06 13:05:44 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/07 19:41:23 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 
 # define MLX e->mlx
 # define WIN e->win
-# define WIN_WIDTH 1000
+# define WIN_WIDTH 1040
 # define WIN_HEIGHT 600
 # define IMG_WIDTH (WIN_WIDTH - 40)
 # define IMG_HEIGHT WIN_HEIGHT
@@ -125,6 +125,7 @@ typedef struct	m_mat
 {
 	char 		*name;
 	double		diffuse;
+	double		shine;
 }				t_mat;
 
 typedef struct	s_object
@@ -205,6 +206,7 @@ void			init_menu(t_env *e);
 
 void			parse_rt(t_env *e, char *file_name);
 void			build_object(t_env *e, char *str, int n);
+void            add_mat(t_env *e, t_object *obj, char *str, int n);
 char			*get_in_acc(t_env *e, char *str, char *acc, int n);
 t_v3d			get_origin(char *str, int n);
 int				size_to_end_acc(t_env *e, char *str);

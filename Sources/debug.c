@@ -6,11 +6,18 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 18:49:11 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/08 15:48:35 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/07 16:01:24 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+static void	print_mat(t_object *obj)
+{
+	printf("		Material:\n");
+	printf("			Color diffuse: %lf\n", obj->mat.diffuse);
+	printf("			Shiness: %lf\n", obj->mat.shine);
+}
 
 static void	print_obj(t_env *e)
 {
@@ -32,6 +39,7 @@ static void	print_obj(t_env *e)
 		printf("		origin(%lf, %lf, %lf)\n", obj->pos.x,
 												obj->pos.y, obj->pos.z);
 		printf("		color: 0x%08.8X\n", obj->color);
+		print_mat(obj);
 		printf("		----------\n");
 		elem = elem->next;
 	}

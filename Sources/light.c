@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 08:30:59 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/06 08:08:19 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/07 19:41:18 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,31 @@ static void	init_light_ray(t_param *param, t_object *light)
 static void	get_v(t_param *param, t_hsv *hsv)
 {
 	double	angle_light;
+	double	angle_ref;
+	t_v3d	ref;
 	//float	angle_view;
 	double	dist;
 
 	(*(param->e->obj_fct_norm[VW_RAY.obj->type]))(&VW_RAY);
 	angle_light = cos_v3d(PHO_RAY.dir, VW_RAY.norm);
+	ref = sub_v3d(PHO_RAY.dir, smul_v3d(VW_RAY.norm, 2.0 * dot_v3d(PHO_RAY.dir, VW_RAY.norm)));
+	angle_ref = cos_v3d(ref, VW_RAY.dir);
 	//angle_view = cos_v3d(VW_RAY.dir, VW_RAY.norm);
+	if (angle_ref > -0.01 && angle_ref < 0.01)
+	{
+		hsv->v = 1;
+		hsv->s = 1;
+	}
 	if (angle_light <= 0)
 	{
-		hsv->v -= angle_light * 0.18;
-		hsv->v = fmax(0.12, hsv->v);
+		hsv->v -= angle_light * VW_RAY.obj->mat.diffuse;
+		hsv->v = fmax(VW_RAY.obj->mat.diffuse, hsv->v);
 		//hsv->s += pow((angle_light - angle_view), 2.0);
 		if (PHO_RAY.obj && PHO_RAY.obj != VW_RAY.obj
 			&& PHO_RAY.dist < length_v3d(sub_v3d(VW_RAY.inter, PHO_RAY.pos)) && PHO_RAY.dist > 0)
 		{
 			dist = length_v3d(sub_v3d(PHO_RAY.inter, VW_RAY.inter));
-			hsv->v = fmax(0.12, hsv->v - 0.1);
+			hsv->v = fmax(VW_RAY.obj->mat.diffuse, hsv->v - 0.1);
 			//hsv->v -= PHO_RAY.det * dist * 0.5;
 		}
 	}
@@ -55,7 +64,7 @@ void		apply_light(t_env *e, t_param *param)
 
 	rgb_to_hsv(VW_RAY.obj->color, &hsv.h, &hsv.s, &hsv.v);
 	vm = hsv.v;
-	hsv.v = 0.12;
+	hsv.v = VW_RAY.obj->mat.diffuse;
 	lst_light = e->scene->light;
 	while (lst_light)
 	{
