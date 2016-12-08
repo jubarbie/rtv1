@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 08:30:59 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/07 19:41:18 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/08 12:45:37 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,41 @@ static void	init_light_ray(t_param *param, t_object *light)
 	PHO_RAY.obj = NULL;
 }
 
-static void	get_v(t_param *param, t_hsv *hsv)
+static void	get_v(t_param *param, t_object *light, t_hsv *hsv)
 {
 	double	angle_light;
 	double	angle_ref;
 	t_v3d	ref;
 	//float	angle_view;
 	double	dist;
+	int		color;
 
 	(*(param->e->obj_fct_norm[VW_RAY.obj->type]))(&VW_RAY);
 	angle_light = cos_v3d(PHO_RAY.dir, VW_RAY.norm);
-	ref = sub_v3d(PHO_RAY.dir, smul_v3d(VW_RAY.norm, 2.0 * dot_v3d(PHO_RAY.dir, VW_RAY.norm)));
-	angle_ref = cos_v3d(ref, VW_RAY.dir);
+	ref = sub_v3d(PHO_RAY.dir, smul_v3d(VW_RAY.norm, 2.0 *
+				dot_v3d(PHO_RAY.dir, VW_RAY.norm)));
 	//angle_view = cos_v3d(VW_RAY.dir, VW_RAY.norm);
-	if (angle_ref > -0.01 && angle_ref < 0.01)
-	{
-		hsv->v = 1;
-		hsv->s = 1;
-	}
 	if (angle_light <= 0)
 	{
 		hsv->v -= angle_light * VW_RAY.obj->mat.diffuse;
 		hsv->v = fmax(VW_RAY.obj->mat.diffuse, hsv->v);
 		//hsv->s += pow((angle_light - angle_view), 2.0);
+		if (VW_RAY.obj->mat.shine > 0.0)
+		{
+			angle_ref = cos_v3d(ref, VW_RAY.dir);
+			if (angle_ref <= -0.95)
+			{
+				color = hsv_to_rgb(hsv->h, hsv->s, hsv->v);
+				color = add_color(color, light->color, ((-0.95 - angle_ref) / 0.05) * VW_RAY.obj->mat.shine);
+			//color = add_color(color, light->color, fmin(1, log((-0.9 - angle_ref) / 0.1)));
+				rgb_to_hsv(color, &hsv->h, &hsv->s, &hsv->v);
+			//hsv->v *= angle_ref / -0.9;
+			//hsv->s *= angle_ref / -0.9;
+			}
+		}
 		if (PHO_RAY.obj && PHO_RAY.obj != VW_RAY.obj
-			&& PHO_RAY.dist < length_v3d(sub_v3d(VW_RAY.inter, PHO_RAY.pos)) && PHO_RAY.dist > 0)
+			&& PHO_RAY.dist < length_v3d(sub_v3d(VW_RAY.inter, PHO_RAY.pos))
+			&& PHO_RAY.dist > 0)
 		{
 			dist = length_v3d(sub_v3d(PHO_RAY.inter, VW_RAY.inter));
 			hsv->v = fmax(VW_RAY.obj->mat.diffuse, hsv->v - 0.1);
@@ -79,7 +89,7 @@ void		apply_light(t_env *e, t_param *param)
 			lst_obj = lst_obj->next;
 		}
 		PHO_RAY.inter = add_v3d(PHO_RAY.pos, smul_v3d(PHO_RAY.dir, PHO_RAY.dist));
-		get_v(param, &hsv);
+		get_v(param, light, &hsv);
 		lst_light = lst_light->next;
 	}
 	COLOR = hsv_to_rgb(hsv.h, hsv.s, 0.02 + (hsv.v * vm));

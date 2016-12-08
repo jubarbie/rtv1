@@ -6,20 +6,21 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 10:30:51 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/10 10:31:09 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/08 11:38:20 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int				add_color(int c1, int c2)
+int				add_color(int c1, int c2, double i)
 {
 	int	r;
 	int	g;
 	int	b;
 
-	b = ft_min(((c1 & 0x000000FF) >> 0) + ((c2 & 0x000000FF) >> 0), 255);
-	g = ft_min(((c1 & 0x0000FF00) >> 8) + ((c2 & 0x0000FF00) >> 8), 255);
-	r = ft_min(((c1 & 0x00FF0000) >> 16) + ((c2 & 0x00FF0000) >> 16), 255);
+	i = fmin(1, i);
+	b = ft_min(((c1 & 0x000000FF) >> 0) + ((c2 & 0x000000FF) >> 0) * i, 255);
+	g = ft_min(((c1 & 0x0000FF00) >> 8) + ((c2 & 0x0000FF00) >> 8) * i, 255);
+	r = ft_min(((c1 & 0x00FF0000) >> 16) + ((c2 & 0x00FF0000) >> 16) * i, 255);
 	return ((r << 16) + (g << 8) + b);
 }

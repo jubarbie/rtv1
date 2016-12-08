@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/07 19:41:23 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/08 10:49:43 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,7 @@ void			debug(t_env *e);
 
 unsigned int	hsv_to_rgb(unsigned int h, double s, double v);
 void			rgb_to_hsv(unsigned int rgb, int *h, double *s, double *v);
-int				add_color(int c1, int c2);
+int				add_color(int c1, int c2, double i);
 
 int				ft_key_press(int keycode, t_env *e);
 int				ft_key_release(int keycode, t_env *e);

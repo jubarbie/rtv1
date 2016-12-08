@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/12/07 19:41:20 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/12/08 15:31:46 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,31 +84,31 @@ scene {
 #     CYLINDER
 #
 
-#	object {
-#		name { cylinder }
-#		inter {
-#			origin { 1 1 0 }
-#			cylinder { 0.4 1.4 1 0}
-#		}
-#		color { rgb { 0x0000FF00 }}
-#		mat {	
-#			diffuse { 0.18 }
-#			shine { 0.3}
-#		}
-#	}
+	object {
+		name { cylinder }
+		inter {
+			origin { 1 1 0 }
+			cylinder { 0.4 1.4 1 0}
+		}
+		color { rgb { 0x0000FF00 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.3}
+		}
+	}
 
 #
 #     CONE
 #
 
-#	object {
-#		name { cone1 }
-#		inter {
-#			origin { 0 3.5 -1 }
-#			cone {  0.2 0 1 0}
-#		}
-#		color { rgb { 0x00E09891 }}
-#	}
+	object {
+		name { cone1 }
+		inter {
+			origin { 0 3.5 0 }
+			cone {  0.2 0 1 0}
+		}
+		color { rgb { 0x00E09891 }}
+	}
 
 
 #
@@ -124,7 +124,7 @@ scene {
 		color { rgb { 0x008A6552 }}
 		mat {	
 			diffuse { 0.18 }
-			shine { 0.3}
+			shine { 0.2}
 		}
 	}
 	
@@ -147,7 +147,7 @@ scene {
 		color { rgb { 0x00CA2E55 }}
 		mat {	
 			diffuse { 0.18 }
-			shine { 0.3}
+			shine { 0.2}
 		}
 	}
 	object {
@@ -159,7 +159,7 @@ scene {
 		color { rgb { 0x00CA2E55 }}
 		mat {	
 			diffuse { 0.18 }
-			shine { 0.3}
+			shine { 0.2}
 		}
 	}
 	object {
@@ -171,7 +171,7 @@ scene {
 		color { rgb { 0x00CA2E55 }}
 		mat {	
 			diffuse { 0.18 }
-			shine { 0.3}
+			shine { 0.2}
 		}
 	}
 	object {
@@ -183,7 +183,7 @@ scene {
 		color { rgb { 0x00CA2E55 }}
 		mat {	
 			diffuse { 0.18 }
-			shine { 0.3}
+			shine { 0.2}
 		}
 	}
 	object {
@@ -195,7 +195,7 @@ scene {
 		color { rgb { 0x00CA2E55 }}
 		mat {	
 			diffuse { 0.18 }
-			shine { 0.3}
+			shine { 0.2}
 		}
 	}
 	object {
@@ -207,7 +207,7 @@ scene {
 		color { rgb { 0x00CA2E55 }}
 		mat {	
 			diffuse { 0.18 }
-			shine { 0.3}
+			shine { 0.2}
 		}
 
 	}
@@ -220,7 +220,7 @@ scene {
 		color { rgb { 0x00CA2E55 }}
 		mat {	
 			diffuse { 0.18 }
-			shine { 0.3}
+			shine { 0.2}
 		}
 	}
 	object {
@@ -247,7 +247,7 @@ scene {
 		color { rgb { 0x00FFE0B5 }}
 		mat {	
 			diffuse { 0.18 }
-			shine { 0.3}
+			shine { 0.1}
 		}
 	}
 
@@ -260,7 +260,7 @@ scene {
 		color { rgb { 0x00EF7B45 }}
 		mat {	
 			diffuse { 0.18 }
-			shine { 0.3}
+			shine { 0.2}
 		}
 	}
 	
@@ -273,7 +273,7 @@ scene {
 		color { rgb { 0x00FFF07C }}
 		mat {	
 			diffuse { 0.18 }
-			shine { 0.3}
+			shine { 0.2}
 		}
 	}
 
@@ -286,7 +286,7 @@ scene {
 		color { rgb { 0x00F4F0BB }}
 		mat {	
 			diffuse { 0.18 }
-			shine { 0.3}
+			shine { 0.2}
 		}
 	}
 
@@ -304,7 +304,7 @@ scene {
 		color { rgb { 0x00042A2B }}
 		mat {	
 			diffuse { 0.18 }
-			shine { 0.3}
+			shine { 0}
 		}
 	}
 
@@ -317,7 +317,7 @@ scene {
 		color { rgb { 0x00A0A4B8 }}
 		mat {	
 			diffuse { 0.23 }
-			shine { 0.3}
+			shine { 0.0}
 		}
 	}
 
@@ -330,7 +330,7 @@ scene {
 		color { rgb { 0x00A0A4B8 }}
 		mat {	
 			diffuse { 0.25 }
-			shine { 0.3}
+			shine { 0.0}
 		}
 	}
 
@@ -343,7 +343,7 @@ scene {
 		color { rgb { 0x00A0A4B8 }}
 		mat {	
 			diffuse { 0.25 }
-			shine { 0.3}
+			shine { 0.0}
 		}	
 	}
 
@@ -356,7 +356,7 @@ scene {
 		color { rgb { 0x00A0A4B8 }}
 		mat {	
 			diffuse { 0.18 }
-			shine { 0.3}
+			shine { 0.0}
 		}
 	}
 }

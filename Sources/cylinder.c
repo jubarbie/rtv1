@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:58:17 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/07 19:41:25 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/08 15:55:45 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void		cylinder(t_object *obj, t_ray *ray)
 			tp0 = tp2;
 		if ((tp3 < tp1 && tp3 > 0) || (tp3 > tp1 && tp1 < 0))
 			tp1 = tp3;
-		find_dist(obj, ray, tp0, tp1);	
+		find_dist(obj, ray, tp0, tp1);
 	}
 }
 
