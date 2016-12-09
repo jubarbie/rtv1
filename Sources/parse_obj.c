@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 11:04:38 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/07 16:20:44 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/09 19:02:53 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,15 @@ void			build_object(t_env *e, char *str, int n)
 {
 	t_object	obj;
 	t_list		*elem;
-	char		*name;
 	char		*tmp;
 	char		*type_acc;
 
 	if (!(tmp = ft_strnstr(str, "name {", n)))
 		error_perso(e, "No name found in object");
-	name = get_in_acc(e, str, "name {", size_to_end_acc(e, str));
+	obj.name = get_in_acc(e, str, "name {", size_to_end_acc(e, str));
 	if (!(tmp = ft_strnstr(str, "inter {", n)))
 		error_file(e);
 	obj.type = get_obj_type(e, tmp + 7, size_to_end_acc(e, tmp + 7));
-	obj.name = ft_strdup(name);
 	obj.pos = get_origin(tmp + 7, size_to_end_acc(e, tmp + 7));
 	type_acc = ft_strjoin(e->obj_allowed[obj.type], " {");
 	tmp = get_in_acc(e, tmp + 7, type_acc, size_to_end_acc(e, tmp + 7));
@@ -99,6 +97,5 @@ void			build_object(t_env *e, char *str, int n)
 	else
 		ft_lstadd(&(e->scene->obj), elem);
 	free(type_acc);
-	free(name);
 	free(tmp);
 }

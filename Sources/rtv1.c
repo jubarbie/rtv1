@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:01:24 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/03 17:08:57 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/09 18:26:10 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int			create_img(t_env *e)
 	int			i;
 	pthread_t	th[NB_TH];
 
-	mlx_put_image_to_window(MLX, WIN, WAIT_IMG, 40, 0);
 	i = -1;
 	while (++i < NB_TH)
 		if (pthread_create(&th[i], NULL, &raytracer, (void *)(e->param[i])) < 0)
@@ -26,6 +25,8 @@ int			create_img(t_env *e)
 	while (++i < NB_TH)
 		(void)pthread_join(th[i], NULL);
 	mlx_put_image_to_window(MLX, WIN, IMG, 40, 0);
+	if (S)
+		mlx_put_image_to_window(MLX, WIN, IMG2, 40 + IMG_WIDTH / 2, 0);
 	return (0);
 }
 

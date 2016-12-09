@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 15:06:39 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/07 16:02:32 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/09 19:09:09 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void		init_scene(t_env *e, char *file_name)
 	CAM_UP = v3d(0, 1.0, 0);
 	CAM_DIR = v3d(0, 0, 1.0);
 	CAM_RIGHT = v3d(1.0, 0, 0);
-	//CAM_UP = unit_v3d(cross_v3d(CAM_RIGHT, CAM_DIR));
 }
 
 static t_param	*init_param(t_env *e, int index)
@@ -63,9 +62,11 @@ void			free_env(t_env *e)
 		ft_lstdel(&e->scene->light, &free_obj);
 		e->scene ? free(e->scene) : 0;
 		mlx_destroy_image(MLX, IMG);
+		S ? mlx_destroy_image(MLX, IMG2) : 0;
 		MLX = NULL;
 		WIN = NULL;
 		IMG = NULL;
+		IMG2 = NULL;
 		free(e);
 	}
 }
@@ -85,9 +86,14 @@ t_env			*init_env(char *file_name, char opt)
 	MLX = mlx_init();
 	WIN = mlx_new_window(MLX, WIN_WIDTH, WIN_HEIGHT, "RT v.1");
 	init_menu(e);
-	IMG = mlx_new_image(MLX, IMG_WIDTH, IMG_HEIGHT);
+	IMG = mlx_new_image(MLX, (S) ? IMG_WIDTH / 2 : IMG_WIDTH, IMG_HEIGHT);
 	IMG_ADDR = mlx_get_data_addr(IMG, &e->img.bpp, &e->img.sizeline, &ENDIAN);
-	create_wait_image(e);
+	if (S)
+	{
+		IMG2 = mlx_new_image(MLX, IMG_WIDTH / 2, IMG_HEIGHT);
+		IMG2_ADDR = mlx_get_data_addr(IMG2, &e->img2.bpp, &e->img2.sizeline,
+																	&ENDIAN);
+	}
 	debug(e);
 	return (e);
 }

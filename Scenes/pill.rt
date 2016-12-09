@@ -1,0 +1,278 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    test1.rt                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
+#    Updated: 2016/12/09 15:45:02 by jubarbie         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+#
+# Scene de test 1
+#
+
+scene {
+	name { test1} 
+	camera { 
+		origin { 3 1.75 -23 }			
+	}
+	render {
+		mlx_all_objects { 1080 800 }
+	}
+	
+	object {
+		name { light1 }
+		inter {
+			origin {5 3.4 -1}
+			light {  0.01}
+		}
+		color { rgb { 0x00FFFFFF } }
+	}
+
+	object {
+		name { light1 }
+		inter {
+			origin {-5 3.4 -1}
+			light {  0.01}
+		}
+		color { rgb { 0x00FFFFFF } }
+	}
+
+
+	object {
+		name { cylinder }
+		inter {
+			origin { 0 -0.2 0 }
+			plane { 0 1 0}
+		}
+		color { rgb { 0x002F4B26 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.2}
+		}
+	}
+
+
+#
+#     CYLINDER
+#
+
+	object {
+		name { cylinder }
+		inter {
+			origin { 0 0 0 }
+			cylinder { 0.2 4 0 0}
+		}
+		color { rgb { 0x00D9FFF5 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.2}
+		}
+	}
+
+	object {
+		name { cylinder }
+		inter {
+			origin { 4 0 0 }
+			cylinder { 0.2 4 0 -4}
+		}
+		color { rgb { 0x00D9FFF5 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.2}
+		}
+	}
+
+	object {
+		name { cylinder }
+		inter {
+			origin { 0 0 -4 }
+			cylinder { 0.2 4 0 -4}
+		}
+		color { rgb { 0x00D9FFF5 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.2}
+		}
+	}
+
+	object {
+		name { cylinder }
+		inter {
+			origin { 0 0 0 }
+			cylinder { 0.2 0 0 -4}
+		}
+		color { rgb { 0x00D9FFF5 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.2}
+		}
+	}
+
+
+	object {
+		name { cylinder }
+		inter {
+			origin { 2 0.4 0.828427 }
+			cylinder { 0.2 4.828427 0.4 -2}
+		}
+		color { rgb { 0x00D9FFF5 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.2}
+		}
+	}
+
+	object {
+		name { cylinder }
+		inter {
+			origin { 4.828427 0.4 -2 }
+			cylinder { 0.2 2 0.4 -4.828427}
+		}
+		color { rgb { 0x00D9FFF5 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.2}
+		}
+	}
+
+	object {
+		name { cylinder }
+		inter {
+			origin { 2 0.4 -4.828427 }
+			cylinder { 0.2 -0.828427 0.4 -2}
+		}
+		color { rgb { 0x00D9FFF5 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.2}
+		}
+	}
+
+	object {
+		name { cylinder }
+		inter {
+			origin { -0.828427 0.4 -2 }
+			cylinder { 0.2 2 0.4 0.828427}
+		}
+		color { rgb { 0x00D9FFF5 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.2}
+		}
+	}
+
+
+#
+#     SPHERES
+#
+
+	object {
+		name { sphere1 }
+		inter {
+			origin { 0 0 0 }
+			sphere {  0.2}
+		}
+		color { rgb { 0x00D9FFF5 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.2}
+		}
+	}
+
+	object {
+		name { sphere1 }
+		inter {
+			origin { 4 0 0 }
+			sphere {  0.2}
+		}
+		color { rgb { 0x00D9FFF5 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.2}
+		}
+	}
+
+	object {
+		name { sphere1 }
+		inter {
+			origin { 0 0 -4 }
+			sphere {  0.2}
+		}
+		color { rgb { 0x00D9FFF5 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.2}
+		}
+	}
+
+	object {
+		name { sphere1 }
+		inter {
+			origin { 4 0 -4 }
+			sphere {  0.2}
+		}
+		color { rgb { 0x00D9FFF5 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.2}
+		}
+	}
+
+	object {
+		name { sphere1 }
+		inter {
+			origin { 2 0.4 0.828427 }
+			sphere {  0.2}
+		}
+		color { rgb { 0x00D9FFF5 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.2}
+		}
+	}
+
+	object {
+		name { sphere1 }
+		inter {
+			origin { 4.828427 0.4 -2 }
+			sphere {  0.2}
+		}
+		color { rgb { 0x00D9FFF5 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.2}
+		}
+	}
+
+	object {
+		name { sphere1 }
+		inter {
+			origin { 2 0.4 -4.828427 }
+			sphere {  0.2}
+		}
+		color { rgb { 0x00D9FFF5 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.2}
+		}
+	}
+
+	object {
+		name { sphere1 }
+		inter {
+			origin { -0.828427 0.4 -2 }
+			sphere {  0.2}
+		}
+		color { rgb { 0x00D9FFF5 }}
+		mat {	
+			diffuse { 0.18 }
+			shine { 0.2}
+		}
+	}
+
+
+}

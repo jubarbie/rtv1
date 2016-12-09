@@ -6,27 +6,29 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 09:11:28 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/06 13:05:50 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/09 17:32:28 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-/*static void	find_inter(t_object *obj, t_ray *ray, t_v3d q, float r)
+static void	find_dist(t_object *obj, t_ray *ray, double t0, double t1)
 {
-	float	t0;
-	float	t1;
-
-	t0 = (-q.y + sqrt(r)) / 2.0 * q.x;
-	t1 = (-q.y - sqrt(r)) / 2.0 * q.x;
-	find_dist(obj, ray, t0, t1);	
-}*/
+	if ((t1 < t0 && t1 > 0) || (t1 > t0 && t0 < 0))
+		t0 = t1;
+	if (t0 > 0 && t0 < ray->dist)
+	{
+		ray->obj = obj;
+		ray->dist = t0;
+		ray->norm = unit_v3d(sub_v3d(ray->inter, ray->obj->pos));
+	}
+}
 
 void		sphere(t_object *obj, t_ray *ray)
 {
 	t_v3d	o;
 	t_v3d	abc;
-	float	r;
+	double	r;
 	double	t1;
 	double	t0;
 
@@ -40,9 +42,4 @@ void		sphere(t_object *obj, t_ray *ray)
 			pow(ray->pos.z - o.z, 2.0)) - r * r;
 	if ((r = ft_solve_quadratic(abc.x, abc.y, abc.z, &t0, &t1)) >= 0)
 		find_dist(obj, ray, t0, t1);
-}
-
-void		sphere_norm(t_ray *ray)
-{
-	ray->norm = unit_v3d(sub_v3d(ray->inter, ray->obj->pos));
 }

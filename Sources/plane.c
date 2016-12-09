@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/23 19:55:56 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/06 13:05:48 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/09 09:50:08 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,7 @@ void	plane(t_object *obj, t_ray *ray)
 			ray->det = det;
 			ray->obj = obj;
 			ray->dist = t;
+			ray->norm = n;
 		}
 	}
-}
-
-void	plane_norm(t_ray *ray)
-{
-	t_v3d n;
-	
-	n = unit_v3d(v3d(ray->obj->param[0], ray->obj->param[1],
-														ray->obj->param[2]));
-	ray->norm = n;
 }
