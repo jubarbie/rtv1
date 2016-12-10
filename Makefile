@@ -6,7 +6,7 @@
 #    By: jubarbie <jubarbie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/30 16:51:35 by jubarbie          #+#    #+#              #
-#    Updated: 2016/12/07 15:52:55 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/12/10 12:45:33 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC=	rtv1.c			\
 		plane.c			\
 		cylinder.c		\
 		cone.c			\
+		caps.c			\
 		moves.c
 OBJDIR=Objects
 VPATH=Sources

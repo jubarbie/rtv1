@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:41:19 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/09 19:09:07 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/10 12:52:52 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	init_vw_ray(t_env *e, t_param *param)
 				CAM_RIGHT, GAP_X * X), smul_v3d(CAM_UP, GAP_Y * Y))), CAM_POS));
 }
 
-static void	perform_raytracing(t_env *e, t_param *param, int i)
+static void	perform_raytracing(t_env *e, t_param *param)
 {
 	t_list		*lst_obj;
 	t_object	*obj;
@@ -44,40 +44,23 @@ static void	perform_raytracing(t_env *e, t_param *param, int i)
 	VW_RAY.inter = add_v3d(VW_RAY.pos, smul_v3d(VW_RAY.dir, VW_RAY.dist));
 	COLOR = VW_RAY.obj ? VW_RAY.obj->color : 0;
 	(VW_RAY.obj && L) ? apply_light(ENV, param) : 0;
-	if (i == 0)
-		img_put_pixel(&e->img, X, Y, COLOR);
-	if (i == 1)
-		img_put_pixel(&e->img2, X, Y, COLOR);
+	img_put_pixel(&e->img, X, Y, COLOR);
 }
 
 void		*raytracer(void *arg)
 {
 	t_param		*param;
 	t_env		*e;
-	double		width;
 
 	param = (t_param *)arg;
 	init_param(param, ENV);
 	e = ENV;
 	Y = TH * (IMG_HEIGHT / NB_TH) - 1;
-	width = (S) ? IMG_WIDTH / 2 : IMG_WIDTH;
 	while (++Y < (TH + 1) * IMG_HEIGHT / NB_TH)
 	{
 		X = -1;
-		while (++X < width)
-			perform_raytracing(e, param, 0);
-	}
-	if (S)
-	{
-		CAM_POS.x += 0.05;
-		init_param(param, ENV);
-		Y = TH * (IMG_HEIGHT / NB_TH) - 1;
-		while (++Y < (TH + 1) * IMG_HEIGHT / NB_TH)
-		{
-			X = -1;
-			while (++X < width)
-				perform_raytracing(e, param, 1);
-		}
+		while (++X < IMG_WIDTH)
+			perform_raytracing(e, param);
 	}
 	pthread_exit(0);
 }

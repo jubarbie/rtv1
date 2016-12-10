@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:04:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/09 19:18:20 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/10 16:51:37 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define DIST_MAX 100000.0
 # define SPEED 0.1
 
-# define OPT_REF "dls"
+# define OPT_REF "dl"
 # define OPT e->opt
 # define D (OPT & (1 << 0))
 # define L (OPT & (1 << 1))
@@ -48,14 +48,12 @@
 
 # define MLX e->mlx
 # define WIN e->win
-# define WIN_WIDTH 640
-# define WIN_HEIGHT 400
+# define WIN_WIDTH 1840
+# define WIN_HEIGHT 1200
 # define IMG_WIDTH (WIN_WIDTH - 40)
 # define IMG_HEIGHT WIN_HEIGHT
 # define IMG e->img.img
 # define IMG_ADDR e->img.addr
-# define IMG2 e->img2.img
-# define IMG2_ADDR e->img2.addr
 # define ENDIAN e->endian
 # define NB_BTN 1
 # define MENU e->menu
@@ -186,7 +184,6 @@ typedef struct	s_env
 	void		*mlx;
 	void		*win;
 	t_img		img;
-	t_img		img2;
 	int			endian;
 	t_button	menu[NB_BTN];
 	char		moves;
@@ -222,6 +219,9 @@ void			sphere(t_object *obj, t_ray *ray);
 void			plane(t_object *obj, t_ray *ray);
 void			cylinder(t_object *obj, t_ray *ray);
 void			cone(t_object *obj, t_ray *ray);
+double			caps_up(t_object *obj, t_ray *ray);
+double			caps_bottom(t_object *obj, t_ray *ray);
+double			caps(t_ray *ray, double r, t_v3d n, t_v3d p);
 
 void			error_usage(void);
 void			error_file(t_env *e);

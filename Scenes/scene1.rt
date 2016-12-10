@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/12/09 18:25:21 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/12/10 16:51:34 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,6 +101,7 @@ scene {
 			shine { 0}
 		}
 	}
+
 	object {
 		name { cylinder }
 		inter {
@@ -113,6 +114,7 @@ scene {
 			shine { 0}
 		}
 	}
+
 	object {
 		name { cylinder }
 		inter {
@@ -138,6 +140,137 @@ scene {
 		}
 	}
 
+	object {
+		name { cylinder }
+		inter {
+			origin { 6.05 0 -7 }
+			cylinder { 0.3 6.05 0.3 -7}
+		}
+		color { rgb { 0x00FCF7FF }}
+		mat {	
+			diffuse { 0.25 }
+			shine { 0}
+		}
+	}
+
+	object {
+		name { cylinder }
+		inter {
+			origin { -0.05 0 -7 }
+			cylinder { 0.3 -0.05 0.3 -7}
+		}
+		color { rgb { 0x00FCF7FF }}
+		mat {	
+			diffuse { 0.25 }
+			shine { 0}
+		}
+	}
+
+	object {
+		name { cylinder }
+		inter {
+			origin { 6.05 0 -9 }
+			cylinder { 0.3 6.05 0.3 -9}
+		}
+		color { rgb { 0x00FCF7FF }}
+		mat {	
+			diffuse { 0.25 }
+			shine { 0}
+		}
+	}
+
+	object {
+		name { cylinder }
+		inter {
+			origin { -0.05 0 -9 }
+			cylinder { 0.3 -0.05 0.3 -9}
+		}
+		color { rgb { 0x00FCF7FF }}
+		mat {	
+			diffuse { 0.25 }
+			shine { 0}
+		}
+	}
+
+	
+	object {
+		name {cone}
+		inter {
+			origin {-0.05 3.3 -5 }
+			cone { 0.3 0.5 -0.05  3.5 -5 }
+		}
+		color { rgb {0x00FCF7FF}}
+		mat {	
+			diffuse { 0.28 }
+			shine { 0.4}
+		}
+	}
+
+	object {
+		name {cone}
+		inter {
+			origin {-0.05 3.3 -3 }
+			cone { 0.3 0.5 -0.05  3.5 -3 }
+		}
+		color { rgb {0x00FCF7FF}}
+		mat {	
+			diffuse { 0.28 }
+			shine { 0.4}
+		}
+	}
+
+	object {
+		name {cone}
+		inter {
+			origin {-0.05 3.3 -1 }
+			cone { 0.3 0.5 -0.05  3.5 -1 }
+		}
+		color { rgb {0x00FCF7FF}}
+		mat {	
+			diffuse { 0.28 }
+			shine { 0.4}
+		}
+	}
+
+	object {
+		name {cone}
+		inter {
+			origin {6.05 3.3 -5 }
+			cone { 0.3 0.5 6.05  3.5 -5 }
+		}
+		color { rgb {0x00FCF7FF}}
+		mat {	
+			diffuse { 0.28 }
+			shine { 0.4}
+		}
+	}
+
+	object {
+		name {cone}
+		inter {
+			origin {6.05 3.3 -3 }
+			cone { 0.3 0.5 6.05  3.5 -3 }
+		}
+		color { rgb {0x00FCF7FF}}
+		mat {	
+			diffuse { 0.28 }
+			shine { 0.4}
+		}
+	}
+
+	object {
+		name {cone}
+		inter {
+			origin {6.05 3.3 -1 }
+			cone { 0.3 0.5 6.05  3.5 -1 }
+		}
+		color { rgb {0x00FCF7FF}}
+		mat {	
+			diffuse { 0.28 }
+			shine { 0.4}
+		}
+	}
+
 
 
 #
@@ -157,16 +290,6 @@ scene {
 		}
 	}
 	
-#	object {
-#		name { sphere1 }
-#		inter {
-#			origin { 0 1.75 -3 }
-#			sphere { 1.5}
-#		}
-#		color { rgb { 0x00FFFFFF }}
-#	}
-
-
 	object {
 		name { sphere2 }
 		inter {
@@ -180,8 +303,6 @@ scene {
 		}
 	}
 	
-
-
 	object {
 		name { sphere3 }
 		inter {
@@ -234,6 +355,22 @@ scene {
 		}
 	}
 
+#
+#		CONE
+#
+
+	object {
+		name {cone}
+		inter {
+			origin {3 0 -5 }
+			cone { 1 0.8 3 0.2 -5 }
+		}
+		color { rgb {0x00FEF5EF}}
+		mat {	
+			diffuse { 0.28 }
+			shine { 0.4}
+		}
+	}
 
 #
 #		PLANS
@@ -248,7 +385,7 @@ scene {
 		color { rgb { 0x00042A2B }}
 		mat {	
 			diffuse { 0.18 }
-			shine { 0}
+			shine { 0.0}
 		}
 	}
 
@@ -264,7 +401,6 @@ scene {
 			shine { 0.0}
 		}
 	}
-
 
 	object {
 		name { plane }

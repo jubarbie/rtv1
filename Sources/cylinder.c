@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:58:17 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/09 19:18:18 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/10 16:51:43 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,60 +55,6 @@ static void		find_dist(t_object *obj, t_ray *ray, double *sol)
 	}
 }
 
-static double	caps_up(t_object *obj, t_ray *ray)
-{
-	t_v3d	n;
-	t_v3d	p2;
-	t_v3d	tmp;
-	double	r;
-	double	det;
-
-	r = obj->param[0];
-	p2 = v3d(obj->param[1], obj->param[2], obj->param[3]);
-	n = unit_v3d(sub_v3d(p2, obj->pos));
-	det = dot_v3d(n, ray->dir);
-	if (det < 0.0000001 || det > 0.0000001)
-	{
-		tmp = sub_v3d(p2, ray->pos);
-		det = dot_v3d(tmp, n) / det;
-		if (det > 0)
-		{
-			tmp = add_v3d(ray->pos, smul_v3d(ray->dir, det));
-			if (dot_v3d(sub_v3d(tmp, p2), sub_v3d(tmp, p2)) >= r * r)
-				return (-1);
-			return (det);
-		}
-	}
-	return (-1);
-}
-
-static double	caps_bottom(t_object *obj, t_ray *ray)
-{
-	t_v3d	n;
-	t_v3d	p1;
-	t_v3d	tmp;
-	double	r;
-	double	det;
-
-	r = obj->param[0];
-	p1 = obj->pos;
-	n = unit_v3d(sub_v3d(p1, v3d(obj->param[1], obj->param[2], obj->param[3])));
-	det = dot_v3d(n, ray->dir);
-	if (det < 0.0000001 || det > 0.0000001)
-	{
-		tmp = sub_v3d(p1, ray->pos);
-		det = dot_v3d(tmp, n) / det;
-		if (det > 0)
-		{
-			tmp = add_v3d(ray->pos, smul_v3d(ray->dir, det));
-			if (dot_v3d(sub_v3d(tmp, p1), sub_v3d(tmp, p1)) >= r * r)
-				return (-1);
-			return (det);
-		}
-	}
-	return (-1);
-}
-
 static void		find_solutions(t_object *obj, t_ray *ray, t_v3d abc)
 {
 	t_v3d	p2;
@@ -130,8 +76,8 @@ static void		find_solutions(t_object *obj, t_ray *ray, t_v3d abc)
 											dot_v3d(n, sub_v3d(tmp, p2)) < 0))
 					sol[(int)sol[2]] = -1;
 			}
-		sol[2] = caps_up(obj, ray);
-		sol[3] = caps_bottom(obj, ray);
+		sol[2] = caps(ray, obj->param[0], n, p2);
+		sol[3] = caps(ray, obj->param[0], smul_v3d(n, -1), obj->pos);
 		find_dist(obj, ray, sol);
 	}
 }

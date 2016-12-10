@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 15:06:39 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/09 19:09:09 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/10 12:49:42 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,9 @@ void			free_env(t_env *e)
 		ft_lstdel(&e->scene->light, &free_obj);
 		e->scene ? free(e->scene) : 0;
 		mlx_destroy_image(MLX, IMG);
-		S ? mlx_destroy_image(MLX, IMG2) : 0;
 		MLX = NULL;
 		WIN = NULL;
 		IMG = NULL;
-		IMG2 = NULL;
 		free(e);
 	}
 }
@@ -88,12 +86,6 @@ t_env			*init_env(char *file_name, char opt)
 	init_menu(e);
 	IMG = mlx_new_image(MLX, (S) ? IMG_WIDTH / 2 : IMG_WIDTH, IMG_HEIGHT);
 	IMG_ADDR = mlx_get_data_addr(IMG, &e->img.bpp, &e->img.sizeline, &ENDIAN);
-	if (S)
-	{
-		IMG2 = mlx_new_image(MLX, IMG_WIDTH / 2, IMG_HEIGHT);
-		IMG2_ADDR = mlx_get_data_addr(IMG2, &e->img2.bpp, &e->img2.sizeline,
-																	&ENDIAN);
-	}
 	debug(e);
 	return (e);
 }
