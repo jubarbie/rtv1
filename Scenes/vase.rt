@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    test1.rt                                           :+:      :+:    :+:    #
+#    cone.rt                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/12/06 12:30:06 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/12/12 20:24:23 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,43 +17,23 @@
 scene {
 	name { test1 }
 	camera { 
-		origin { 0 2 -10 }			
-	}
-	render {
-		mlx_all_objects { 1080 800 }
+		origin { 0 -15 0 }
+		dir	{ 0 1 0}
 	}
 	object {
-		name { light1 }
+		name { light 1 }
 		inter {
-			origin { 3 3 -10 }
+			origin { 10 10 10 }
 			light {  0.0}
 		}
 		color { rgb { 0x003F0000  }}
 	}
 	object {
-		name { cylindre }
+		name { cone }
 		inter {
 			origin { 0 0 0 }
-			cylinder {2 1 1 0}
+			cone {1 1.1 0 -3 -2}
 		}
 		color { rgb { 0x000000FF  }}
 	}
-#	object {
-#		name { plan }
-#		inter {
-#			origin { 0 0 0 }
-#			plane { 1 0 -1}
-#		}
-#		color { rgb { 0x00FFFFFF  }}
-#	}
-
-#	object {
-#		name { plan }
-#		inter {
-#			origin { 0 0 0 }
-#			plane { -1 0 -1}
-#		}
-#		color { rgb { 0x00FFFFFF  }}
-#	}
-
 }

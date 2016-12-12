@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:58:17 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/10 16:51:43 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/12 20:04:32 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void		find_solutions(t_object *obj, t_ray *ray, t_v3d abc)
 
 	p2 = v3d(obj->param[1], obj->param[2], obj->param[3]);
 	n = unit_v3d(sub_v3d(p2, obj->pos));
-	if ((det = ft_solve_quadratic(abc.x, abc.y, abc.z, &sol[0], &sol[1])) >= 0)
+	if ((det = ft_solve_quadratic(abc.x, abc.y, abc.z, sol)) >= 0)
 	{
 		sol[2] = -1;
 		while (++sol[2] < 2)

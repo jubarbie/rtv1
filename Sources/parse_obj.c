@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 11:04:38 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/09 19:02:53 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/12 20:53:00 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ static int		get_obj_color(t_env *e, char *str, int n)
 	int		color;
 
 	col_h = NULL;
-	if (!(tmp = ft_strnstr(str, "color {", n)))
+	if (!(tmp = ft_strnstr(str, "color", n)))
 		return (0);
-	if ((tmp = ft_strnstr(tmp + 7, "rgb {", size_to_end_acc(e, tmp + 7))))
+	tmp = go_to_next_acc(e, tmp + 5, n);
+	if ((tmp = ft_strnstr(tmp, "rgb", size_to_end_acc(e, tmp))))
 	{
-		col_h = get_in_acc(e, tmp, "rgb {", n);
+		col_h = get_in_acc(e, tmp, "rgb", n);
 		col_i = ft_convert_base(col_h + 2, "0123456789ABCDEF", "0123456789");
 		color = ft_atoi(col_i);
 		free(col_i);
@@ -77,17 +78,16 @@ void			build_object(t_env *e, char *str, int n)
 	t_object	obj;
 	t_list		*elem;
 	char		*tmp;
-	char		*type_acc;
 
-	if (!(tmp = ft_strnstr(str, "name {", n)))
+	if (!(tmp = ft_strnstr(str, "name", n)))
 		error_perso(e, "No name found in object");
-	obj.name = get_in_acc(e, str, "name {", size_to_end_acc(e, str));
-	if (!(tmp = ft_strnstr(str, "inter {", n)))
+	obj.name = get_in_acc(e, str, "name", size_to_end_acc(e, str));
+	if (!(tmp = ft_strnstr(str, "inter", n)))
 		error_file(e);
-	obj.type = get_obj_type(e, tmp + 7, size_to_end_acc(e, tmp + 7));
-	obj.pos = get_origin(tmp + 7, size_to_end_acc(e, tmp + 7));
-	type_acc = ft_strjoin(e->obj_allowed[obj.type], " {");
-	tmp = get_in_acc(e, tmp + 7, type_acc, size_to_end_acc(e, tmp + 7));
+	tmp = go_to_next_acc(e, tmp + 5, n);
+	obj.type = get_obj_type(e, tmp, size_to_end_acc(e, tmp));
+	obj.pos = get_v3d(e, tmp, size_to_end_acc(e, tmp), "origin");
+	tmp = get_in_acc(e, tmp, e->obj_allowed[obj.type], size_to_end_acc(e, tmp));
 	obj.param = get_obj_param(e, &(obj.nb_param), tmp);
 	obj.color = get_obj_color(e, str, n);
 	add_mat(e, &obj, str, n);
@@ -96,6 +96,5 @@ void			build_object(t_env *e, char *str, int n)
 		ft_lstadd(&(e->scene->light), elem);
 	else
 		ft_lstadd(&(e->scene->obj), elem);
-	free(type_acc);
 	free(tmp);
 }

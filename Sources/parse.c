@@ -6,11 +6,24 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:21:36 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/07 15:36:56 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/12 20:53:37 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+char		*go_to_next_acc(t_env *e, char *str, int n)
+{
+	char	*tmp;
+
+	tmp = str;
+	while ((*tmp == '\n' || *tmp == '\t' || *tmp == ' ') && tmp != '\0'
+																	&& n-- > 0)
+		tmp++;
+	if (*tmp != '{')
+		error_perso(e, "Missing one \"{\" in file");
+	return (++tmp);
+}
 
 void		check_acc(t_env *e, char *str)
 {
@@ -52,17 +65,17 @@ int			size_to_end_acc(t_env *e, char *str)
 	return (-1);
 }
 
-t_v3d		get_origin(char *str, int n)
+t_v3d		get_v3d(t_env *e, char *str, int n, char *name)
 {
 	char	*tmp;
 	char	*tmpy;
 	char	*tmpz;
 
-	if (!(tmp = ft_strnstr(str, "origin {", n)))
+	if (!(tmp = ft_strnstr(str, name, n)))
 		return (v3d(0, 0, 0));
 	else
 	{
-		tmp += 8;
+		tmp = go_to_next_acc(e, tmp + ft_strlen(name), n);
 		while ((*tmp == '\n' || *tmp == '\t' || *tmp == ' ') && n-- > 0)
 			tmp++;
 		tmpy = tmp;
@@ -87,7 +100,8 @@ char		*get_in_acc(t_env *e, char *str, char *acc, int n)
 	if (!(tmp = ft_strnstr(str, acc, n)))
 		error_perso(e, "malloc failed in get_in_acc function");
 	len = ft_strlen(acc);
-	tmp1 = strndup(tmp + len, size_to_end_acc(e, tmp + len));
+	tmp = go_to_next_acc(e, tmp + len, n);
+	tmp1 = strndup(tmp, size_to_end_acc(e, tmp));
 	tmp2 = ft_strtrim(tmp1);
 	free(tmp1);
 	return (tmp2);

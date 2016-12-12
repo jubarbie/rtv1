@@ -6,7 +6,7 @@
 #    By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/19 17:51:33 by jubarbie          #+#    #+#              #
-#    Updated: 2016/12/10 16:51:34 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/12/12 20:44:34 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,9 @@
 scene {
 	name { test1} 
 	camera { 
-		origin { 3.05 1.75 -13 }			
-	}
-	render {
-		mlx_all_objects { 1080 800 }
-	}
+		origin { 3.05 1.75 -13 }
+		dir { 0 0 1 }		
+	}	
 	
 	object {
 		name { light1 }
@@ -359,18 +357,6 @@ scene {
 #		CONE
 #
 
-	object {
-		name {cone}
-		inter {
-			origin {3 0 -5 }
-			cone { 1 0.8 3 0.2 -5 }
-		}
-		color { rgb {0x00FEF5EF}}
-		mat {	
-			diffuse { 0.28 }
-			shine { 0.4}
-		}
-	}
 
 #
 #		PLANS

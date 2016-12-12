@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:21:36 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/09 09:49:09 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/12 20:55:09 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,22 @@ static void	build_scene(t_env *e, char *str)
 	e->scene->obj = NULL;
 	e->scene->light = NULL;
 	check_acc(e, str);
-	if (!(str = ft_strstr(str, "scene {")))
+	if (!(str = ft_strstr(str, "scene")))
 		error_perso(e, "no scene found in file");
-	str += 7;
-	e->scene->name = get_in_acc(e, str, "name {", size_to_end_acc(e, str));
-	if (!(tmp = ft_strnstr(str, "camera {", size_to_end_acc(e, str))))
-		e->scene->cam_pos = v3d(0, 0, 0);
+	str = go_to_next_acc(e, str + 5, ft_strlen(str));
+	e->scene->name = get_in_acc(e, str, "name", size_to_end_acc(e, str));
+	if (!(tmp = ft_strnstr(str, "camera", size_to_end_acc(e, str))))
+		error_perso(e, "No camera specified in scene");
 	else
-		e->scene->cam_pos = get_origin(tmp + 8, size_to_end_acc(e, tmp + 8));
-	tmp = str;
-	while ((tmp = ft_strnstr(tmp, "object {", size_to_end_acc(e, str))))
 	{
-		tmp += 8;
+		tmp = go_to_next_acc(e, tmp + 6, size_to_end_acc(e, str));
+		e->scene->cam_pos = get_v3d(e, tmp, size_to_end_acc(e, tmp), "origin");
+		e->scene->cam_dir = get_v3d(e, tmp, size_to_end_acc(e, tmp), "dir");
+	}
+	tmp = str;
+	while ((tmp = ft_strnstr(tmp, "object", size_to_end_acc(e, str))))
+	{
+		tmp = go_to_next_acc(e, tmp + 6, size_to_end_acc(e, str));
 		build_object(e, tmp, size_to_end_acc(e, tmp));
 	}
 }
@@ -77,7 +81,7 @@ void		parse_rt(t_env *e, char *file_name)
 	int		i;
 
 	if ((fd = open(file_name, O_RDONLY)) == -1)
-		error_perso(e, "failed opening file");
+		error_perso(e, "Failed opening file");
 	file = ft_strnew(0);
 	while (get_next_line(fd, &line))
 	{

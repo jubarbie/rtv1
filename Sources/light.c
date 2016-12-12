@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 08:30:59 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/09 18:56:05 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/12 18:58:26 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,18 @@ static void	get_color(t_param *param, t_object *light, t_hsv *hsv)
 {
 	double	angle_light;
 	t_v3d	ref;
-	double	dist;
 
 	PHO_RAY.inter = add_v3d(PHO_RAY.pos, smul_v3d(PHO_RAY.dir, PHO_RAY.dist));
-	angle_light = cos_v3d(PHO_RAY.dir, VW_RAY.norm);
+	angle_light = cos_v3d(VW_RAY.norm, PHO_RAY.dir);
 	ref = sub_v3d(PHO_RAY.dir, smul_v3d(VW_RAY.norm, 2.0 *
 				dot_v3d(PHO_RAY.dir, VW_RAY.norm)));
-	if (angle_light <= 0.001)
+	if (angle_light < 0)
 	{
 		hsv->v -= angle_light * VW_RAY.obj->mat.diffuse;
 		hsv->v = fmax(VW_RAY.obj->mat.diffuse, hsv->v);
-		if (PHO_RAY.obj && PHO_RAY.obj != VW_RAY.obj
-			&& PHO_RAY.dist < length_v3d(sub_v3d(VW_RAY.inter, PHO_RAY.pos))
-			&& PHO_RAY.dist > 0)
-		{
-			dist = length_v3d(sub_v3d(PHO_RAY.inter, VW_RAY.inter));
+		if (PHO_RAY.obj && PHO_RAY.obj != VW_RAY.obj && PHO_RAY.dist > 0
+			&& PHO_RAY.dist < length_v3d(sub_v3d(PHO_RAY.pos, VW_RAY.inter)))
 			hsv->v = fmax(VW_RAY.obj->mat.diffuse, hsv->v - 0.1);
-		}
 		do_shininess(param, light, hsv, ref);
 	}
 }

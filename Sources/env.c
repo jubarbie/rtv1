@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 15:06:39 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/10 12:49:42 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/12 20:55:08 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,16 @@ static void		init_scene(t_env *e, char *file_name)
 	VW_DIST = 1.0;
 	GAP_X = VW_WIDTH / (double)IMG_WIDTH;
 	GAP_Y = VW_HEIGHT / (double)IMG_HEIGHT;
+	CAM_DIR = unit_v3d(CAM_DIR);
 	CAM_UP = v3d(0, 1.0, 0);
-	CAM_DIR = v3d(0, 0, 1.0);
-	CAM_RIGHT = v3d(1.0, 0, 0);
+	if (CAM_DIR.y == fmax(fmax(CAM_DIR.x, CAM_DIR.y), CAM_DIR.z))
+		CAM_UP = v3d(0, 0, 1);
+	if (CAM_DIR.y == fmin(fmin(CAM_DIR.x, CAM_DIR.y), CAM_DIR.z) &&
+																CAM_DIR.y < 0)
+		CAM_UP = v3d(0, 0, -1);
+	CAM_RIGHT = cross_v3d(CAM_UP, CAM_DIR);
+	VW_DIST = 1.0;
+	CAM_UP = cross_v3d(CAM_DIR, CAM_RIGHT);
 }
 
 static t_param	*init_param(t_env *e, int index)
@@ -76,7 +83,10 @@ t_env			*init_env(char *file_name, char opt)
 
 	if (!(e = (t_env *)malloc(sizeof(t_env))))
 		error_perso(e, "malloc (t_env *)e failed");
+	if (ft_strcmp(file_name + ft_strlen(file_name) - 3, ".rt"))
+		error_perso(e, "Bad file extension (.rt)");
 	OPT = opt;
+	OPT |= (1 << 1);
 	init_scene(e, file_name);
 	i = -1;
 	while (++i < NB_TH)

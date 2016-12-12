@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 17:50:44 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/11/13 20:21:16 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/12/12 19:56:05 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int		moves(t_env *e)
 		CAM_POS = add_v3d(CAM_POS, smul_v3d(CAM_UP, SPEED));
 	if (MOVES & M_DOWN)
 		CAM_POS = sub_v3d(CAM_POS, smul_v3d(CAM_UP, SPEED));
-	if (MOVES & M_LEFT)
-		CAM_POS = add_v3d(CAM_POS, smul_v3d(CAM_RIGHT, SPEED));
 	if (MOVES & M_RIGHT)
+		CAM_POS = add_v3d(CAM_POS, smul_v3d(CAM_RIGHT, SPEED));
+	if (MOVES & M_LEFT)
 		CAM_POS = sub_v3d(CAM_POS, smul_v3d(CAM_RIGHT, SPEED));
 	if (MOVES & M_FORWARD)
 		CAM_POS = add_v3d(CAM_POS, smul_v3d(CAM_DIR, SPEED));
